@@ -1,0 +1,9 @@
+
+**/Win32
+**/modules
+**/__history
+*/.identcache
+*/.local
+**/__recovery
+*.identcache
+*.local
