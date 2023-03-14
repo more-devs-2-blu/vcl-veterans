@@ -12,10 +12,11 @@ type
     protected
       FTabela: String;
     public
-      function ObterRegistros: TJSONArray; virtual;
+      function ObterRegistros(aJSONArray: TJSONArray): TJSONArray; virtual;
+      function ObterSQL: TJSONArray; overload;
+      function ObterSQL(aColuna, aOrdem: string): TJSONArray; overload;
       function ProcurarPorId(const aIdentificador: Integer): TJSONObject; virtual;
       function AdicionarRegistro(aRegistro: TJSONObject): Boolean;
-      function OrdenarRegistros(const aColuna, aOrdem: string): TJSONArray; virtual;
       function DeletarRegistro(const aIdentificador: Integer): Boolean;
       function AlterarRegistro(const aIdentificador: Integer; const aRegistro: TJSONObject;
            const aColuna, aValor: string): Boolean;
@@ -63,21 +64,32 @@ begin
   end;
 end;
 
-function TDAOBase.ObterRegistros: TJSONArray;
+function TDAOBase.ObterRegistros(aJSONArray: TJSONArray): TJSONArray;
 begin
   try
-    Result := TUtilBanco.ExecutarConsulta(Format('SELECT * FROM %s',
-      [FTabela]));
+    Result := aJSONArray;
   except
     on e: Exception do
       raise Exception.Create('Erro ao Obter Registros: ' + e.Message);
   end;
 end;
-function TDAOBase.OrdenarRegistros(const aColuna, aOrdem: string): TJSONArray;
+
+function TDAOBase.ObterSQL(aColuna, aOrdem: string): TJSONArray;
 begin
   try
     Result := TUtilBanco.ExecutarConsulta(Format('SELECT * FROM %s ORDER BY %s %s',
       [FTabela, aColuna, aOrdem]));
+  except
+    on e: Exception do
+      raise Exception.Create('Erro ao Obter Registros: ' + e.Message);
+  end;
+end;
+
+function TDAOBase.ObterSQL: TJSONArray;
+begin
+  try
+    Result := TUtilBanco.ExecutarConsulta(Format('SELECT * FROM %s',
+      [FTabela]));
   except
     on e: Exception do
       raise Exception.Create('Erro ao Obter Registros: ' + e.Message);

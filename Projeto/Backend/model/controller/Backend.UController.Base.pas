@@ -69,13 +69,13 @@ begin
   end;
   xColuna := Req.Params.Items['coluna'];
   xOrdem  := Req.Params.Items['ordem'];
-  Res.Send<TJSONArray>(FDAO.OrdenarRegistros(xColuna, xOrdem));
+  Res.Send<TJSONArray>(FDAO.ObterRegistros(FDAO.ObterSQL(xColuna, xOrdem)));
 end;
 
 class procedure TControllerBase.Gets(Req: THorseRequest;
   Res: THorseResponse; Next: TProc);
 begin
-  Res.Send<TJSONArray>(FDAO.ObterRegistros);
+  Res.Send<TJSONArray>(FDAO.ObterRegistros(FDAO.ObterSQL));
 end;
 
 class procedure TControllerBase.Post(Req: THorseRequest;

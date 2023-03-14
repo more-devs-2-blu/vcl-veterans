@@ -11,8 +11,7 @@ type
     function ObterCategoria(const aId: Integer): TJSONObject;
   public
     constructor Create;
-    function ObterRegistros: TJSONArray; override;
-    function OrdenarRegistros(const aColuna, aOrdem: string): TJSONArray; override;
+    function ObterRegistros(aJSONArray: TJSONArray): TJSONArray; override;
     function ProcurarPorId(const aIdentificador: Integer): TJSONObject; override;
   end;
 
@@ -51,7 +50,7 @@ begin
   end;
 end;
 
-function TDAOMelhoria.ObterRegistros: TJSONArray;
+function TDAOMelhoria.ObterRegistros(aJSONArray: TJSONArray): TJSONArray;
 var
   xJSONArray, xJSONArrayAux: TJSONArray;
   xJSONObject: TJSONObject;
@@ -82,7 +81,7 @@ begin
 
 end;
 
-function TDAOMelhoria.OrdenarRegistros(const aColuna,
+{function TDAOMelhoria.OrdenarRegistros(const aColuna,
   aOrdem: string): TJSONArray;
 var
   xJSONArray, xJSONArrayAux: TJSONArray;
@@ -112,7 +111,7 @@ begin
   FreeAndNil(xJSONArray);
   Result := xJSONArrayAux;
 
-end;
+end;}
 
 function TDAOMelhoria.ProcurarPorId(const aIdentificador: Integer): TJSONObject;
 var
