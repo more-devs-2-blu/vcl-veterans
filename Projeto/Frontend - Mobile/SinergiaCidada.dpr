@@ -20,7 +20,10 @@ uses
   Backend.UEntity.Cidadao in '..\Backend\model\entities\Backend.UEntity.Cidadao.pas',
   Backend.UEntity.Melhoria in '..\Backend\model\entities\Backend.UEntity.Melhoria.pas',
   Backend.UEntity.Voluntario in '..\Backend\model\entities\Backend.UEntity.Voluntario.pas',
-  UfrmRanking in 'model\views\UfrmRanking.pas' {frmRanking};
+  UfrmRanking in 'model\views\UfrmRanking.pas' {frmRanking},
+  UServiceCidadao in 'model\services\UServiceCidadao.pas',
+  UUtils.Constants in 'model\utils\UUtils.Constants.pas',
+  UUtils.Functions in 'model\utils\UUtils.Functions.pas';
 
 {$R *.res}
 
