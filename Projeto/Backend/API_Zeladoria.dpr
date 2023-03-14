@@ -77,12 +77,12 @@ begin
   //http://localhost:9090/swagger/doc/html
   Swagger
     .Info
-      .Title('Documentação API DevsBets')
-      .Description('DevsBets - Lance seu Palpite')
+      .Title('Documentação API Eu Ajudo')
+      .Description('Eu Ajudo - Cuidando da nossa cidade')
       .Contact
-        .Name('Armando Neto')
-        .Email('email@hotmail.com')
-        .URL('http://www.mypage.com.br')
+        .Name('VCL Veterans')
+        .Email('email@vclveterans.com')
+        .URL('http://www.vclveterans.com.br')
       .&End
     .&End
     .BasePath('v1');
