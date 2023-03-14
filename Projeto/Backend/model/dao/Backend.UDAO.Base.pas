@@ -15,7 +15,7 @@ type
       function ObterRegistros: TJSONArray; virtual;
       function ProcurarPorId(const aIdentificador: Integer): TJSONObject; virtual;
       function AdicionarRegistro(aRegistro: TJSONObject): Boolean;
-      function OrdenarRegistros(const aColuna, aOrdem: string): TJSONArray;
+      function OrdenarRegistros(const aColuna, aOrdem: string): TJSONArray; virtual;
       function DeletarRegistro(const aIdentificador: Integer): Boolean;
       function AlterarRegistro(const aIdentificador: Integer; const aRegistro: TJSONObject;
            const aColuna, aValor: string): Boolean;

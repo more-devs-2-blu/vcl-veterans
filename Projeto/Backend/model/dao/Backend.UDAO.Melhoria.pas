@@ -12,6 +12,7 @@ type
   public
     constructor Create;
     function ObterRegistros: TJSONArray; override;
+    function OrdenarRegistros(const aColuna, aOrdem: string): TJSONArray; override;
     function ProcurarPorId(const aIdentificador: Integer): TJSONObject; override;
   end;
 
@@ -51,6 +52,38 @@ begin
 end;
 
 function TDAOMelhoria.ObterRegistros: TJSONArray;
+var
+  xJSONArray, xJSONArrayAux: TJSONArray;
+  xJSONObject: TJSONObject;
+  I: Integer;
+  xIdCidadao: Integer;
+  xIdCategoria: Integer;
+begin
+  xJSONArray := inherited;
+
+  if xJSONArray.Count = 0 then
+    Exit(xJSONArray);
+  xJSONArrayAux := TJSONArray.Create;
+  for I := 0 to Pred(xJSONArray.Count) do
+  begin
+    xJSONObject := TJSONObject.ParseJSONValue(
+      TEncoding.ASCII.GetBytes(
+        xJSONArray[I].ToJSON), 0) as TJSONObject;
+    xIdCidadao := StrToInt(xJSONObject.GetValue('idcidadao').Value);
+    xJSONObject.AddPair('cidadao', Self.ObterCidadao(xidCidadao));
+    xJSONObject.RemovePair('idcidadao');
+    xIdCategoria := StrToInt(xJSONObject.GetValue('idcategoria').Value);
+    xJSONObject.AddPair('categoria', Self.ObterCategoria(xIdCategoria));
+    xJSONObject.RemovePair('idcategoria');
+    xJSONArrayAux.AddElement(xJSONObject);
+  end;
+  FreeAndNil(xJSONArray);
+  Result := xJSONArrayAux;
+
+end;
+
+function TDAOMelhoria.OrdenarRegistros(const aColuna,
+  aOrdem: string): TJSONArray;
 var
   xJSONArray, xJSONArrayAux: TJSONArray;
   xJSONObject: TJSONObject;
