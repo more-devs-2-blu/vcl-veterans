@@ -1,54 +1,63 @@
 unit UServiceCidadao;
-
 interface
-
 uses
-  Generics.Collections,
-  Backend.UEntity.Cidadao,
+  REST.Client, REST.Types, Generics.Collections,
+  Backend.UEntity.Cidadao, Backend.UEntity.Categoria,
   UServiceIntf;
-
 type
   TServiceCidadao = class(TInterfacedObject, IService)
     private
       FCidadao: TCidadao;
       FCidadaos: TObjectList<TCidadao>;
+
+      FRESTClient: TRESTClient;
+      FRESTRequest: TRESTRequest;
+      FRESTResponse: TRESTResponse;
+
+      function GetCidadao: TObjectList<TCidadao>;
       function GetCidadaos: TObjectList<TCidadao>;
+      procedure SetCidadaos(const Value: TObjectList<TCidadao>);
+
     public
+      procedure Alterar;
+      procedure Registrar;
+      procedure Listar;
+      procedure Excluir;
+      procedure ObterRegistro;
+      procedure PreencherCidadaos(const aJsonCidadaos: String);
       constructor Create; overload;
       constructor Create(aCidadao: TCidadao); overload;
       destructor  Destroy; override;
-      procedure Alterar; override;
-      procedure Registrar; override;
-      procedure Listar; override;
-      procedure Excluir; override;
-      procedure ObterRegistro; override;
 
+      property Cidadaos: TObjectList<TCidadao> read GetCidadaos write SetCidadaos;
   end;
 implementation
-
 uses
-  System.SysUtils, REST.Types,
-  UUtils.Constants, DataSet.Serialize,
+  System.JSON,
+  DataSet.Serialize,
   FireDAC.comp.Client,
-  UUtils.Functions, JSON;
-
+  System.SysUtils,
+  System.IOUtils,
+  UUtils.Constants,
+  UUtils.Functions;
 { TServiceTeam }
-
 constructor TServiceCidadao.Create;
 begin
-  Inherited Create;
-
+  FRESTClient   := TRESTClient.Create(nil);
+  FRESTRequest  := TRESTRequest.Create(nil);
+  FRESTResponse := TRESTResponse.Create(nil);
+  FRESTRequest.Accept   := 'application/json';
+  FRESTRequest.Client   := FRESTClient;
+  FRESTRequest.Response := FRESTResponse;
+  FRESTRequest.Params.Clear;
   FCidadaos := TObjectList<TCidadao>.Create;
 end;
-
 
 constructor TServiceCidadao.Create(aCidadao: TCidadao);
 begin
   FCidadao := aCidadao;
-
   Self.Create;
 end;
-
 destructor TServiceCidadao.Destroy;
 begin
   FreeAndNil(FCidadao);
@@ -56,65 +65,106 @@ begin
   inherited;
 end;
 
-procedure TServiceCidadao.Listar;
-var
-  xMemTable: TFDMemTable;
+function TServiceCidadao.GetCidadao: TObjectList<TCidadao>;
 begin
-  FCidadaos.Clear;
-  xMemTable := TFDMemTable.Create(nil);
-  try
+
+end;
+
+function TServiceCidadao.GetCidadaos: TObjectList<TCidadao>;
+begin
+  Result := FCidadaos;
+end;
+
+procedure TServiceCidadao.Listar;
+begin
     try
-      FRESTClient.BaseURL := URL_BASE_CIDADAO;
+      FRESTClient.BaseURL := 'http://localhost:9090/v1/cidadao/apoio/desc';
       FRESTRequest.Method := rmGet;
       FRESTRequest.Execute;
       case FRESTResponse.StatusCode of
-        API_SUCESSO:
-          begin
-            xMemTable.LoadFromJSON(FRESTResponse.Content);
-            while not xMemTable.Eof do
-            begin
-              FCidadaos.Add(TCidadao.Create(xMemTable.FieldByName('id').AsInteger,
-                xMemTable.FieldByName('pontos').AsInteger,
-                xMemTable.FieldByName('nome').AsString));
-              xMemTable.Next;
-            end;
-          end;
-        API_NAO_AUTORIZADO:
+        200:
+        begin
+          Self.PreencherCidadaos(FRESTResponse.Content)
+        end;
+        401:
           raise Exception.Create('Usuário não autorizado.');
-      else
-        raise Exception.Create
-          ('Error ao carregar a lista de Times. Código do Erro:' +
-          FRESTResponse.StatusCode.ToString);
+        else
+          raise Exception.Create('Erro ao carregar a lista de Times. Código do Erro: ' + FRESTResponse.StatusCode.ToString);
       end;
-    except
-      on e: Exception do
-        raise Exception.Create(e.Message);
+    except on E: Exception do
+      raise Exception.Create('Error Message');
     end;
-  finally
-    FreeAndNil(xMemTable);
-  end;
 end;
-
 procedure TServiceCidadao.ObterRegistro;
+begin
+end;
+{Preencher Cidadaos}
+procedure TServiceCidadao.PreencherCidadaos(const aJsonCidadaos: String);
 var
   xMemTable: TFDMemTable;
+  xMemTableCidadao: TFDMemTable;
+  xMemTableCategoria: TFDMemTable;
+  xCidadao: TCidadao;
+  xCategoria: TCategoria;
+  xJSONFile: String;
 begin
-  Result := nil;
+  FCidadaos.Clear;
   xMemTable := TFDMemTable.Create(nil);
+  xMemTableCidadao := TFDMemTable.Create(nil);
+  xMemTableCategoria := TFDMemTable.Create(nil);
   try
-    FRESTClient.BaseURL := URL_BASE_CIDADAO + '/' + aId.ToString;
-    FRESTRequest.Method := rmGet;
-    FRESTRequest.Execute;
-    if FRESTResponse.StatusCode = API_SUCESSO then
+    xMemTable.LoadFromJSON(FRESTResponse.Content);
+    xJSONFile := FRESTResponse.Content;
+    TFile.WriteAllText('file.json', xJSONFile);
+    while not xMemTable.Eof do
     begin
-      xMemTable.LoadFromJSON(FRESTResponse.Content);
-      if xMemTable.FindFirst then
-        Result := TCidadao.Create(xMemTable.FieldByName('id').AsInteger);
+      FCidadaos.Add(TCidadao.Create(xMemTable.FieldByName('id').asInteger,
+                                      xMemTable.FieldByName('pontos').asInteger,
+                                      xMemTable.FieldByName('nome').AsString));
+      xMemTable.Next;
     end;
   finally
     FreeAndNil(xMemTable);
   end;
 end;
 
+procedure TServiceCidadao.Registrar;
+begin
+  try
+    FRESTClient.BaseURL := 'http://localhost:9090/v1/cidadao';
+    FRESTRequest.Method := rmPost;
+    FRESTRequest.Params.AddBody(FCidadao.JSON);
+    FRESTRequest.Execute;
+    case FRESTResponse.StatusCode of
+      201:
+        Exit;
+      401:
+        raise Exception.Create('Usuário não autorizado.');
+      else
+        raise Exception.Create('Erro não catalogado.');
+    end;
+  except
+    on e: exception do
+      raise Exception.Create(e.Message);
+  end;
+end;
+
+procedure TServiceCidadao.SetCidadaos(const Value: TObjectList<TCidadao>);
+begin
+  FCidadaos := Value;
+end;
+
+
+{Metodos Vazios}
+procedure TServiceCidadao.Excluir;
+begin
+
+end;
+
+procedure TServiceCidadao.Alterar;
+begin
+
+end;
 
 end.
+
