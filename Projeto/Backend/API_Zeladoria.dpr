@@ -34,6 +34,7 @@ begin
   THorse.Group.Prefix('v1')
     .Get('/cidadao', TControllerCidadao.Gets)
     .Get('/cidadao/:id', TControllerCidadao.Get)
+    .Get('/cidadao/:coluna/:ordem', TControllerCidadao.GetOrder)
     .Post('/cidadao', TControllerCidadao.Post)
     .Delete('/cidadao/:id', TControllerCidadao.Delete)
     .Patch('/cidadao/:id/:coluna/:valor', TControllerCidadao.Patch)

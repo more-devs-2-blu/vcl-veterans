@@ -18,6 +18,9 @@ type
       [SwagResponse(404)]
       class procedure Gets(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
 
+      //DOCUMENTAÇÃO AQUI
+      class procedure GetOrder(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
+
       [SwagGET('{id}', 'Procurar um Cidadão')]
       [SwagParamPath('id', 'id do Cidadão')]
       [SwagResponse(200, TCidadao, 'Informações do Cidadão')]
@@ -74,6 +77,14 @@ end;
 
 class procedure TControllerCidadao.Get(Req: THorseRequest; Res: THorseResponse;
   Next: TProc);
+begin
+  FDAO := TDAOCidadao.Create;
+  inherited;
+
+end;
+
+class procedure TControllerCidadao.GetOrder(Req: THorseRequest;
+  Res: THorseResponse; Next: TProc);
 begin
   FDAO := TDAOCidadao.Create;
   inherited;
