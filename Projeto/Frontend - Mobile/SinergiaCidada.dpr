@@ -19,12 +19,14 @@ uses
   Backend.UEntity.Categoria in '..\Backend\model\entities\Backend.UEntity.Categoria.pas',
   Backend.UEntity.Cidadao in '..\Backend\model\entities\Backend.UEntity.Cidadao.pas',
   Backend.UEntity.Melhoria in '..\Backend\model\entities\Backend.UEntity.Melhoria.pas',
-  Backend.UEntity.Voluntario in '..\Backend\model\entities\Backend.UEntity.Voluntario.pas';
+  Backend.UEntity.Voluntario in '..\Backend\model\entities\Backend.UEntity.Voluntario.pas',
+  UfrmRanking in 'model\views\UfrmRanking.pas' {frmRanking};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.CreateForm(TfrmApoiarMelhorias, frmApoiarMelhorias);
+  Application.CreateForm(TfrmRanking, frmRanking);
   Application.Run;
 end.
