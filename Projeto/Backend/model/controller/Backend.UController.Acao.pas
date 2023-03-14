@@ -38,18 +38,17 @@ type
       class procedure Delete(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
 
       //PESQUISAR IMPLEMENTAÇÃO
-      [SwagGET('{id}', 'Alterar o Registro de uma Ação')]
+      [SwagPatch('{id}', 'Alterar o Registro de uma Ação')]
       [SwagParamPath('id', 'id da Ação')]
       [SwagParamPath('coluna', 'Coluna da tabela Ação')]
-      [SwagParamPath('valor', 'Novo Valor da colunda da tabela Ação')]
+      [SwagParamPath('valor', 'Novo Valor da coluna da tabela Ação')]
       [SwagResponse(200, TAcao, 'Informações da Ação')]
       [SwagResponse(404)]
       class procedure Patch(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
 
-      [SwagGET('{id}', 'Alterar número de Apoios de uma Ação')]
+      [SwagPut('{id}', 'Alterar número de Apoios de uma Ação')]
       [SwagParamPath('id', 'id da Ação')]
-      [SwagParamPath('coluna', 'Coluna da tabela Ação')]
-      [SwagParamPath('valor', 'Novo Valor da colunda da tabela Ação')]
+      [SwagParamPath('valor', 'Valor a ser adicionado ao campo Apoio na tabela Ação')]
       [SwagResponse(200, TAcao, 'Informações da Ação')]
       [SwagResponse(404)]
 

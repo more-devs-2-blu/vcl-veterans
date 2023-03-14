@@ -41,14 +41,14 @@ type
       [SwagPATCH('{id}', 'Alterar o Registro de um Cidadão')]
       [SwagParamPath('id', 'id do Cidadão')]
       [SwagParamPath('coluna', 'Coluna da tabela Cidadão')]
-      [SwagParamPath('valor', 'Novo Valor da colunda da tabela Cidadão')]
+      [SwagParamPath('valor', 'Novo Valor da coluna da tabela Cidadão')]
       [SwagResponse(200, TCidadao, 'Informações do Cidadão')]
       [SwagResponse(404)]
       class procedure Patch(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
 
-      [SwagPATCH('{id}', 'Alterar número de Pontos de um Cidadão')]
+      [SwagPUT('{id}', 'Alterar número de Pontos de um Cidadão')]
       [SwagParamPath('id', 'id do Cidadão')]
-      [SwagParamPath('valor', 'Novo Valor da colunda da tabela Cidadão')]
+      [SwagParamPath('valor', 'Valor a ser adicionado ao campo Pontos na tabela Cidadão')]
       [SwagResponse(200, TCidadao, 'Informações do Cidadão')]
       [SwagResponse(404)]
       class procedure PatchPontuacao(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;

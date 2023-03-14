@@ -41,16 +41,16 @@ type
       [SwagPATCH('{id}', 'Alterar o Registro de uma Melhoria')]
       [SwagParamPath('id', 'id da Melhoria')]
       [SwagParamPath('coluna', 'Coluna da tabela Melhoria')]
-      [SwagParamPath('valor', 'Novo Valor da colunda da tabela Melhoria')]
+      [SwagParamPath('valor', 'Novo Valor da coluna da tabela Melhoria')]
       [SwagResponse(200, TMelhoria, 'Informações da Melhoria')]
       [SwagResponse(404)]
       class procedure Patch(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
 
 
-      [SwagGET('{id}', 'Alterar número de Apoios de uma Melhoria')]
+      [SwagPUT('{id}', 'Alterar número de Apoios de uma Melhoria')]
       [SwagParamPath('id', 'id da Ação')]
       [SwagParamPath('coluna', 'Coluna da tabela Ação')]
-      [SwagParamPath('valor', 'Novo Valor da colunda da tabela Ação')]
+      [SwagParamPath('valor', 'Valor a ser adicionado ao campo Apoio na tabela Melhoria')]
       [SwagResponse(200, TMelhoria, 'Informações da Ação')]
       [SwagResponse(404)]
       class procedure PatchPontuacao(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
