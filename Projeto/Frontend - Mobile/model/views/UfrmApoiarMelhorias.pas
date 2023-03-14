@@ -25,12 +25,11 @@ type
     imgTeste: TImage;
     imgApoiarMelhorias: TImage;
     lytMensagem: TLayout;
-    Button2: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Apoiar(Sender: TObject);
     procedure lstMelhoriasItemClickEx(const Sender: TObject; ItemIndex: Integer;
       const LocalClickPos: TPointF; const ItemObject: TListItemDrawable);
-    procedure Button2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     procedure CarregarRegistros;
@@ -70,11 +69,6 @@ begin
   //TListItemGlyphButton(xItem.Objects.FindDrawable('Button')).Click := Self.Apoiar;
 end;
 
-procedure TfrmApoiarMelhorias.Button2Click(Sender: TObject);
-begin
-  Self.CarregarRegistros;
-end;
-
 procedure TfrmApoiarMelhorias.lstMelhoriasItemClickEx(const Sender: TObject;
   ItemIndex: Integer; const LocalClickPos: TPointF;
   const ItemObject: TListItemDrawable);
@@ -105,6 +99,11 @@ begin
 
 end;
 
+procedure TfrmApoiarMelhorias.FormCreate(Sender: TObject);
+begin
+  Self.CarregarRegistros;
+end;
+
 procedure TfrmApoiarMelhorias.PrepararListView(aMelhoria: TMelhoria);
 var
   xItem: TListViewItem;
@@ -112,7 +111,7 @@ begin
   xItem := lstMelhorias.Items.Add;
   xItem.Tag := aMelhoria.Id;
 
-  TListItemText(xItem.Objects.FindDrawable('txtRanking')).Text := '#1';
+  TListItemText(xItem.Objects.FindDrawable('txtRanking')).Text := '';
   TListItemImage(xItem.Objects.FindDrawable('imgMelhoria')).Bitmap := imgTeste.Bitmap;
   TListItemText(xItem.Objects.FindDrawable('txtCategoria')).Text := aMelhoria.Categoria.Nome;
   TListItemImage(xItem.Objects.FindDrawable('imgApoiar')).Bitmap := imgApoiarMelhorias.Bitmap;
