@@ -26,7 +26,6 @@ uses
 
 begin
   Application.Initialize;
-  Application.CreateForm(TfrmApoiarMelhorias, frmApoiarMelhorias);
-  Application.CreateForm(TfrmRanking, frmRanking);
+  Application.CreateForm(TfrmHome, frmHome);
   Application.Run;
 end.
