@@ -5,7 +5,8 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
-  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Objects, FMX.Layouts, FMX.Effects;
+  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Objects, FMX.Layouts, FMX.Effects,
+  backend.UEntity.Cidadao;
 
 type
   TfrmHome = class(TForm)
@@ -31,9 +32,9 @@ type
     lytImg: TLayout;
     imgRanking: TImage;
     lytTOP3: TLayout;
-    lblPrimeiro: TLabel;
-    lblSegundo: TLabel;
-    lblTerceiro: TLabel;
+    posicao1: TLabel;
+    posicao2: TLabel;
+    posicao3: TLabel;
     lytVejaRanking: TLayout;
     lblVerRanking: TLabel;
     ShadowEffect2: TShadowEffect;
@@ -46,8 +47,10 @@ type
     ShadowEffect1: TShadowEffect;
     procedure recMelhoriaUrbanaClick(Sender: TObject);
     procedure recAcoesVoluntariaClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
+    procedure CarregarRanking;
   public
     { Public declarations }
   end;
@@ -58,9 +61,17 @@ var
 implementation
 
 uses
-  uFrmMelhoriasUrbanas, UfrmAcaoVoluntaria;
+  uFrmMelhoriasUrbanas,
+  UfrmAcaoVoluntaria,
+  UServiceIntf,
+  UServiceCidadao;
 
 {$R *.fmx}
+
+procedure TfrmHome.FormCreate(Sender: TObject);
+begin
+  Self.CarregarRanking;
+end;
 
 procedure TfrmHome.recAcoesVoluntariaClick(Sender: TObject);
 begin
@@ -80,6 +91,27 @@ begin
   frmMelhoriasUrbanas.Show;
   Application.MainForm := frmMelhoriasUrbanas;
   Self.Close;
+end;
+
+procedure TfrmHome.CarregarRanking;
+var
+  xServiceCidadao: IService;
+  xCidadao: TCidadao;
+  xPosicao: Integer;
+  xLabel : TLabel;
+begin
+    xPosicao := 1;
+    xServiceCidadao := TServiceCidadao.Create;
+    xServiceCidadao.Listar;
+    for xCidadao in TServiceCidadao(xServiceCidadao).Cidadaos do
+    begin
+      xLabel := TLabel(FindComponent('posicao'+xPosicao.ToString));
+      xLabel.Text := '#' +xPosicao.ToString + 'º - ' + xCidadao.Nome;
+      Inc(xPosicao);
+
+      if xPosicao = 4 then
+        break;
+    end;
 end;
 
 end.
