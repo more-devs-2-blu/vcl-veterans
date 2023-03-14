@@ -1,0 +1,11 @@
+{
+  "name": "API_Zeladoria",
+  "description": "",
+  "version": "1.0.0",
+  "homepage": "",
+  "mainsrc": "./",
+  "projects": [],
+  "dependencies": {
+    "github.com/HashLoad/horse": ">0.0.0"
+  }
+}
