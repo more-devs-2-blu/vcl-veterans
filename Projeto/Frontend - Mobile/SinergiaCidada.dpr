@@ -15,11 +15,11 @@ uses
   UfrmSplash in 'model\views\UfrmSplash.pas' {frmSplash},
   UServiceMelhoria in 'model\services\UServiceMelhoria.pas',
   UServiceIntf in 'model\services\UServiceIntf.pas',
-  Backend.UEntity.Acao in '..\..\..\vclveteran_backend3\4 - Projeto\backend\model\entities\Backend.UEntity.Acao.pas',
-  Backend.UEntity.Categoria in '..\..\..\vclveteran_backend3\4 - Projeto\backend\model\entities\Backend.UEntity.Categoria.pas',
-  Backend.UEntity.Cidadao in '..\..\..\vclveteran_backend3\4 - Projeto\backend\model\entities\Backend.UEntity.Cidadao.pas',
-  Backend.UEntity.Melhoria in '..\..\..\vclveteran_backend3\4 - Projeto\backend\model\entities\Backend.UEntity.Melhoria.pas',
-  Backend.UEntity.Voluntario in '..\..\..\vclveteran_backend3\4 - Projeto\backend\model\entities\Backend.UEntity.Voluntario.pas';
+  Backend.UEntity.Acao in '..\Backend\model\entities\Backend.UEntity.Acao.pas',
+  Backend.UEntity.Categoria in '..\Backend\model\entities\Backend.UEntity.Categoria.pas',
+  Backend.UEntity.Cidadao in '..\Backend\model\entities\Backend.UEntity.Cidadao.pas',
+  Backend.UEntity.Melhoria in '..\Backend\model\entities\Backend.UEntity.Melhoria.pas',
+  Backend.UEntity.Voluntario in '..\Backend\model\entities\Backend.UEntity.Voluntario.pas';
 
 {$R *.res}
 

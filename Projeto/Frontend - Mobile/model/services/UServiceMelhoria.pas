@@ -23,6 +23,7 @@ type
       Procedure Excluir;
       Procedure Alterar;
       Procedure ObterRegistro;
+      procedure PreencherMelhorias(const aJsonMelhorias: String);
 
       constructor Create; overload;
       constructor Create(aMelhoria : TMelhoria);overload;
@@ -60,6 +61,8 @@ begin
   FRESTRequest.Client   := FRESTClient;
   FRESTRequest.Response := FRESTResponse;
   FRESTRequest.Params.Clear;
+
+  FMelhorias := TObjectList<TMelhoria>.Create;
 end;
 
 destructor TServiceMelhoria.Destroy;
@@ -67,6 +70,10 @@ begin
   FreeAndNil(FRESTClient);
   FreeAndNil(FRESTRequest);
   FreeAndNil(FRESTResponse);
+
+  FreeAndNil(FMelhoria);
+  FreeAndNil(FMelhorias);
+
   inherited;
 end;
 
@@ -86,14 +93,7 @@ begin
 end;
 
 procedure TServiceMelhoria.Listar;
-var
-  xMemTable: TFDMemTable;
-  xJSONFile: String;
-  xMelhoria : TMelhoria;
 begin
-  xMemTable := TFDMemTable.Create(nil);
-  xMelhoria := TMelhoria.Create();
-  try
     try
       FRESTClient.BaseURL := 'http://localhost:9090/v1/melhoria';
       FRESTRequest.Method := rmGet;
@@ -102,15 +102,7 @@ begin
       case FRESTResponse.StatusCode of
         200:
         begin
-          xJSONFile := FRESTResponse.Content;
-          xMemTable.LoadFromJSON(FRESTResponse.Content);
-          TFile.WriteAllText('file.json', xJSONFile);
-          while not xMemTable.Eof do
-          begin
-
-            FMelhorias.Add(FMelhoria);
-            xMemTable.Next;
-          end;
+          Self.PreencherMelhorias(FRESTResponse.Content)
         end;
         401:
           raise Exception.Create('Usuário não autorizado.');
@@ -118,17 +110,66 @@ begin
           raise Exception.Create('Erro ao carregar a lista de Times. Código do Erro: ' + FRESTResponse.StatusCode.ToString);
       end;
     except on E: Exception do
+      raise Exception.Create('Error Message');
     end;
 
 
-  finally
-    FreeAndNil(xMemTable);
-  end;
 
 end;
 
 procedure TServiceMelhoria.ObterRegistro;
 begin
+
+end;
+
+procedure TServiceMelhoria.PreencherMelhorias(const aJsonMelhorias: String);
+var
+  xMemTable: TFDMemTable;
+  xMemTableCidadao: TFDMemTable;
+  xMemTableCategoria: TFDMemTable;
+  xCidadao: TCidadao;
+  xCategoria: TCategoria;
+  xJSONFile: String;
+
+begin
+  FMelhorias.Clear;
+
+  xMemTable := TFDMemTable.Create(nil);
+  xMemTableCidadao := TFDMemTable.Create(nil);
+  xMemTableCategoria := TFDMemTable.Create(nil);
+
+  try
+    xMemTable.LoadFromJSON(FRESTResponse.Content);
+    xJSONFile := FRESTResponse.Content;
+    TFile.WriteAllText('file.json', xJSONFile);
+
+
+    while not xMemTable.Eof do
+    begin
+      xMemTableCidadao.LoadFromJSON(xMemTable.FieldByName('cidadao').AsString);
+      xCidadao := TCidadao.Create(xMemTableCidadao.FieldByName('nome').AsString);
+
+      xMemTableCategoria.LoadFromJSON(xMemTable.FieldByName('categoria').AsString);
+      xCategoria := TCategoria.Create(xMemTableCategoria.FieldByName('nome').AsString);
+
+      FMelhorias.Add(TMelhoria.Create(xMemTable.FieldByName('id').asInteger,
+                                      xMemTable.FieldByName('apoio').asInteger,
+                                      xMemTable.FieldByName('resposta').AsString,
+                                      xMemTable.FieldByName('status').AsString,
+                                      xMemTable.FieldByName('descricao').AsString,
+                                      xMemTable.FieldByName('endereco').AsString,
+                                      xCidadao,
+                                      xCategoria
+                                      ));
+
+
+      xMemTable.Next;
+    end;
+  finally
+    FreeAndNil(xMemTable);
+    FreeAndNil(xMemTableCidadao);
+    FreeAndNil(xMemTableCategoria);
+  end;
 
 end;
 

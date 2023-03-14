@@ -43,6 +43,8 @@ type
       constructor Create; overload;
       constructor Create(aId: Integer); overload;
       constructor Create(const aStatus, aDescricao, aEndereco: String; aCidadao: TCidadao; const aCategoria: TCategoria); overload;
+      //Create Usado para listar melhorias
+      constructor Create(const aId, aApoio: Integer; const aResposta, aStatus, aDescricao, aEndereco: String; aCidadao: TCidadao; const aCategoria: TCategoria); overload;
 
       destructor  Destroy; override;
 
@@ -102,6 +104,21 @@ end;
 constructor TMelhoria.Create(aId: Integer);
 begin
   FId := aId;
+  Self.Create;
+end;
+
+constructor TMelhoria.Create(const aId, aApoio: Integer; const aResposta,
+  aStatus, aDescricao, aEndereco: String; aCidadao: TCidadao;
+  const aCategoria: TCategoria);
+begin
+  FId       := aId;
+  FApoio    := aApoio;
+  FStatus   := aStatus;
+  FDescricao:= aDescricao;
+  FEndereco := aEndereco;
+  FCidadao  := aCidadao;
+  FCategoria:= aCategoria;
+
   Self.Create;
 end;
 

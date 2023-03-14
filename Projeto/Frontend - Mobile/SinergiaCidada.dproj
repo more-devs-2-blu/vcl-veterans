@@ -243,11 +243,11 @@
         </DCCReference>
         <DCCReference Include="model\services\UServiceMelhoria.pas"/>
         <DCCReference Include="model\services\UServiceIntf.pas"/>
-        <DCCReference Include="..\..\..\vclveteran_backend3\4 - Projeto\backend\model\entities\Backend.UEntity.Acao.pas"/>
-        <DCCReference Include="..\..\..\vclveteran_backend3\4 - Projeto\backend\model\entities\Backend.UEntity.Categoria.pas"/>
-        <DCCReference Include="..\..\..\vclveteran_backend3\4 - Projeto\backend\model\entities\Backend.UEntity.Cidadao.pas"/>
-        <DCCReference Include="..\..\..\vclveteran_backend3\4 - Projeto\backend\model\entities\Backend.UEntity.Melhoria.pas"/>
-        <DCCReference Include="..\..\..\vclveteran_backend3\4 - Projeto\backend\model\entities\Backend.UEntity.Voluntario.pas"/>
+        <DCCReference Include="..\Backend\model\entities\Backend.UEntity.Acao.pas"/>
+        <DCCReference Include="..\Backend\model\entities\Backend.UEntity.Categoria.pas"/>
+        <DCCReference Include="..\Backend\model\entities\Backend.UEntity.Cidadao.pas"/>
+        <DCCReference Include="..\Backend\model\entities\Backend.UEntity.Melhoria.pas"/>
+        <DCCReference Include="..\Backend\model\entities\Backend.UEntity.Voluntario.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

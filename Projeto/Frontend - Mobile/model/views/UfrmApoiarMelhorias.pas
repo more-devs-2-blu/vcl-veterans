@@ -33,8 +33,8 @@ type
     procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
-    procedure PreencherMelhorias;
-
+    procedure CarregarRegistros;
+    procedure PrepararListView(aMelhoria: TMelhoria);
   public
     { Public declarations }
   end;
@@ -72,7 +72,7 @@ end;
 
 procedure TfrmApoiarMelhorias.Button2Click(Sender: TObject);
 begin
-  Self.PreencherMelhorias;
+  Self.CarregarRegistros;
 end;
 
 procedure TfrmApoiarMelhorias.lstMelhoriasItemClickEx(const Sender: TObject;
@@ -88,30 +88,39 @@ begin
     ItemObject.TagFloat := 0;
 end;
 
-procedure TfrmApoiarMelhorias.PreencherMelhorias;
+procedure TfrmApoiarMelhorias.CarregarRegistros;
 var
   xServiceMelhorias: IService;
   xMelhoria: TMelhoria;
-  xItem: TListViewItem;
 begin
+  lstMelhorias.Items.Clear;
+
   xServiceMelhorias := TServiceMelhoria.Create;
   xServiceMelhorias.Listar;
 
-  for xMelhoria in TServiceMelhoria(xMelhoria).Melhorias do
+  for xMelhoria in TServiceMelhoria(xServiceMelhorias).Melhorias do
   begin
-    xItem := lstMelhorias.Items.Add;
-
-    TListItemText(xItem.Objects.FindDrawable('txtRanking')).Text := '#1';
-    TListItemImage(xItem.Objects.FindDrawable('imgMelhoria')).Bitmap := imgTeste.Bitmap;
-    TListItemText(xItem.Objects.FindDrawable('txtCategoria')).Text := xMelhoria.Categoria.Nome;
-    TListItemImage(xItem.Objects.FindDrawable('imgApoiar')).Bitmap := imgApoiarMelhorias.Bitmap;
-    TListItemText(xItem.Objects.FindDrawable('txtEndereco')).Text := xMelhoria.Endereco;
-    TListItemText(xItem.Objects.FindDrawable('txtDescricao')).Text := xMelhoria.Descricao;
-    TListItemText(xItem.Objects.FindDrawable('txtApoiadores')).Text := FloatToStr(xMelhoria.Apoio);
-    TListItemText(xItem.Objects.FindDrawable('txtStatus')).Text := xMelhoria.Status;
-    TListItemText(xItem.Objects.FindDrawable('txtNome')).Text := 'João Silva';
+    Self.PrepararListView(xMelhoria)
   end;
 
+end;
+
+procedure TfrmApoiarMelhorias.PrepararListView(aMelhoria: TMelhoria);
+var
+  xItem: TListViewItem;
+begin
+  xItem := lstMelhorias.Items.Add;
+  xItem.Tag := aMelhoria.Id;
+
+  TListItemText(xItem.Objects.FindDrawable('txtRanking')).Text := '#1';
+  TListItemImage(xItem.Objects.FindDrawable('imgMelhoria')).Bitmap := imgTeste.Bitmap;
+  TListItemText(xItem.Objects.FindDrawable('txtCategoria')).Text := aMelhoria.Categoria.Nome;
+  TListItemImage(xItem.Objects.FindDrawable('imgApoiar')).Bitmap := imgApoiarMelhorias.Bitmap;
+  TListItemText(xItem.Objects.FindDrawable('txtEndereco')).Text := aMelhoria.Endereco;
+  TListItemText(xItem.Objects.FindDrawable('txtDescricao')).Text := aMelhoria.Descricao;
+  TListItemText(xItem.Objects.FindDrawable('txtApoiadores')).Text := FloatToStr(aMelhoria.Apoio);
+  TListItemText(xItem.Objects.FindDrawable('txtStatus')).Text := aMelhoria.Status;
+  TListItemText(xItem.Objects.FindDrawable('txtNome')).Text := aMelhoria.Cidadao.Nome;
 end;
 
 end.
