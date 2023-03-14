@@ -24,6 +24,13 @@ type
       [SwagResponse(404)]
       class procedure Get(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
 
+      [SwagGET('{coluna}', 'Listar Cidadãos em ordem')]
+      [SwagParamPath('coluna', 'Coluna em que se deseja aplicar a ordenação')]
+      [SwagParamPath('ordem', 'Determina se o retorno deve ser feito de modo crescente ou decrescente')]
+      [SwagResponse(200, TAcao, 'Lista de Ações ordenada')]
+      [SwagResponse(404)]
+      class procedure GetOrder(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
+
       [SwagPOST('Cadastrar Nova Ação')]
       [SwagParamBody('Informações da Ação', TAcao)]
       [SwagResponse(201)]
@@ -74,6 +81,14 @@ end;
 
 class procedure TControlleAcao.Get(Req: THorseRequest;
   Res: THorseResponse; Next: TProc);
+begin
+  FDAO := TDAOAcao.Create;
+  inherited;
+
+end;
+
+class procedure TControlleAcao.GetOrder(Req: THorseRequest; Res: THorseResponse;
+  Next: TProc);
 begin
   FDAO := TDAOAcao.Create;
   inherited;

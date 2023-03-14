@@ -44,6 +44,7 @@ begin
   THorse.Group.Prefix('v1')
     .Get('/acao', TControlleAcao.Gets)
     .Get('/acao/:id', TControlleAcao.Get)
+    .Get('/acao/:coluna/:ordem', TControlleAcao.GetOrder)
     .Post('/acao', TControlleAcao.Post)
     .Delete('/acao/:id', TControlleAcao.Delete)
     .Patch('/acao/:id/:coluna/:valor', TControlleAcao.Patch)
@@ -53,6 +54,7 @@ begin
   THorse.Group.Prefix('v1')
     .Get('/melhoria', TControllerMelhoria.Gets)
     .Get('/melhoria/:id', TControllerMelhoria.Get)
+    .Get('/melhoria/:coluna/:ordem', TControllerMelhoria.GetOrder)
     .Post('/melhoria', TControllerMelhoria.Post)
     .Delete('/melhoria/:id', TControllerMelhoria.Delete)
     .Patch('/melhoria/:id/:coluna/:valor', TControllerMelhoria.Patch)
@@ -62,6 +64,7 @@ begin
   THorse.Group.Prefix('v1')
     .Get('/voluntario', TControllerVoluntario.Gets)
     .Get('/voluntario/:id', TControllerVoluntario.Get)
+    .Get('/voluntario/:coluna/:ordem', TControllerVoluntario.GetOrder)
     .Post('/voluntario', TControllerVoluntario.Post)
     .Delete('/voluntario/:id', TControllerVoluntario.Delete)
     .Patch('/voluntario/:id/:coluna/:valor', TControllerVoluntario.Patch);

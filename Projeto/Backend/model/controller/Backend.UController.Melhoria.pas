@@ -24,6 +24,13 @@ type
       [SwagResponse(404)]
       class procedure Get(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
 
+      [SwagGET('{coluna}', 'Listar Cidadãos em ordem')]
+      [SwagParamPath('coluna', 'Coluna em que se deseja aplicar a ordenação')]
+      [SwagParamPath('ordem', 'Determina se o retorno deve ser feito de modo crescente ou decrescente')]
+      [SwagResponse(200, TMelhoria, 'Lista de Melhorias ordenada')]
+      [SwagResponse(404)]
+      class procedure GetOrder(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
+
       [SwagPOST('Cadastrar Nova Melhoria')]
       [SwagParamBody('Informações da Melhoria', TMelhoria)]
       [SwagResponse(201)]
@@ -79,6 +86,14 @@ class procedure TControllerMelhoria.Get(Req: THorseRequest;
 begin
   FDAO := TDAOMelhoria.Create;
   inherited;
+end;
+
+class procedure TControllerMelhoria.GetOrder(Req: THorseRequest;
+  Res: THorseResponse; Next: TProc);
+begin
+  FDAO := TDAOMelhoria.Create;
+  inherited;
+
 end;
 
 class procedure TControllerMelhoria.Gets(Req: THorseRequest;
