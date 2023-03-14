@@ -30,7 +30,8 @@ type
 
     public
       constructor Create; overload;
-      constructor Create(aId: Integer); overload;
+      constructor Create(const aId: Integer); overload;
+      constructor Create(const aId: Integer; aCidadao: TCidadao; aAcao: TAcao); overload;
 
       destructor  Destroy; override;
 
@@ -41,6 +42,8 @@ type
                                              write SetAcao;
 
       property Cidadao: TCidadao read GetCidadao write SetCidadao;
+
+      property JSON: TJSONObject read GetJSON;
   end;
 implementation
 
@@ -54,9 +57,18 @@ begin
 end;
 
 {Destroy}
-constructor TVoluntario.Create(aId: Integer);
+constructor TVoluntario.Create(const aId: Integer);
 begin
   FId := aId;
+  Self.Create;
+end;
+
+constructor TVoluntario.Create(const aId: Integer; aCidadao: TCidadao;
+  aAcao: TAcao);
+begin
+  FId := aId;
+  FCidadao := aCidadao;
+  FAcao := aAcao;
   Self.Create;
 end;
 
