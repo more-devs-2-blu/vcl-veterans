@@ -11,8 +11,7 @@ type
     function ObterCriador(const aId: Integer): TJSONObject;
   public
     constructor Create;
-
-    function ObterRegistros: TJSONArray; override;
+    function ObterRegistros(aJSONArray: TJSONArray): TJSONArray; override;
     function ProcurarPorId(const aIdentificador: Integer): TJSONObject; override;
   end;
 
@@ -54,7 +53,7 @@ begin
 
 end;
 
-function TDAOAcao.ObterRegistros: TJSONArray;
+function TDAOAcao.ObterRegistros(aJSONArray: TJSONArray): TJSONArray;
 var
   xJSONArray, xJSONArrayAux: TJSONArray;
   xJSONObject: TJSONObject;
