@@ -34,6 +34,8 @@ type
     { Private declarations }
     procedure CarregarRegistros;
     procedure PrepararListView(aMelhoria: TMelhoria);
+    function ObterItemSelecionado: Integer;
+    procedure AdicionarApoio;
   public
     { Public declarations }
   end;
@@ -44,6 +46,18 @@ var
 implementation
 
 {$R *.fmx}
+
+procedure TfrmApoiarMelhorias.AdicionarApoio;
+const
+  APOIO_RECEBIDO = '1';
+var
+  xServiceMelhoria: TServiceMelhoria;
+begin
+  xServiceMelhoria := TServiceMelhoria.Create(
+    TMelhoria.Create(ObterItemSelecionado));
+
+  xServiceMelhoria.AlterarPontuacao(APOIO_RECEBIDO);
+end;
 
 procedure TfrmApoiarMelhorias.Apoiar(Sender: TObject);
 begin
@@ -75,11 +89,20 @@ procedure TfrmApoiarMelhorias.lstMelhoriasItemClickEx(const Sender: TObject;
 begin
   if (not(itemObject = nil)) and (ItemObject.Name = 'imgApoiar') and (ItemObject.TagFloat = 0) then
     begin
+      AdicionarApoio;
       ShowMessage('Teste');
       ItemObject.TagFloat := 1;
     end
   else if (not(itemObject = nil)) and (ItemObject.Name = 'imgApoiar') and (ItemObject.TagFloat = 1) then
     ItemObject.TagFloat := 0;
+end;
+
+function TfrmApoiarMelhorias.ObterItemSelecionado: Integer;
+begin
+  if lstMelhorias.ItemIndex <> -1 then
+  begin
+    Result := lstMelhorias.Items[lstMelhorias.ItemIndex].Tag;
+  end;
 end;
 
 procedure TfrmApoiarMelhorias.CarregarRegistros;

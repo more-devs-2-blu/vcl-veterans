@@ -48,7 +48,7 @@ begin
     .Post('/acao', TControlleAcao.Post)
     .Delete('/acao/:id', TControlleAcao.Delete)
     .Patch('/acao/:id/:coluna/:valor', TControlleAcao.Patch)
-    .Put('/acao/:id/:valor', TControllerCidadao.PatchPontuacao);
+    .Put('/acao/:id/:valor', TControllerMelhoria.PatchPontuacao);
 
   //Melhoria
   THorse.Group.Prefix('v1')
@@ -58,7 +58,7 @@ begin
     .Post('/melhoria', TControllerMelhoria.Post)
     .Delete('/melhoria/:id', TControllerMelhoria.Delete)
     .Patch('/melhoria/:id/:coluna/:valor', TControllerMelhoria.Patch)
-    .Put('/melhoria/:id/:valor', TControllerCidadao.PatchPontuacao);
+    .Put('/melhoria/:id/:valor', TControllerMelhoria.PatchPontuacao);
 
   //Voluntário
   THorse.Group.Prefix('v1')

@@ -15,14 +15,15 @@ type
       FRESTClient: TRESTClient;
       FRESTRequest: TRESTRequest;
       FRESTResponse: TRESTResponse;
-    function GetMelhoria: TObjectList<TMelhoria>;
-    procedure SetMelhorias(const Value: TObjectList<TMelhoria>);
-    function GetMelhorias: TObjectList<TMelhoria>;
+      function GetMelhoria: TObjectList<TMelhoria>;
+      procedure SetMelhorias(const Value: TObjectList<TMelhoria>);
+      function GetMelhorias: TObjectList<TMelhoria>;
     public
       Procedure Registrar;
       Procedure Listar;
       Procedure Excluir;
-      Procedure Alterar;
+      Procedure Alterar(const aColuna, aValor: String);
+      Procedure AlterarPontuacao(aValor: String);
       Procedure ObterRegistro;
       procedure PreencherMelhorias(const aJsonMelhorias: String);
 
@@ -36,13 +37,68 @@ type
 implementation
 
 uses
-  System.JSON, DataSet.Serialize, FireDAC.comp.Client, System.SysUtils, System.IOUtils;
+  System.JSON, DataSet.Serialize, FireDAC.comp.Client, System.SysUtils, System.IOUtils, UUtils.Constants;
 
 { TServiceMelhoria }
 
-procedure TServiceMelhoria.Alterar;
+procedure TServiceMelhoria.Alterar(const aColuna, aValor: String);
+var
+  xRequestJSON: TJSONObject;
 begin
+  try
+    xRequestJSON := TJSONObject.Create;
+    try
+      FRESTClient.BaseURL := Format(URL_BASE_MELHORIA + '/%s/%s/%s',[FMelhoria.Id.ToString, aColuna, aValor]);
+      FRESTRequest.Method := rmPut;
 
+
+      FRESTRequest.Addbody(xRequestJSON);
+
+      FRESTRequest.Execute;
+      case FRESTResponse.StatusCode of
+      API_SUCESSO:
+        Exit;
+      API_NAO_AUTORIZADO:
+        raise Exception.Create('Registro não autorizado.');
+      else
+        raise Exception.Create('Erro não catalogado.');
+      end;
+    except
+      on e: exception do
+        raise Exception.Create(e.Message);
+    end;
+  finally
+    FreeAndNil(xRequestJSON);
+  end;
+end;
+
+procedure TServiceMelhoria.AlterarPontuacao(aValor: String);
+var
+  xRequestJSON: TJSONObject;
+begin
+  try
+    xRequestJSON := TJSONObject.Create;
+    try
+      FRESTClient.BaseURL := Format(URL_BASE_MELHORIA + '/%s/%s',[FMelhoria.Id.ToString, aValor]);
+      FRESTRequest.Method := rmPut;
+      FRESTRequest.Addbody(xRequestJSON);
+
+      FRESTRequest.Execute;
+      case FRESTResponse.StatusCode of
+      API_SUCESSO:
+        Exit;
+      API_NAO_AUTORIZADO:
+        raise Exception.Create('Registro não autorizado.');
+      else
+        raise Exception.Create('Erro não catalogado.');
+      end;
+    except
+      on e: exception do
+        raise Exception.Create(e.Message);
+    end;
+  finally
+    FreeAndNil(xRequestJSON);
+  end;
 end;
 
 constructor TServiceMelhoria.Create(aMelhoria : TMelhoria);

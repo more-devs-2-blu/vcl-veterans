@@ -123,7 +123,7 @@ class procedure TControlleAcao.PatchPontuacao(Req: THorseRequest;
   Res: THorseResponse; Next: TProc);
 begin
   FDAO := TDAOAcao.Create;
-  FColuna := 'Apoio';
+  FColuna := 'apoio';
   inherited;
 
 end;
