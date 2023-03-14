@@ -27,7 +27,7 @@ type
       function GetStatus       : String;
       function GetDescricao    : String;
       function GetEndereco     : String;
-      function GetCriador: TCidadao;
+      function GetCriador      : TCidadao;
 
       function GetJSON: TJSONObject;
 
@@ -44,6 +44,8 @@ type
       constructor Create; overload;
       constructor Create(aId: Integer); overload;
       constructor Create(const aCategoria: TCategoria; const aApoio: Integer;
+          const aStatus, aDescricao, aEndereco: String; const aCriador: TCidadao); overload;
+      constructor Create(const aId: Integer; const aCategoria: TCategoria; const aApoio: Integer;
           const aStatus, aDescricao, aEndereco: String; const aCriador: TCidadao); overload;
 
       destructor  Destroy; override;
@@ -103,6 +105,21 @@ end;
 constructor TAcao.Create(aId: Integer);
 begin
   FId:= aId;
+  Self.Create;
+end;
+
+constructor TAcao.Create(const aId: Integer; const aCategoria: TCategoria;
+  const aApoio: Integer; const aStatus, aDescricao, aEndereco: String;
+  const aCriador: TCidadao);
+begin
+  Fid       := aId;
+  FCategoria:= aCategoria;
+  FApoio    := aApoio;
+  FStatus   := aStatus;
+  FDescricao:= aDescricao;
+  FEndereco := aEndereco;
+  FCriador  := aCriador;
+
   Self.Create;
 end;
 
