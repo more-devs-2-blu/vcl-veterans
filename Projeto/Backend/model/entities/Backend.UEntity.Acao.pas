@@ -47,6 +47,9 @@ type
           const aStatus, aDescricao, aEndereco: String; const aCriador: TCidadao); overload;
       constructor Create(const aId: Integer; const aCategoria: TCategoria; const aApoio: Integer;
           const aStatus, aDescricao, aEndereco: String; const aCriador: TCidadao); overload;
+      //Listar Acoes
+       constructor Create(const aId: Integer;  const aApoio: Integer; const aStatus,
+           aDescricao, aEndereco: String; const aCategoria: TCategoria; const aCriador: TCidadao); overload;
 
       destructor  Destroy; override;
 
@@ -121,6 +124,18 @@ begin
   FCriador  := aCriador;
 
   Self.Create;
+end;
+
+constructor TAcao.Create(const aId, aApoio: Integer; const aStatus, aDescricao,
+  aEndereco: String; const aCategoria: TCategoria; const aCriador: TCidadao);
+begin
+  FId := aId;
+  FApoio := aApoio;
+  FStatus := aStatus;
+  FDescricao := aDescricao;
+  FEndereco := aEndereco;
+  FCategoria := aCategoria;
+  FCriador := aCriador;
 end;
 
 destructor TAcao.Destroy;
