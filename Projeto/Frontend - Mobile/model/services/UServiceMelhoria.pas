@@ -2,8 +2,9 @@ unit UServiceMelhoria;
 
 interface
 
-uses UServiceIntf, REST.Client, REST.Types, Generics.Collections,
-  Backend.UEntity.Melhoria, Backend.UEntity.Cidadao, Backend.UEntity.Categoria;
+uses REST.Client, REST.Types, Generics.Collections,
+  Backend.UEntity.Melhoria, Backend.UEntity.Cidadao, Backend.UEntity.Categoria,
+  UServiceIntf;
 
 type
   TServiceMelhoria = class(TInterfacedObject, IService)
