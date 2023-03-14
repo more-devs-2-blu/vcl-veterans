@@ -124,7 +124,7 @@ class procedure TControllerMelhoria.PatchPontuacao(Req: THorseRequest;
   Res: THorseResponse; Next: TProc);
 begin
   FDAO := TDAOMelhoria.Create;
-  FColuna := 'Apoio';
+  FColuna := 'apoio';
   inherited;
 end;
 

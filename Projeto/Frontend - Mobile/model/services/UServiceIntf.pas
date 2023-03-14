@@ -7,7 +7,7 @@ type
     Procedure Registrar;
     Procedure Listar;
     Procedure Excluir;
-    Procedure Alterar;
+    Procedure Alterar(const aColuna, aValor: String);
     Procedure ObterRegistro;
   end;
 
