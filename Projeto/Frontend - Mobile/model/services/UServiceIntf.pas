@@ -8,6 +8,7 @@ type
     Procedure Listar;
     Procedure Excluir;
     Procedure Alterar(const aColuna, aValor: String);
+    Procedure AlterarPontuacao(aValor: String);
     Procedure ObterRegistro;
   end;
 

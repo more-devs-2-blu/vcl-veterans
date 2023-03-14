@@ -49,9 +49,7 @@ begin
     xRequestJSON := TJSONObject.Create;
     try
       FRESTClient.BaseURL := Format(URL_BASE_MELHORIA + '/%s/%s/%s',[FMelhoria.Id.ToString, aColuna, aValor]);
-      FRESTRequest.Method := rmPut;
-
-
+      FRESTRequest.Method := rmPatch;
       FRESTRequest.Addbody(xRequestJSON);
 
       FRESTRequest.Execute;
