@@ -13,6 +13,7 @@ type
     public
       class procedure Gets(Req: THorseRequest; Res: THorseResponse; Next: TProc); virtual;
       class procedure Get(Req: THorseRequest; Res: THorseResponse; Next: TProc); virtual;
+      class procedure GetOrder(Req: THorseRequest; Res: THorseResponse; Next: TProc); virtual;
       class procedure Post(Req: THorseRequest; Res: THorseResponse; Next: TProc); virtual;
       class procedure Delete(Req: THorseRequest; Res: THorseResponse; Next: TProc); virtual;
       class procedure Patch(Req: THorseRequest; Res: THorseResponse; Next: TProc); virtual;
@@ -54,6 +55,21 @@ begin
   end;
   xId := StrToIntDef(Req.Params.Items['id'], 0);
   Res.Send<TJSONObject>(FDAO.ProcurarPorId(xId));
+end;
+
+class procedure TControllerBase.GetOrder(Req: THorseRequest;
+  Res: THorseResponse; Next: TProc);
+var
+  xColuna, xOrdem: String;
+begin
+  if (Req.Params.Count <> 2) then
+  begin
+    Res.Status(THTTPStatus.BadRequest);
+    Exit;
+  end;
+  xColuna := Req.Params.Items['coluna'];
+  xOrdem  := Req.Params.Items['ordem'];
+  Res.Send<TJSONArray>(FDAO.OrdenarRegistros(xColuna, xOrdem));
 end;
 
 class procedure TControllerBase.Gets(Req: THorseRequest;

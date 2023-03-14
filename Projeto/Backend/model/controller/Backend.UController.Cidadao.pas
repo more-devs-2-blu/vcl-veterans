@@ -24,6 +24,13 @@ type
       [SwagResponse(404)]
       class procedure Get(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
 
+      [SwagGET('{coluna}', 'Listar Cidadãos em ordem')]
+      [SwagParamPath('coluna', 'Coluna em que se deseja aplicar a ordenação')]
+      [SwagParamPath('ordem', 'Determina se o retorno deve ser feito de modo crescente ou decrescente')]
+      [SwagResponse(200, TCidadao, 'Lista de Cidadãos ordenada')]
+      [SwagResponse(404)]
+      class procedure GetOrder(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
+
       [SwagPOST('Cadastrar Novo Cidadão')]
       [SwagParamBody('Informações do Cidadao', TCidadao)]
       [SwagResponse(201)]
@@ -37,7 +44,6 @@ type
       [SwagResponse(404)]
       class procedure Delete(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
 
-      //PESQUISAR IMPLEMENTAÇÃO
       [SwagPATCH('{id}', 'Alterar o Registro de um Cidadão')]
       [SwagParamPath('id', 'id do Cidadão')]
       [SwagParamPath('coluna', 'Coluna da tabela Cidadão')]
@@ -74,6 +80,14 @@ end;
 
 class procedure TControllerCidadao.Get(Req: THorseRequest; Res: THorseResponse;
   Next: TProc);
+begin
+  FDAO := TDAOCidadao.Create;
+  inherited;
+
+end;
+
+class procedure TControllerCidadao.GetOrder(Req: THorseRequest;
+  Res: THorseResponse; Next: TProc);
 begin
   FDAO := TDAOCidadao.Create;
   inherited;
