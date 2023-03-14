@@ -95,7 +95,7 @@ end;
 procedure TServiceMelhoria.Listar;
 begin
     try
-      FRESTClient.BaseURL := 'http://localhost:9090/v1/melhoria';
+      FRESTClient.BaseURL := 'http://localhost:9090/v1/melhoria/apoio/desc';
       FRESTRequest.Method := rmGet;
       FRESTRequest.Execute;
 
