@@ -8,7 +8,7 @@
 ## ✒️ Autores/Funções ✒️
 
 - [@Daniel]() - *Full Stack Developer - Repositório - Documentação*
-- [@Carlos]() - *Front-end - prototipação*
+- [@Carlos](https://github.com/CarlosFelipeOR) - *Front-end - prototipação*
 - [@Nathan]() - *Front-end - prototipação*
 - [@Michael]() - *Front-end - Documentação*
 - [@Lucas]() - *Repositório - Documentação**
