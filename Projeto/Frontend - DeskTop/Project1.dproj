@@ -288,15 +288,16 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="..\Frontend - Mobile\model\services\UServiceMelhoria.pas"/>
+        <DCCReference Include="model\utils\UUtils.Enums.pas"/>
+        <DCCReference Include="model\utils\UUtils.Constants.pas"/>
+        <DCCReference Include="model\utils\UUtils.Functions.pas"/>
+        <DCCReference Include="..\Frontend - Mobile\model\services\UServiceIntf.pas"/>
         <DCCReference Include="..\Backend\model\entities\Backend.UEntity.Acao.pas"/>
         <DCCReference Include="..\Backend\model\entities\Backend.UEntity.Categoria.pas"/>
         <DCCReference Include="..\Backend\model\entities\Backend.UEntity.Cidadao.pas"/>
         <DCCReference Include="..\Backend\model\entities\Backend.UEntity.Melhoria.pas"/>
         <DCCReference Include="..\Backend\model\entities\Backend.UEntity.Voluntario.pas"/>
-        <DCCReference Include="model\utils\UUtils.Enums.pas"/>
-        <DCCReference Include="model\utils\UUtils.Constants.pas"/>
-        <DCCReference Include="model\utils\UUtils.Functions.pas"/>
-        <DCCReference Include="..\Frontend - Mobile\model\services\UServiceIntf.pas"/>
+        <DCCReference Include="..\Frontend - Mobile\model\services\UServiceAcao.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

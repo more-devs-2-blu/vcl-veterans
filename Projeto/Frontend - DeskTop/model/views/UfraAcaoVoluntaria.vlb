@@ -16,9 +16,6 @@ Coordinates=364,10,53,58
 [lytPrincipal]
 Coordinates=10,344,78,36
 
-[lstListaOrcamentos]
-Coordinates=472,276,125,36
-
 [lytBotoes]
 Coordinates=394,276,68,36
 
@@ -31,13 +28,16 @@ Coordinates=73,276,53,58
 [Label2]
 Coordinates=10,276,53,58
 
-[lstOrcamentos]
-Coordinates=10,10,107,256
-Visible=True
-
 []
 Coordinates=427,10,64,58
 
 [cmbOrdenar]
 Coordinates=127,10,101,146
+
+[lytMelhorias]
+Coordinates=472,276,125,36
+
+[lstAcoes]
+Coordinates=10,10,107,256
+Visible=True
 
