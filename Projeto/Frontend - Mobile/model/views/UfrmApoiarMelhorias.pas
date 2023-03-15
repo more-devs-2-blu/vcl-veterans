@@ -25,11 +25,13 @@ type
     imgTeste: TImage;
     imgApoiarMelhorias: TImage;
     lytMensagem: TLayout;
+    imgApoioOn: TImage;
     procedure Button1Click(Sender: TObject);
     procedure Apoiar(Sender: TObject);
     procedure lstMelhoriasItemClickEx(const Sender: TObject; ItemIndex: Integer;
       const LocalClickPos: TPointF; const ItemObject: TListItemDrawable);
     procedure FormCreate(Sender: TObject);
+    procedure imgVoltarClick(Sender: TObject);
   private
     { Private declarations }
     procedure CarregarRegistros;
@@ -46,6 +48,8 @@ var
 implementation
 
 {$R *.fmx}
+
+uses uFrmMelhoriasUrbanas;
 
 procedure TfrmApoiarMelhorias.AdicionarApoio;
 const
@@ -86,15 +90,20 @@ end;
 procedure TfrmApoiarMelhorias.lstMelhoriasItemClickEx(const Sender: TObject;
   ItemIndex: Integer; const LocalClickPos: TPointF;
   const ItemObject: TListItemDrawable);
+var
+  xItem: TListViewItem;
 begin
+
   if (not(itemObject = nil)) and (ItemObject.Name = 'imgApoiar') and (ItemObject.TagFloat = 0) then
     begin
       AdicionarApoio;
-      ShowMessage('Teste');
+      xItem  := lstMelhorias.Items[lstMelhorias.ItemIndex];
+      TListItemImage(xItem.Objects.FindDrawable('imgApoiar')).Bitmap := imgApoioOn.Bitmap;
+      TListItemText(xItem.Objects.FindDrawable('txtApoiadores')).Text :=
+            FloatToStr(StrToFloat(TListItemText(xItem.Objects.FindDrawable('txtApoiadores')).Text) + 1 );
+      ShowMessage('Melhoria Apoiada');
       ItemObject.TagFloat := 1;
-    end
-  else if (not(itemObject = nil)) and (ItemObject.Name = 'imgApoiar') and (ItemObject.TagFloat = 1) then
-    ItemObject.TagFloat := 0;
+    end;
 end;
 
 function TfrmApoiarMelhorias.ObterItemSelecionado: Integer;
@@ -125,6 +134,16 @@ end;
 procedure TfrmApoiarMelhorias.FormCreate(Sender: TObject);
 begin
   Self.CarregarRegistros;
+end;
+
+procedure TfrmApoiarMelhorias.imgVoltarClick(Sender: TObject);
+begin
+  if not Assigned(frmMelhoriasUrbanas) then
+    frmMelhoriasUrbanas := TfrmMelhoriasUrbanas.Create(Application);
+
+  frmMelhoriasUrbanas.Show;
+  Application.MainForm := frmMelhoriasUrbanas;
+  Self.Close;
 end;
 
 procedure TfrmApoiarMelhorias.PrepararListView(aMelhoria: TMelhoria);

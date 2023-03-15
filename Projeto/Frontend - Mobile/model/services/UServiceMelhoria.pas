@@ -235,11 +235,13 @@ begin
 end;
 
 procedure TServiceMelhoria.Registrar;
+
 begin
     try
     FRESTClient.BaseURL := 'http://localhost:9090/v1/melhoria';
     FRESTRequest.Method := rmPost;
     FRESTRequest.Params.AddBody(FMelhoria.JSON);
+
     FRESTRequest.Execute;
     case FRESTResponse.StatusCode of
       201:
