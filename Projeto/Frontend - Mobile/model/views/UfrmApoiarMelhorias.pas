@@ -25,6 +25,7 @@ type
     imgTeste: TImage;
     imgApoiarMelhorias: TImage;
     lytMensagem: TLayout;
+    imgApoioOn: TImage;
     procedure Button1Click(Sender: TObject);
     procedure Apoiar(Sender: TObject);
     procedure lstMelhoriasItemClickEx(const Sender: TObject; ItemIndex: Integer;
@@ -86,15 +87,22 @@ end;
 procedure TfrmApoiarMelhorias.lstMelhoriasItemClickEx(const Sender: TObject;
   ItemIndex: Integer; const LocalClickPos: TPointF;
   const ItemObject: TListItemDrawable);
+var
+  xItem: TListViewItem;
 begin
+
   if (not(itemObject = nil)) and (ItemObject.Name = 'imgApoiar') and (ItemObject.TagFloat = 0) then
     begin
       AdicionarApoio;
-      ShowMessage('Teste');
+      xItem  := lstMelhorias.Items[lstMelhorias.ItemIndex];
+      TListItemImage(xItem.Objects.FindDrawable('imgApoiar')).Bitmap := imgApoioOn.Bitmap;
+      TListItemText(xItem.Objects.FindDrawable('txtApoiadores')).Text :=
+            FloatToStr(StrToFloat(TListItemText(xItem.Objects.FindDrawable('txtApoiadores')).Text) + 1 );
+      ShowMessage('Melhoria Apoiada');
       ItemObject.TagFloat := 1;
-    end
-  else if (not(itemObject = nil)) and (ItemObject.Name = 'imgApoiar') and (ItemObject.TagFloat = 1) then
-    ItemObject.TagFloat := 0;
+    end;
+//  else if (not(itemObject = nil)) and (ItemObject.Name = 'imgApoiar') and (ItemObject.TagFloat = 1) then
+//    ItemObject.TagFloat := 0;
 end;
 
 function TfrmApoiarMelhorias.ObterItemSelecionado: Integer;
