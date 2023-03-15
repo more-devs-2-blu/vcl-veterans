@@ -28,7 +28,7 @@ CREATE TABLE Acao
  Apoio INT UNSIGNED,  
  Endereco VARCHAR(255),
  Status VARCHAR(20),
- Criador INT UNSIGNED NOT NULL,
+ idCriador INT UNSIGNED NOT NULL,
  idCategoria INT UNSIGNED NOT NULL);
 
 CREATE TABLE Categoria 
