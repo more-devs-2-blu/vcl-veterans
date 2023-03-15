@@ -32,7 +32,7 @@ type
       constructor Create; overload;
       constructor Create(const aId: Integer); overload;
       constructor Create(const aId: Integer; aCidadao: TCidadao; aAcao: TAcao); overload;
-
+      constructor Create(aCidadao: TCidadao; aAcao: TAcao); overload;
       destructor  Destroy; override;
 
       [SwagProp('Voluntario Id', True)]
@@ -72,6 +72,13 @@ begin
   Self.Create;
 end;
 
+constructor TVoluntario.Create(aCidadao: TCidadao;aAcao: TAcao);
+begin
+  FCidadao := aCidadao;
+  FAcao := aAcao;
+  Self.Create;
+end;
+
 destructor TVoluntario.Destroy;
 begin
   FreeAndNil(FJSON);
@@ -99,7 +106,7 @@ function TVoluntario.GetJSON: TJSONObject;
 begin
 
   FJSON.AddPair('idcidadao',        FCidadao.Id.ToString);
-  FJSON.AddPair('idccao',      FAcao.Id.ToString);
+  FJSON.AddPair('idacao',      FAcao.Id.ToString);
 
   Result := FJSON;
 end;
