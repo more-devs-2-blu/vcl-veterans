@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Objects, FMX.Layouts, FMX.Controls.Presentation, FMX.Edit, FMX.ListBox,
   UServiceIntf, UServiceMelhoria, Backend.UEntity.Cidadao,
-  Backend.UEntity.Melhoria, Backend.UEntity.Categoria;
+  Backend.UEntity.Melhoria, Backend.UEntity.Categoria, UUtils.AnimacaoClick;
 
 type
   TfrmSolicitarMelhoria = class(TForm)
@@ -38,6 +38,7 @@ type
     procedure imgVoltarClick(Sender: TObject);
     procedure recBotaoClick(Sender: TObject);
   private
+    FEventoBotao: TEventoBotao;
     procedure Registrar;
   public
     { Public declarations }
@@ -85,7 +86,7 @@ begin
 
   try
     xServiceMelhoria.Registrar;
-    ShowMessage('Usuário registrado com sucesso.');
+    ShowMessage('Melhoria registrada com sucesso.');
   except on E: Exception do
     raise Exception.Create('Erro:' + E.Message);
   end;
