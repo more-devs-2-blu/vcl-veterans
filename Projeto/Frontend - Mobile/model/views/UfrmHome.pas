@@ -48,6 +48,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure recRankingClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure recNoticiasClick(Sender: TObject);
   private
     FEventoBotao: TEventoBotao;
     procedure CarregarRanking;
@@ -96,6 +97,11 @@ begin
   frmMelhoriasUrbanas.Show;
   Application.MainForm := frmMelhoriasUrbanas;
   Self.Close;
+end;
+
+procedure TfrmHome.recNoticiasClick(Sender: TObject);
+begin
+  FEventoBotao.EventoBotao(recNoticias);
 end;
 
 procedure TfrmHome.recRankingClick(Sender: TObject);
