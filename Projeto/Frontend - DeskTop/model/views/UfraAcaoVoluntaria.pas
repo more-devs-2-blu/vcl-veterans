@@ -31,11 +31,15 @@ type
     Image2: TImage;
     rectAtualizar: TRectangle;
     Label13: TLabel;
+    Button1: TButton;
     procedure FrameResized(Sender: TObject);
+    procedure rectAtualizarClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     procedure CarregarRegistros;
     procedure PrepararListView(aAcao: TAcao);
+    procedure SelecionarRegistro;
   public
     { Public declarations }
   end;
@@ -46,7 +50,13 @@ var
 implementation
 
 {$R *.fmx}
+uses
+    UfrnHome, UfraGestaoVoluntaria;
 
+procedure TfraAcaoVoluntaria.Button1Click(Sender: TObject);
+begin
+  SelecionarRegistro;
+end;
 
 procedure TfraAcaoVoluntaria.CarregarRegistros;
 var
@@ -81,6 +91,44 @@ begin
   TListItemText(xItem.Objects.FindDrawable('txtDescricao')).Text := aAcao.Descricao;
   TListItemText(xItem.Objects.FindDrawable('txtCategoria')).Text := aAcao.Categoria.Nome;
   TListItemText(xItem.Objects.FindDrawable('txtStatus')).Text := aAcao.Status;
+
+end;
+
+procedure TfraAcaoVoluntaria.rectAtualizarClick(Sender: TObject);
+begin
+  SelecionarRegistro;
+end;
+
+procedure TfraAcaoVoluntaria.SelecionarRegistro;
+var
+  xServiceAcao: TServiceAcao;
+  xItem: TListViewItem;
+begin
+  if lstAcoes.ItemIndex = -1 then
+  exit;
+
+  try
+    xItem := lstAcoes.Items[lstAcoes.ItemIndex];
+
+    xServiceAcao := TServiceAcao.Create;
+    frmHome.Acao := xServiceAcao.ObterRegistro1(lstAcoes.Items[lstAcoes.ItemIndex].Tag);
+    if not Assigned(fraGestaoVoluntaria) then
+      fraGestaoVoluntaria := TfraGestaoSolidaria.Create(application);
+    try
+      fraGestaoVoluntaria.Align := TAlignLayout.Center;
+      Self.Parent.AddObject(fraGestaoVoluntaria);
+
+      FreeAndNil(xServiceAcao);
+    finally
+
+    end;
+  finally
+
+end;
+
+ {   }
+
+
 
 end;
 

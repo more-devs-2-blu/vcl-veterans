@@ -28,6 +28,7 @@ CREATE TABLE Acao
  Apoio INT UNSIGNED,  
  Endereco VARCHAR(255),
  Status VARCHAR(20),
+ Resposta VARCHAR(255),
  idCriador INT UNSIGNED NOT NULL,
  idCategoria INT UNSIGNED NOT NULL);
 
@@ -62,17 +63,18 @@ INSERT INTO CATEGORIA (nome) VALUES ('Iluminação');
 INSERT INTO CATEGORIA (nome) VALUES ('Pavimentos');
 INSERT INTO CATEGORIA (nome) VALUES ('Sinalização');
 INSERT INTO CATEGORIA (nome) VALUES ('Vegetação');
+INSERT INTO CATEGORIA (nome) VALUES ('Outros');
 
-INSERT INTO ACAO (descricao, apoio, endereco, status, criador, idcategoria) 
-	VALUES ('Carpir meu quintal', 0, 'Rua do Bode, 43', 'Aberto', 2, 1);
-INSERT INTO ACAO (descricao, apoio, endereco, status, criador, idcategoria) 
-	VALUES ('Plantar flores na pracinha', 19, 'Rua da Vaca, 11', 'Autorizado', 5, 3);  
-INSERT INTO ACAO (descricao, apoio, endereco, status, criador, idcategoria) 
-	VALUES ('Roubar a geladeira do vizinho', 0, 'Rua do Sapo, 8', 'Negado', 3, 5);  
-INSERT INTO ACAO (descricao, apoio, endereco, status, criador, idcategoria) 
-	VALUES ('Organizar festa de aniversário da rua', 22, 'Rua do Elefante, 11', 'Autorizado', 1, 3);
-INSERT INTO ACAO (descricao, apoio, endereco, status, criador, idcategoria) 
-	VALUES ('Pintar o poste de roxo', 3, 'Rua da Pitanguinha, 83', 'Negado', 4, 1);    
+INSERT INTO ACAO (descricao, apoio, endereco, status, resposta, idcriador, idcategoria) 
+	VALUES ('Carpir meu quintal', 0, 'Rua do Bode, 43', 'Aberto', 'Parabéns pela iniciativa!',2, 1);
+INSERT INTO ACAO (descricao, apoio, endereco, status, resposta, idcriador, idcategoria) 
+	VALUES ('Plantar flores na pracinha', 19, 'Rua da Vaca, 11', 'Autorizado', '', 5, 3);  
+INSERT INTO ACAO (descricao, apoio, endereco, status, resposta, idcriador, idcategoria) 
+	VALUES ('Roubar a geladeira do vizinho', 0, 'Rua do Sapo, 8', 'Negado', '', 3, 5);  
+INSERT INTO ACAO (descricao, apoio, endereco, status, resposta, idcriador, idcategoria) 
+	VALUES ('Organizar festa de aniversário da rua', 22, 'Rua do Elefante, 11', 'Autorizado', '', 1, 3);
+INSERT INTO ACAO (descricao, apoio, endereco, status, resposta, idcriador, idcategoria) 
+	VALUES ('Pintar o poste de roxo', 3, 'Rua da Pitanguinha, 83', 'Negado', '', 4, 1);    
 
 INSERT INTO MELHORIA (descricao, status, apoio, endereco, resposta, idCidadao, idcategoria) 
 	VALUES ('Mendigos sujando a rua', 'Aberto', 4, 'Rua da Pitanguinha, 83', '', 1, 1);

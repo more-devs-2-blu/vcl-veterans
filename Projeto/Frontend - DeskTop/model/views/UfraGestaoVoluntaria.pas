@@ -7,10 +7,10 @@ uses
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   UUtils.Enums,
 
-  FMX.Objects, FMX.ListBox, FMX.Controls.Presentation, FMX.Layouts;
+  FMX.Objects, FMX.ListBox, FMX.Controls.Presentation, FMX.Layouts, FMX.Edit;
 
 type
-  TfrmGestaoSolidaria = class(TFrame)
+  TfraGestaoSolidaria = class(TFrame)
     lytPrincipal: TLayout;
     lytHead: TLayout;
     Label1: TLabel;
@@ -38,17 +38,84 @@ type
     Image2: TImage;
     rectAtualizar: TRectangle;
     Label13: TLabel;
+    edtRespostaTeste: TEdit;
+    btnRespostaTeste: TButton;
+    cbteste: TComboBox;
+    btnstatusteste: TButton;
+    procedure FrameResized(Sender: TObject);
+    procedure btnRespostaTesteClick(Sender: TObject);
+    procedure btnstatustesteClick(Sender: TObject);
   private
     { Private declarations }
+    procedure EnviarResposta;
+    procedure AlterarStatus;
   public
     { Public declarations }
   end;
 
 var
- fraGestaoVoluntaria : TfrmGestaoSolidaria;
+ fraGestaoVoluntaria : TfraGestaoSolidaria;
 
 implementation
 
+uses
+  Backend.UEntity.Acao, UServiceAcao, UfrnHome;
 {$R *.fmx}
+
+procedure TfraGestaoSolidaria.AlterarStatus;
+const COLUNA = 'status';
+var
+  xStatus: String;
+  xServiceAcao: TServiceAcao;
+begin
+  //TRATATIVA AQUI
+  xStatus := cbTeste.Items[cbTeste.ItemIndex];
+
+  xServiceAcao := TServiceAcao.Create(TAcao.Create(frmHome.Melhoria.Id));
+  try
+    xServiceAcao.Alterar1(COLUNA, xStatus);
+    lblStatus.Text := xStatus;
+    showMessage('deu certo aeee');
+  finally
+    FreeAndNil(xServiceAcao);
+  end;
+end;
+
+procedure TfraGestaoSolidaria.btnRespostaTesteClick(Sender: TObject);
+begin
+  EnviarResposta;
+end;
+
+procedure TfraGestaoSolidaria.btnstatustesteClick(Sender: TObject);
+begin
+  AlterarStatus;
+end;
+
+procedure TfraGestaoSolidaria.EnviarResposta;
+const COLUNA = 'resposta';
+var
+  xResposta: string;
+  xServiceAcao: TServiceAcao;
+begin
+  //FAZER TRATAMENTO DO MEMO
+  xResposta := edtRespostaTeste.Text;
+
+  xServiceAcao := TServiceAcao.Create(TAcao.Create(frmHome.Acao.Id));
+  try
+    xServiceAcao.Alterar1(COLUNA, xResposta);
+    showMessage('aeee deu certo');
+  finally
+    FreeAndNil(xServiceAcao);
+  end;
+end;
+
+
+procedure TfraGestaoSolidaria.FrameResized(Sender: TObject);
+begin
+  lblApoiadores.Text := frmHome.Acao.Apoio.ToString;
+  lblDescricao.Text  := frmHome.Acao.descricao;
+  lblCategoria.Text  := frmHome.Acao.Categoria.Nome;
+  lblStatus.Text     := frmHome.Acao.Status;
+end;
 
 end.
