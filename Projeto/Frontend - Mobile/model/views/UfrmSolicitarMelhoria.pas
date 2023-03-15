@@ -71,7 +71,6 @@ end;
 procedure TfrmSolicitarMelhoria.Registrar;
 var
   xServiceMelhoria: IService;
-  xCidado: TCidadao;
 begin
   if Trim(edtEndereco.Text) = EmptyStr then
     raise Exception.Create('Informe o Endereço.');

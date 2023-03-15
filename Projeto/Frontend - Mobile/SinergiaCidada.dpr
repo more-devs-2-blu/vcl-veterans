@@ -23,7 +23,8 @@ uses
   UfrmRanking in 'model\views\UfrmRanking.pas' {frmRanking},
   UServiceCidadao in 'model\services\UServiceCidadao.pas',
   UUtils.Constants in 'model\utils\UUtils.Constants.pas',
-  UUtils.Functions in 'model\utils\UUtils.Functions.pas';
+  UUtils.Functions in 'model\utils\UUtils.Functions.pas',
+  UServiceAcao in 'model\services\UServiceAcao.pas';
 
 {$R *.res}
 

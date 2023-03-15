@@ -5,7 +5,8 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
-  FMX.Edit, FMX.ListBox, FMX.StdCtrls, FMX.Layouts, FMX.Controls.Presentation;
+  FMX.Edit, FMX.ListBox, FMX.StdCtrls, FMX.Layouts, FMX.Controls.Presentation,
+  UServiceIntf, UServiceAcao, Backend.UEntity.Acao;
 
 type
   TfrmSolicitarAcaoVoluntaria = class(TForm)
@@ -36,6 +37,7 @@ type
     procedure imgVoltarClick(Sender: TObject);
   private
     { Private declarations }
+    procedure Registrar;
   public
     { Public declarations }
   end;
@@ -58,6 +60,29 @@ begin
   frmAcaoVoluntaria.Show;
   Application.MainForm := frmAcaoVoluntaria;
   Self.Close;
+end;
+
+procedure TfrmSolicitarAcaoVoluntaria.Registrar;
+var
+  xServiceVoluntario: IService;
+begin
+  if Trim(edtEndereco.Text) = EmptyStr then
+    raise Exception.Create('Informe o Endereço.');
+
+  if Trim(edtDescricao.Text) = EmptyStr then
+    raise Exception.Create('Descreva a ação voluntária.');
+
+  {xServiceVoluntario := TServiceAcao.Create(
+    TAcao.Create('Em aguardo',edtDescricao.Text,edtEndereco.Text,
+       TCidadao.Create(1),
+       TCategoria.Create(cmbCategoria.ItemIndex+1)));
+
+  try
+    xServiceMelhoria.Registrar;
+    ShowMessage('Usuário registrado com sucesso.');
+  except on E: Exception do
+    raise Exception.Create('Erro:' + E.Message);
+  end;}
 end;
 
 end.

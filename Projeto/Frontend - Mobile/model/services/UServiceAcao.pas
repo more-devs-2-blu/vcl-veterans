@@ -22,7 +22,8 @@ type
       Procedure Registrar;
       Procedure Listar;
       Procedure Excluir;
-      Procedure Alterar;
+      Procedure Alterar(const aColuna, aValor: String);
+      Procedure AlterarPontuacao(aValor: String);
       Procedure ObterRegistro;
       procedure PreencherAcao(const aJsonAcoes: String);
 
@@ -40,9 +41,14 @@ uses
 
 { TServiceMelhoria }
 
-procedure TServiceAcao.Alterar;
+procedure TServiceAcao.Alterar(const aColuna, aValor: String);
 begin
 
+end;
+
+procedure TServiceAcao.AlterarPontuacao(aValor: String);
+begin
+  //não implementado
 end;
 
 constructor TServiceAcao.Create(aAcao : TAcao);
