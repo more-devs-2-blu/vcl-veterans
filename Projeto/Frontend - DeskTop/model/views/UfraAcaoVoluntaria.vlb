@@ -7,9 +7,6 @@ Coordinates=301,10,53,58
 [Label8]
 Coordinates=238,10,53,58
 
-[rectVoltar]
-Coordinates=98,344,70,36
-
 [Label5]
 Coordinates=364,10,53,58
 
@@ -25,14 +22,8 @@ Coordinates=312,276,72,36
 [Label1]
 Coordinates=73,276,53,58
 
-[Label2]
-Coordinates=10,276,53,58
-
 []
-Coordinates=427,10,64,58
-
-[cmbOrdenar]
-Coordinates=127,10,101,146
+Coordinates=98,344,70,36
 
 [lytMelhorias]
 Coordinates=472,276,125,36

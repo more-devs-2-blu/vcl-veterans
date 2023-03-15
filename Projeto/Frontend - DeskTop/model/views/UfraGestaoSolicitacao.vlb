@@ -14,12 +14,9 @@ Coordinates=10,233,46,51
 Coordinates=234,233,62,33
 
 []
-Coordinates=361,10,57,51
+Coordinates=109,10,84,123
 Visible=True
 
 [lytHead]
 Coordinates=84,294,61,33
-
-[cmbOrdenar]
-Coordinates=109,10,84,123
 

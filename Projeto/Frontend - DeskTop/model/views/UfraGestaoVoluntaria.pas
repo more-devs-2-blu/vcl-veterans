@@ -14,7 +14,6 @@ type
     lytPrincipal: TLayout;
     lytHead: TLayout;
     Label1: TLabel;
-    cmbOrdenar: TComboBox;
     rectVoltar: TRectangle;
     Label2: TLabel;
     lytDetalhes: TLayout;
@@ -31,24 +30,21 @@ type
     lblStatus: TLabel;
     Label11: TLabel;
     Label12: TLabel;
-    Label4: TLabel;
     rectFundo: TRectangle;
-    Label6: TLabel;
-    imgMaoMarcaDAgua: TImage;
     Image2: TImage;
     rectAtualizar: TRectangle;
     Label13: TLabel;
-    edtRespostaTeste: TEdit;
-    btnRespostaTeste: TButton;
-    cbteste: TComboBox;
-    btnstatusteste: TButton;
+    edtFeedBack: TEdit;
+    imgMaoMarcaDAgua: TImage;
     procedure FrameResized(Sender: TObject);
     procedure btnRespostaTesteClick(Sender: TObject);
-    procedure btnstatustesteClick(Sender: TObject);
+    procedure rectAtualizarClick(Sender: TObject);
+    procedure rectVoltarClick(Sender: TObject);
   private
     { Private declarations }
     procedure EnviarResposta;
     procedure AlterarStatus;
+    procedure VoltarTela;
   public
     { Public declarations }
   end;
@@ -68,14 +64,13 @@ var
   xStatus: String;
   xServiceAcao: TServiceAcao;
 begin
-  //TRATATIVA AQUI
-  xStatus := cbTeste.Items[cbTeste.ItemIndex];
+  xStatus := cmbStatus.Items[cmbStatus.ItemIndex];
 
   xServiceAcao := TServiceAcao.Create(TAcao.Create(frmHome.Melhoria.Id));
   try
     xServiceAcao.Alterar1(COLUNA, xStatus);
     lblStatus.Text := xStatus;
-    showMessage('deu certo aeee');
+    showMessage('Status Alterado com Sucesso.');
   finally
     FreeAndNil(xServiceAcao);
   end;
@@ -86,29 +81,22 @@ begin
   EnviarResposta;
 end;
 
-procedure TfraGestaoSolidaria.btnstatustesteClick(Sender: TObject);
-begin
-  AlterarStatus;
-end;
-
 procedure TfraGestaoSolidaria.EnviarResposta;
 const COLUNA = 'resposta';
 var
   xResposta: string;
   xServiceAcao: TServiceAcao;
 begin
-  //FAZER TRATAMENTO DO MEMO
-  xResposta := edtRespostaTeste.Text;
+  xResposta := Trim(edtFeedBack.Text);
 
   xServiceAcao := TServiceAcao.Create(TAcao.Create(frmHome.Acao.Id));
   try
     xServiceAcao.Alterar1(COLUNA, xResposta);
-    showMessage('aeee deu certo');
+    showMessage('FeedBack Enviado..');
   finally
     FreeAndNil(xServiceAcao);
   end;
 end;
-
 
 procedure TfraGestaoSolidaria.FrameResized(Sender: TObject);
 begin
@@ -116,6 +104,28 @@ begin
   lblDescricao.Text  := frmHome.Acao.descricao;
   lblCategoria.Text  := frmHome.Acao.Categoria.Nome;
   lblStatus.Text     := frmHome.Acao.Status;
+end;
+
+procedure TfraGestaoSolidaria.rectAtualizarClick(Sender: TObject);
+begin
+  if not (edtFeedback.text.IsEmpty) then
+  EnviarResposta;
+
+  if cmbStatus.ItemIndex > -1 then
+  AlterarStatus;
+end;
+
+procedure TfraGestaoSolidaria.rectVoltarClick(Sender: TObject);
+begin
+  self.VoltarTela;
+end;
+
+procedure TfraGestaoSolidaria.VoltarTela;
+begin
+    if not Assigned(frmHome) then
+    frmHome := TfrmHome.Create(application);
+
+    FreeAndNil(fraGestaoVoluntaria);
 end;
 
 end.
