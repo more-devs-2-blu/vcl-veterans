@@ -26,12 +26,15 @@ uses
   UUtils.Functions in 'model\utils\UUtils.Functions.pas',
   UServiceAcao in 'model\services\UServiceAcao.pas',
   UUtils.AnimacaoClick in 'model\utils\UUtils.AnimacaoClick.pas',
-  UServiceVoluntario in 'model\services\UServiceVoluntario.pas';
+  UServiceVoluntario in 'model\services\UServiceVoluntario.pas',
+  UfrmLogin in 'model\views\UfrmLogin.pas' {frmLogin},
+  UServiceUsuario in 'model\services\UServiceUsuario.pas' {dm: TDataModule};
 
 {$R *.res}
 
 begin
   Application.Initialize;
+  Application.CreateForm(Tdm, dm);
   Application.CreateForm(TfrmSplash, frmSplash);
   Application.Run;
 end.
