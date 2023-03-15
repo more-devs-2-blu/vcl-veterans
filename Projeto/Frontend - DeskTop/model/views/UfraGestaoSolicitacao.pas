@@ -16,7 +16,6 @@ type
     lytPrincipal: TLayout;
     lytHead: TLayout;
     Label1: TLabel;
-    cmbOrdenar: TComboBox;
     rectVoltar: TRectangle;
     Label2: TLabel;
     rectFundo: TRectangle;
@@ -25,34 +24,28 @@ type
     Label5: TLabel;
     Label7: TLabel;
     Label8: TLabel;
-    rectDetalhes: TRectangle;
     lblApoiadores: TLabel;
     lblDescricao: TLabel;
     lblCategoria: TLabel;
     lblStatus: TLabel;
-    rectFeedBack: TRectangle;
     Label11: TLabel;
     Label12: TLabel;
+    Image2: TImage;
+    rectDetalhes: TRectangle;
     cmbStatus: TComboBox;
     rectAtualizar: TRectangle;
-    Label4: TLabel;
-    imgMaoMarcaDAgua: TImage;
-    Image2: TImage;
     Label13: TLabel;
-    Rectangle1: TRectangle;
-    Label9: TLabel;
-    Label10: TLabel;
-    edtTeste: TEdit;
-    btnTeste: TButton;
-    cbTeste: TComboBox;
-    btnTesteStatus: TButton;
+    rectFeedBack: TRectangle;
+    edtFeedBack: TEdit;
+    imgMaoMarcaDAgua: TImage;
     procedure rectAtualizarClick(Sender: TObject);
     procedure btnTesteClick(Sender: TObject);
     procedure FrameResized(Sender: TObject);
     procedure btnTesteStatusClick(Sender: TObject);
+    procedure rectVoltarClick(Sender: TObject);
   private
     { Private declarations }
-
+    procedure VoltarTela;
     procedure EnviarResposta;
     procedure AlterarStatus;
   public
@@ -69,11 +62,6 @@ uses
 
 {$R *.fmx}
 
-
-{ TfraGestaoSolicitacao }
-
-
-
 { TfraGestaoSolicitacao }
 
 
@@ -84,13 +72,13 @@ var
   xServiceMelhoria: TServiceMelhoria;
 begin
   //TRATATIVA AQUI
-  xStatus := cbTeste.Items[cbTeste.ItemIndex];
+  xStatus := cmbStatus.Items[cmbStatus.ItemIndex];
 
   xServiceMelhoria := TServiceMelhoria.Create(TMelhoria.Create(frmHome.Melhoria.Id));
   try
     xServiceMelhoria.Alterar1(COLUNA, xStatus);
     lblStatus.Text := xStatus;
-    showMessage('deu certo aeee');
+    showMessage('Status Alterado com Sucesso.');
   finally
     FreeAndNil(xServiceMelhoria);
   end;
@@ -112,13 +100,13 @@ var
   xResposta: string;
   xServiceMelhoria: TServiceMelhoria;
 begin
-  //FAZER TRATAMENTO DO MEMO
-  xResposta := edtTeste.Text;
+
+  xResposta := Trim(edtFeedBack.Text);
 
   xServiceMelhoria := TServiceMelhoria.Create(TMelhoria.Create(frmHome.Melhoria.Id));
   try
     xServiceMelhoria.Alterar1(COLUNA, xResposta);
-    showMessage('aeee deu certo');
+    showMessage('FeedBack Enviado.');
   finally
     FreeAndNil(xServiceMelhoria);
   end;
@@ -136,8 +124,27 @@ end;
 
 procedure TfraGestaoSolicitacao.rectAtualizarClick(Sender: TObject);
 begin
+  if not (edtFeedback.text.IsEmpty) then
   EnviarResposta;
+
+  if cmbStatus.ItemIndex > -1 then
+  AlterarStatus;
 end;
 
+procedure TfraGestaoSolicitacao.rectVoltarClick(Sender: TObject);
+begin
+ if not Assigned(frmHome) then
+      frmHome := TfrmHome.Create(application);
+
+      FreeAndNil(fraGestaoSolicitacao);
+end;
+
+procedure TfraGestaoSolicitacao.VoltarTela;
+begin
+    if not Assigned(frmHome) then
+    frmHome := TfrmHome.Create(application);
+
+    FreeAndNil(fraGestaoSolicitacao);
+end;
 
 end.
