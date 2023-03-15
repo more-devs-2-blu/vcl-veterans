@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Edit, FMX.ListBox, FMX.StdCtrls, FMX.Layouts, FMX.Controls.Presentation,
   UServiceIntf, UServiceAcao, Backend.UEntity.Acao, Backend.UEntity.Categoria,
-  Backend.UEntity.Cidadao;
+  Backend.UEntity.Cidadao, UUtils.AnimacaoClick;
 
 type
   TfrmSolicitarAcaoVoluntaria = class(TForm)
@@ -38,7 +38,6 @@ type
     procedure imgVoltarClick(Sender: TObject);
     procedure recBotaoClick(Sender: TObject);
   private
-    { Private declarations }
     procedure Registrar;
   public
     { Public declarations }

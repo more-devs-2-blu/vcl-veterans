@@ -48,6 +48,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure recMinhasMelhoriasClick(Sender: TObject);
+    procedure recNoticiaClick(Sender: TObject);
   private
     FEventoBotao: TEventoBotao;
   public
@@ -100,6 +101,11 @@ end;
 procedure TfrmMelhoriasUrbanas.recMinhasMelhoriasClick(Sender: TObject);
 begin
   FEventoBotao.EventoBotao(recMinhasMelhorias);
+end;
+
+procedure TfrmMelhoriasUrbanas.recNoticiaClick(Sender: TObject);
+begin
+  FEventoBotao.EventoBotao(recNoticia);
 end;
 
 procedure TfrmMelhoriasUrbanas.recSolicitarMelhoriaUrbanaClick(Sender: TObject);
