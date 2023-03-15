@@ -4,7 +4,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Objects, FMX.Layouts, FMX.Effects,
-  backend.UEntity.Cidadao;
+  backend.UEntity.Cidadao, FMX.Ani, UUtils.AnimacaoClick;
 type
   TfrmHome = class(TForm)
     recFundo: TRectangle;
@@ -42,12 +42,14 @@ type
     lytVerNoticias: TLayout;
     lblVerNoticias: TLabel;
     ShadowEffect1: TShadowEffect;
+    ShadowEffect3: TShadowEffect;
     procedure recMelhoriaUrbanaClick(Sender: TObject);
     procedure recAcoesVoluntariaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure recRankingClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
-    { Private declarations }
+    FEventoBotao: TEventoBotao;
     procedure CarregarRanking;
   public
     { Public declarations }
@@ -60,14 +62,23 @@ uses
   UfrmAcaoVoluntaria,
   UServiceIntf,
   UServiceCidadao, UfrmRanking;
+
 {$R *.fmx}
+procedure TfrmHome.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  FreeAndNil(FEventoBotao);
+end;
+
 procedure TfrmHome.FormCreate(Sender: TObject);
 begin
   Self.CarregarRanking;
+  FEventoBotao := TEventoBotao.Create;
 end;
 
 procedure TfrmHome.recAcoesVoluntariaClick(Sender: TObject);
 begin
+    FEventoBotao.EventoBotao(recAcoesVoluntaria);
+
   if not Assigned(frmAcaoVoluntaria) then
     frmAcaoVoluntaria := TfrmAcaoVoluntaria.Create(Application);
   frmAcaoVoluntaria.Show;
@@ -77,6 +88,8 @@ end;
 
 procedure TfrmHome.recMelhoriaUrbanaClick(Sender: TObject);
 begin
+  FEventoBotao.EventoBotao(recMelhoriaUrbana);
+
   if not Assigned(frmMelhoriasUrbanas) then
     frmMelhoriasUrbanas := TfrmMelhoriasUrbanas.Create(Application);
 
@@ -87,6 +100,8 @@ end;
 
 procedure TfrmHome.recRankingClick(Sender: TObject);
 begin
+  FEventoBotao.EventoBotao(recRanking);
+
   if not Assigned(frmRanking) then
     frmRanking := TfrmRanking.Create(Application);
 

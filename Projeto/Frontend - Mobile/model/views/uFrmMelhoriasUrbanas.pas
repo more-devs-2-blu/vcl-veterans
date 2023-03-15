@@ -5,7 +5,8 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Effects,
-  FMX.Layouts, FMX.StdCtrls, FMX.Objects, FMX.Controls.Presentation;
+  FMX.Layouts, FMX.StdCtrls, FMX.Objects, FMX.Controls.Presentation,
+  UUtils.AnimacaoClick;
 
 type
   TfrmMelhoriasUrbanas = class(TForm)
@@ -40,11 +41,15 @@ type
     Layout1: TLayout;
     lytVoltar: TLayout;
     imgVoltar: TImage;
+    ShadowEffect1: TShadowEffect;
     procedure recSolicitarMelhoriaUrbanaClick(Sender: TObject);
     procedure recApoiarMelhoriasClick(Sender: TObject);
     procedure imgVoltarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure recMinhasMelhoriasClick(Sender: TObject);
   private
-    { Private declarations }
+    FEventoBotao: TEventoBotao;
   public
     { Public declarations }
   end;
@@ -59,6 +64,17 @@ uses
 
 {$R *.fmx}
 
+procedure TfrmMelhoriasUrbanas.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  FreeAndNil(FEventoBotao);
+end;
+
+procedure TfrmMelhoriasUrbanas.FormCreate(Sender: TObject);
+begin
+  FEventoBotao := TEventoBotao.Create;
+end;
+
 procedure TfrmMelhoriasUrbanas.imgVoltarClick(Sender: TObject);
 begin
   if not Assigned(frmHome) then
@@ -71,6 +87,8 @@ end;
 
 procedure TfrmMelhoriasUrbanas.recApoiarMelhoriasClick(Sender: TObject);
 begin
+  FEventoBotao.EventoBotao(recApoiarMelhorias);
+
   if not Assigned(frmApoiarMelhorias) then
     frmApoiarMelhorias := TfrmApoiarMelhorias.Create(Application);
 
@@ -79,8 +97,15 @@ begin
   Self.Close;
 end;
 
+procedure TfrmMelhoriasUrbanas.recMinhasMelhoriasClick(Sender: TObject);
+begin
+  FEventoBotao.EventoBotao(recMinhasMelhorias);
+end;
+
 procedure TfrmMelhoriasUrbanas.recSolicitarMelhoriaUrbanaClick(Sender: TObject);
 begin
+  FEventoBotao.EventoBotao(recSolicitarMelhoriaUrbana);
+
   if not Assigned(frmSolicitarMelhoria) then
     frmSolicitarMelhoria := TfrmSolicitarMelhoria.Create(Application);
 
