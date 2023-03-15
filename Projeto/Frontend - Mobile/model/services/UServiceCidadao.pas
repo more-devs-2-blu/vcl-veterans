@@ -19,11 +19,11 @@ type
       procedure SetCidadaos(const Value: TObjectList<TCidadao>);
 
     public
-      Procedure Registrar;
-      Procedure Listar;
-      Procedure Excluir;
-      Procedure Alterar;
-      Procedure ObterRegistro;
+      procedure Alterar;
+      procedure Registrar;
+      procedure Listar;
+      procedure Excluir;
+      procedure ObterRegistro;
       procedure PreencherCidadaos(const aJsonCidadaos: String);
       constructor Create; overload;
       constructor Create(aCidadao: TCidadao); overload;
@@ -78,7 +78,7 @@ end;
 procedure TServiceCidadao.Listar;
 begin
     try
-      FRESTClient.BaseURL := 'http://localhost:9090/v1/cidadao/apoio/desc';
+      FRESTClient.BaseURL := 'http://localhost:9090/v1/cidadao/pontos/desc';
       FRESTRequest.Method := rmGet;
       FRESTRequest.Execute;
       case FRESTResponse.StatusCode of
@@ -119,8 +119,8 @@ begin
     while not xMemTable.Eof do
     begin
       FCidadaos.Add(TCidadao.Create(xMemTable.FieldByName('id').asInteger,
-                                    xMemTable.FieldByName('pontos').asInteger,
-                                    xMemTable.FieldByName('nome').AsString));
+                                      xMemTable.FieldByName('pontos').asInteger,
+                                      xMemTable.FieldByName('nome').AsString));
       xMemTable.Next;
     end;
   finally

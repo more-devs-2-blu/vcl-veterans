@@ -18,9 +18,8 @@ type
     lytPessoas: TLayout;
     lstRanking: TListView;
     imgTeste: TImage;
-    procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure lblRankingClick(Sender: TObject);
+    procedure imgVoltarClick(Sender: TObject);
   private
     { Private declarations }
     FPosicao : Integer;
@@ -36,20 +35,9 @@ var
 implementation
 uses
   UserviceIntf,
-  UserviceCidadao;
+  UserviceCidadao, UfrmHome;
 {$R *.fmx}
-procedure TfrmRanking.Button1Click(Sender: TObject);
-var
-  xItem: TListViewItem;
-  I: Integer;
-begin
-  {xItem := lstRanking.Items.Add;
-  TListItemText(xItem.Objects.FindDrawable('txtCidadao')).Text := 'Nathan';
-  TListItemImage(xItem.Objects.FindDrawable('imgCidadao')).Bitmap := imgTeste.Bitmap;
-  TListItemText(xItem.Objects.FindDrawable('txtRanking')).Text := '#1';
-  TListItemText(xItem.Objects.FindDrawable('txtDescPontos')).Text := 'Pontuação: ';
-  TListItemText(xItem.Objects.FindDrawable('txtPontos')).Text := '17';}
-end;
+
 {Carregar Registros}
 procedure TfrmRanking.CarregarRegistros;
 var
@@ -72,6 +60,16 @@ begin
   Self.CarregarRegistros;
 end;
 
+
+procedure TfrmRanking.imgVoltarClick(Sender: TObject);
+begin
+  if not Assigned(frmHome) then
+    frmHome := TfrmHome.Create(Application);
+
+  frmHome.Show;
+  Application.MainForm := frmHome;
+  Self.Close;
+end;
 
 {Preparar ListView}
 procedure TfrmRanking.PrepararListView(aCidadao : TCidadao);
