@@ -8,7 +8,8 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Objects, FMX.Layouts, FMX.Controls.Presentation, FMX.ListView.Types,
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
-  UServiceIntf, UServiceMelhoria, Backend.UEntity.Melhoria;
+  UServiceIntf, UServiceMelhoria, Backend.UEntity.Melhoria,
+  Backend.UEntity.Categoria;
 
 type
   TfrmApoiarMelhorias = class(TForm)
@@ -37,6 +38,7 @@ type
     procedure PrepararListView(aMelhoria: TMelhoria);
     function ObterItemSelecionado: Integer;
     procedure AdicionarApoio;
+    function CarregarImagemCategoria(aCategoria: TCategoria): TImage;
   public
     { Public declarations }
   end;
@@ -45,6 +47,9 @@ var
   frmApoiarMelhorias: TfrmApoiarMelhorias;
 
 implementation
+
+uses
+  StrUtils, UUtils.Constants;
 
 {$R *.fmx}
 
@@ -101,8 +106,6 @@ begin
       ShowMessage('Melhoria Apoiada');
       ItemObject.TagFloat := 1;
     end;
-//  else if (not(itemObject = nil)) and (ItemObject.Name = 'imgApoiar') and (ItemObject.TagFloat = 1) then
-//    ItemObject.TagFloat := 0;
 end;
 
 function TfrmApoiarMelhorias.ObterItemSelecionado: Integer;
@@ -138,19 +141,45 @@ end;
 procedure TfrmApoiarMelhorias.PrepararListView(aMelhoria: TMelhoria);
 var
   xItem: TListViewItem;
+  xImagemCategoria : TImage;
 begin
+
   xItem := lstMelhorias.Items.Add;
   xItem.Tag := aMelhoria.Id;
 
+  xImagemCategoria := Self.CarregarImagemCategoria(aMelhoria.Categoria);
+
+
   TListItemText(xItem.Objects.FindDrawable('txtRanking')).Text := '';
-  TListItemImage(xItem.Objects.FindDrawable('imgMelhoria')).Bitmap := imgTeste.Bitmap;
   TListItemText(xItem.Objects.FindDrawable('txtCategoria')).Text := aMelhoria.Categoria.Nome;
+
+  TListItemImage(xItem.Objects.FindDrawable('imgMelhoria')).Bitmap := xImagemCategoria.Bitmap;
+
   TListItemImage(xItem.Objects.FindDrawable('imgApoiar')).Bitmap := imgApoiarMelhorias.Bitmap;
   TListItemText(xItem.Objects.FindDrawable('txtEndereco')).Text := aMelhoria.Endereco;
   TListItemText(xItem.Objects.FindDrawable('txtDescricao')).Text := aMelhoria.Descricao;
   TListItemText(xItem.Objects.FindDrawable('txtApoiadores')).Text := FloatToStr(aMelhoria.Apoio);
   TListItemText(xItem.Objects.FindDrawable('txtStatus')).Text := aMelhoria.Status;
-  TListItemText(xItem.Objects.FindDrawable('txtNome')).Text := aMelhoria.Cidadao.Nome;
+  TListItemText(xItem.Objects.FindDrawable('txtNome')).Text := aMelhoria.Cidadao.Nome
+
 end;
 
+function TfrmApoiarMelhorias.CarregarImagemCategoria(aCategoria: TCategoria): TImage;
+var
+  xCategoria : String;
+begin
+
+  xCategoria := aCategoria.Nome;
+
+ case  TEnumCategorias(AnsiIndexStr(UpperCase(xCategoria),ArrayCategorias)) of
+  ctLixo       : Result := imgApoiarMelhorias;
+  ctIluminacao : Result := imgApoiarMelhorias;
+  ctPavimentos : Result := imgApoiarMelhorias;
+  ctSinalizacao: Result := imgApoiarMelhorias;
+  ctVegetacao  : Result := imgApoiarMelhorias;
+  ctOutros     : Result := imgApoiarMelhorias;
+  else
+   Result := imgApoiarMelhorias
+ end;
+end;
 end.
