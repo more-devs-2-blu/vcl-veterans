@@ -91,10 +91,16 @@ function TDAOAcao.ProcurarPorId(const aIdentificador: Integer): TJSONObject;
 var
   xJSONObject: TJSONObject;
   xIdCategoria: Integer;
+  xIdCriador: Integer;
 begin
   xJSONObject := inherited;
   if xJSONObject.Count = 0 then
     Exit(xJSONObject);
+
+  xIdCriador := StrToInt(xJSONObject.GetValue('idcriador').Value);
+  xJSONObject.AddPair('criador', Self.ObterCriador(xIdCriador));
+  xJSONObject.RemovePair('idcriador');
+
   xIdCategoria := StrToInt(xJSONObject.GetValue('idcategoria').Value);
   xJSONObject.AddPair('categoria', Self.ObterCategoria(xIdCategoria));
   xJSONObject.RemovePair('idcategoria');
