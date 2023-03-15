@@ -63,7 +63,8 @@ var
 implementation
 
 uses
-  UfrmSolicitarAcaoVoluntaria, UfrmHome, UfrmListaAcoesVoluntarias;
+  UfrmSolicitarAcaoVoluntaria, UfrmHome, UfrmListaAcoesVoluntarias,
+  UfrmMinhasAcoes;
 
 {$R *.fmx}
 
@@ -102,6 +103,7 @@ end;
 procedure TfrmAcaoVoluntaria.recInscrevaseAcoesClick(Sender: TObject);
 begin
   FEventoBotao.EventoBotao(recInscrevaseAcoes);
+
   if not Assigned(frmListaAcoesVoluntarias) then
     frmListaAcoesVoluntarias := TfrmListaAcoesVoluntarias.Create(Application);
 
@@ -113,6 +115,13 @@ end;
 procedure TfrmAcaoVoluntaria.recMinhasAcoesClick(Sender: TObject);
 begin
   FEventoBotao.EventoBotao(recMinhasAcoes);
+
+  if not Assigned(frmMinhaAcoes) then
+    frmMinhaAcoes := TfrmMinhaAcoes.Create(Application);
+
+  frmMinhaAcoes.Show;
+  Application.MainForm := frmMinhaAcoes;
+  Self.Close;
 end;
 
 procedure TfrmAcaoVoluntaria.recNoticiaClick(Sender: TObject);

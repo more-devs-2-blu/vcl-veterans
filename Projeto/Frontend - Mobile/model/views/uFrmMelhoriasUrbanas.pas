@@ -61,7 +61,7 @@ var
 implementation
 
 uses
-  UfrmSolicitarMelhoria, UfrmApoiarMelhorias, UfrmHome;
+  UfrmSolicitarMelhoria, UfrmApoiarMelhorias, UfrmHome, UfrmMinhasMelhorias;
 
 {$R *.fmx}
 
@@ -101,6 +101,13 @@ end;
 procedure TfrmMelhoriasUrbanas.recMinhasMelhoriasClick(Sender: TObject);
 begin
   FEventoBotao.EventoBotao(recMinhasMelhorias);
+
+  if not Assigned(frmMinhasMelhorias) then
+    frmMinhasMelhorias := TfrmMinhasMelhorias.Create(Application);
+
+  frmMinhasMelhorias.Show;
+  Application.MainForm := frmMinhasMelhorias;
+  Self.Close;
 end;
 
 procedure TfrmMelhoriasUrbanas.recNoticiaClick(Sender: TObject);

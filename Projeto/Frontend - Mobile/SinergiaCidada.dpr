@@ -25,7 +25,8 @@ uses
   UUtils.Constants in 'model\utils\UUtils.Constants.pas',
   UUtils.Functions in 'model\utils\UUtils.Functions.pas',
   UServiceAcao in 'model\services\UServiceAcao.pas',
-  UUtils.AnimacaoClick in 'model\utils\UUtils.AnimacaoClick.pas';
+  UUtils.AnimacaoClick in 'model\utils\UUtils.AnimacaoClick.pas',
+  UServiceVoluntario in 'model\services\UServiceVoluntario.pas';
 
 {$R *.res}
 
