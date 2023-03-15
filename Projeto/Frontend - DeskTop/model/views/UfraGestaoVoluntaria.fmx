@@ -1,4 +1,4 @@
-object frmGestaoSolidaria: TfrmGestaoSolidaria
+object fraGestaoSolidaria: TfraGestaoSolidaria
   Size.Width = 800.000000000000000000
   Size.Height = 600.000000000000000000
   Size.PlatformDefault = False
@@ -1662,6 +1662,7 @@ object frmGestaoSolidaria: TfrmGestaoSolidaria
         Position.Y = 120.000000000000000000
         TabOrder = 14
         Text = 'Button1'
+        OnClick = btnstatustesteClick
       end
     end
   end

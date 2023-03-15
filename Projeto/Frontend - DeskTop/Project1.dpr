@@ -5,7 +5,7 @@ uses
   FMX.Forms,
   UfraAcaoVoluntaria in 'model\views\UfraAcaoVoluntaria.pas' {fraAcaoVoluntaria: TFrame},
   UfraGestaoSolicitacao in 'model\views\UfraGestaoSolicitacao.pas' {fraGestaoSolicitacao: TFrame},
-  UfraGestaoVoluntaria in 'model\views\UfraGestaoVoluntaria.pas' {frmGestaoSolidaria: TFrame},
+  UfraGestaoVoluntaria in 'model\views\UfraGestaoVoluntaria.pas' {fraGestaoSolidaria: TFrame},
   UfraListSolicitacao in 'model\views\UfraListSolicitacao.pas' {fraSolicitacao: TFrame},
   UfrnHome in 'model\views\UfrnHome.pas' {frmHome},
   UServiceMelhoria in '..\Frontend - Mobile\model\services\UServiceMelhoria.pas',

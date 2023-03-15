@@ -31,8 +31,10 @@ type
     Image2: TImage;
     rectAtualizar: TRectangle;
     Label13: TLabel;
+    Button1: TButton;
     procedure FrameResized(Sender: TObject);
     procedure rectAtualizarClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     procedure CarregarRegistros;
@@ -49,7 +51,12 @@ implementation
 
 {$R *.fmx}
 uses
-    UfrnHome, UfraGestaoVoluntaria, UfraGestaoSolicitacao;
+    UfrnHome, UfraGestaoVoluntaria;
+
+procedure TfraAcaoVoluntaria.Button1Click(Sender: TObject);
+begin
+  SelecionarRegistro;
+end;
 
 procedure TfraAcaoVoluntaria.CarregarRegistros;
 var
@@ -106,10 +113,10 @@ begin
     xServiceAcao := TServiceAcao.Create;
     frmHome.Acao := xServiceAcao.ObterRegistro1(lstAcoes.Items[lstAcoes.ItemIndex].Tag);
     if not Assigned(fraGestaoVoluntaria) then
-      fraGestaoVoluntaria := TfrmGestaoSolidaria.Create(application);
+      fraGestaoVoluntaria := TfraGestaoSolidaria.Create(application);
     try
       fraGestaoVoluntaria.Align := TAlignLayout.Center;
-      Self.Parent.AddObject(fraGestaoSolicitacao);
+      Self.Parent.AddObject(fraGestaoVoluntaria);
 
       FreeAndNil(xServiceAcao);
     finally
