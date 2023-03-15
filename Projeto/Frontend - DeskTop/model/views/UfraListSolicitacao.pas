@@ -106,14 +106,14 @@ begin
 
   xServiceMelhoria := TServiceMelhoria.Create(xMelhoria);
 
- { if not Assigned(fraGestaoSolicitacao) then
+  if not Assigned(fraGestaoSolicitacao) then
     fraGestaoSolicitacao := TfraGestaoSolicitacao.Create
       (Application);
 
    fraGestaoSolicitacao.Align := TAlignLayout.Center;
    Self.Parent.AddObject(fraGestaoSolicitacao);
 
-   FreeAndnil(fraSolicitacao);  }
+   FreeAndnil(fraSolicitacao);
 
 end;
 
