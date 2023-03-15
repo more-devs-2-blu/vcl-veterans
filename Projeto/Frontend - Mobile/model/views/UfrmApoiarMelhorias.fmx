@@ -3,7 +3,7 @@ object frmApoiarMelhorias: TfrmApoiarMelhorias
   Top = 0
   Caption = 'Form1'
   ClientHeight = 600
-  ClientWidth = 360
+  ClientWidth = 330
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -12,21 +12,21 @@ object frmApoiarMelhorias: TfrmApoiarMelhorias
   object recFundo: TRectangle
     Align = Client
     Fill.Color = claWhite
-    Size.Width = 360.000000000000000000
+    Size.Width = 330.000000000000000000
     Size.Height = 600.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
     object ToolBar1: TToolBar
       Margins.Top = 15.000000000000000000
       Position.Y = 15.000000000000000000
-      Size.Width = 360.000000000000000000
+      Size.Width = 330.000000000000000000
       Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
       object recFundoBar: TRectangle
         Align = Client
         Fill.Color = claWhite
-        Size.Width = 360.000000000000000000
+        Size.Width = 330.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
         Stroke.Color = claWhite
@@ -223,14 +223,14 @@ object frmApoiarMelhorias: TfrmApoiarMelhorias
         end
         object lytApoirMelhoria: TLayout
           Align = Contents
-          Size.Width = 360.000000000000000000
+          Size.Width = 330.000000000000000000
           Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           object lblApoiarMelhoria: TLabel
             Align = Contents
             StyledSettings = [Family, FontColor]
-            Size.Width = 360.000000000000000000
+            Size.Width = 330.000000000000000000
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Size = 24.000000000000000000
@@ -244,7 +244,7 @@ object frmApoiarMelhorias: TfrmApoiarMelhorias
     end
     object lytPrincipal: TLayout
       Align = Client
-      Size.Width = 360.000000000000000000
+      Size.Width = 330.000000000000000000
       Size.Height = 537.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
@@ -261,7 +261,7 @@ object frmApoiarMelhorias: TfrmApoiarMelhorias
         Margins.Top = 10.000000000000000000
         Margins.Right = 10.000000000000000000
         Margins.Bottom = 40.000000000000000000
-        Size.Width = 340.000000000000000000
+        Size.Width = 310.000000000000000000
         Size.Height = 457.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
@@ -293,7 +293,7 @@ object frmApoiarMelhorias: TfrmApoiarMelhorias
             Appearance.Font.Size = 16.000000000000000000
             Appearance.Font.StyleExt = {00060000000000000004000000}
             Appearance.TextAlign = Leading
-            Appearance.Width = 170.000000000000000000
+            Appearance.Width = 142.000000000000000000
             Appearance.Height = 20.000000000000000000
             Appearance.PlaceOffset.X = 110.000000000000000000
             Appearance.PlaceOffset.Y = 5.000000000000000000
@@ -312,7 +312,7 @@ object frmApoiarMelhorias: TfrmApoiarMelhorias
             AppearanceClassName = 'TTextObjectAppearance'
             Appearance.Font.Size = 11.000000000000000000
             Appearance.TextAlign = Leading
-            Appearance.Width = 170.000000000000000000
+            Appearance.Width = 142.000000000000000000
             Appearance.Height = 20.000000000000000000
             Appearance.PlaceOffset.X = 110.000000000000000000
             Appearance.PlaceOffset.Y = 30.000000000000000000
@@ -375,7 +375,7 @@ object frmApoiarMelhorias: TfrmApoiarMelhorias
       end
       object lytMensagem: TLayout
         Align = Top
-        Size.Width = 360.000000000000000000
+        Size.Width = 330.000000000000000000
         Size.Height = 30.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 6
