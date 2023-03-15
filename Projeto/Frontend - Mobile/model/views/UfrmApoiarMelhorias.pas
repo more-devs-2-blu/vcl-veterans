@@ -50,11 +50,10 @@ var
 implementation
 
 uses
-  StrUtils, UUtils.Constants;
+  StrUtils, UUtils.Constants, uFrmMelhoriasUrbanas;
 
 {$R *.fmx}
 
-uses uFrmMelhoriasUrbanas;
 
 procedure TfrmApoiarMelhorias.AdicionarApoio;
 const
