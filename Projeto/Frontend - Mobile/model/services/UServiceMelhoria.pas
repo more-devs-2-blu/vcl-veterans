@@ -22,7 +22,8 @@ type
       Procedure Registrar;
       Procedure Listar;
       Procedure Excluir;
-      Procedure Alterar(const aColuna, aValor: String);
+      Procedure Alterar;overload;
+      Procedure Alterar(const aColuna, aValor: String);overload;
       Procedure AlterarPontuacao(aValor: String);
       Procedure ObterRegistro;
       procedure PreencherMelhorias(const aJsonMelhorias: String);
@@ -68,6 +69,11 @@ begin
   finally
     FreeAndNil(xRequestJSON);
   end;
+end;
+
+procedure TServiceMelhoria.Alterar;
+begin
+
 end;
 
 procedure TServiceMelhoria.AlterarPontuacao(aValor: String);

@@ -16,6 +16,8 @@ type
     lytImage: TLayout;
     lblEuAjudo: TLabel;
     lytNome: TLayout;
+    Timer1: TTimer;
+    procedure Timer1Timer(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,6 +29,18 @@ var
 
 implementation
 
+uses
+  UfrmHome;
+
 {$R *.fmx}
+
+procedure TfrmSplash.Timer1Timer(Sender: TObject);
+begin
+  Application.CreateForm(TfrmHome, frmHome);
+  Application.MainForm := frmHome;
+  frmHome.Show;
+  Timer1.Enabled := False;
+  Self.Close;
+end;
 
 end.

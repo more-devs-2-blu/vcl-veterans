@@ -22,7 +22,7 @@ type
       Procedure Registrar;
       Procedure Listar;
       Procedure Excluir;
-      Procedure Alterar(const aColuna, aValor: String);
+      Procedure Alterar;
       Procedure AlterarPontuacao(aValor: String);
       Procedure ObterRegistro;
       procedure PreencherAcao(const aJsonAcoes: String);
@@ -41,7 +41,7 @@ uses
 
 { TServiceMelhoria }
 
-procedure TServiceAcao.Alterar(const aColuna, aValor: String);
+procedure TServiceAcao.Alterar;
 begin
 
 end;

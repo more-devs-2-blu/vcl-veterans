@@ -30,6 +30,6 @@ uses
 
 begin
   Application.Initialize;
-  Application.CreateForm(TfrmHome, frmHome);
+  Application.CreateForm(TfrmSplash, frmSplash);
   Application.Run;
 end.

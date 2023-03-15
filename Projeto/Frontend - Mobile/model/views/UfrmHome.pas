@@ -1,13 +1,10 @@
 unit UfrmHome;
-
 interface
-
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Objects, FMX.Layouts, FMX.Effects,
   backend.UEntity.Cidadao;
-
 type
   TfrmHome = class(TForm)
     recFundo: TRectangle;
@@ -48,26 +45,22 @@ type
     procedure recMelhoriaUrbanaClick(Sender: TObject);
     procedure recAcoesVoluntariaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure recRankingClick(Sender: TObject);
   private
     { Private declarations }
     procedure CarregarRanking;
   public
     { Public declarations }
   end;
-
 var
   frmHome: TfrmHome;
-
 implementation
-
 uses
   uFrmMelhoriasUrbanas,
   UfrmAcaoVoluntaria,
   UServiceIntf,
-  UServiceCidadao;
-
+  UServiceCidadao, UfrmRanking;
 {$R *.fmx}
-
 procedure TfrmHome.FormCreate(Sender: TObject);
 begin
   Self.CarregarRanking;
@@ -77,7 +70,6 @@ procedure TfrmHome.recAcoesVoluntariaClick(Sender: TObject);
 begin
   if not Assigned(frmAcaoVoluntaria) then
     frmAcaoVoluntaria := TfrmAcaoVoluntaria.Create(Application);
-
   frmAcaoVoluntaria.Show;
   Application.MainForm := frmAcaoVoluntaria;
   Self.Close;
@@ -90,6 +82,16 @@ begin
 
   frmMelhoriasUrbanas.Show;
   Application.MainForm := frmMelhoriasUrbanas;
+  Self.Close;
+end;
+
+procedure TfrmHome.recRankingClick(Sender: TObject);
+begin
+  if not Assigned(frmRanking) then
+    frmRanking := TfrmRanking.Create(Application);
+
+  frmRanking.Show;
+  Application.MainForm := frmRanking;
   Self.Close;
 end;
 
