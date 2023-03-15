@@ -4,6 +4,8 @@ interface
 
 type
   TEnumMenuGestao = (mnuAvaliarMelhorias, mnuAvaliarAcaoVoluntaria, mnuSair);
+  TEnumOrdenarMelhoria = (ordDescricao, ordStatus, ordCategoria, ordApoiadores);
+
 
 implementation
 

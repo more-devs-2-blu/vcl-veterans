@@ -48,7 +48,7 @@ begin
     .Post('/acao', TControlleAcao.Post)
     .Delete('/acao/:id', TControlleAcao.Delete)
     .Patch('/acao/:id/:coluna/:valor', TControlleAcao.Patch)
-    .Put('/acao/:id/:valor', TControllerMelhoria.PatchPontuacao);
+    .Put('/acao/:id/:valor', TControlleAcao.PatchPontuacao);
 
   //Melhoria
   THorse.Group.Prefix('v1')

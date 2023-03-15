@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
    UfraListSolicitacao, UfraGestaoSolicitacao, UfraAcaoVoluntaria,
-   UUtils.Enums,
+   UUtils.Enums, Backend.UEntity.Melhoria,
 
   FMX.Controls.Presentation, FMX.Layouts, FMX.Objects, FMX.ListBox,
   FMX.MultiView;
@@ -25,13 +25,19 @@ type
     Image1: TImage;
     procedure lstMenuItemClick(const Sender: TCustomListBox;
   const Item: TListBoxItem);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
+    FMelhoria: TMelhoria;
     procedure AbrirAcaoVoluntaria;
     procedure AbrirAcaoSolicitacao;
     procedure RemoverTelaAnterior;
+    function GetMelhoria: TMelhoria;
+    procedure SetMelhoria(const Value: TMelhoria);
   public
     { Public declarations }
+    property Melhoria: TMelhoria read GetMelhoria write SetMelhoria;
   end;
 
 var
@@ -52,6 +58,21 @@ begin
   lytPrincipal.AddObject(fraAcaoVoluntaria);
 end;
 
+
+procedure TfrmHome.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  FreeAndNil(FMelhoria);
+end;
+
+procedure TfrmHome.FormCreate(Sender: TObject);
+begin
+  FMelhoria := TMelhoria.Create;
+end;
+
+function TfrmHome.GetMelhoria: TMelhoria;
+begin
+  Result := FMelhoria;
+end;
 
 procedure TfrmHome.lstMenuItemClick(const Sender: TCustomListBox;
   const Item: TListBoxItem);
@@ -88,6 +109,11 @@ var
 begin
   for I := Pred(lytPrincipal.ControlsCount) downto 0 do
     lytPrincipal.RemoveObject(I);
+end;
+
+procedure TfrmHome.SetMelhoria(const Value: TMelhoria);
+begin
+  FMelhoria := Value;
 end;
 
 end.
