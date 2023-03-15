@@ -66,14 +66,17 @@ begin
   if xJSONArray.Count = 0 then
     Exit(xJSONArray);
   xJSONArrayAux := TJSONArray.Create;
+
   for I := 0 to Pred(xJSONArray.Count) do
   begin
     xJSONObject := TJSONObject.ParseJSONValue(
       TEncoding.ASCII.GetBytes(
         xJSONArray[I].ToJSON), 0) as TJSONObject;
-    xIdCriador := StrToInt(xJSONObject.GetValue('criador').Value);
+
+    xIdCriador := StrToInt(xJSONObject.GetValue('idcriador').Value);
     xJSONObject.AddPair('criador', Self.ObterCriador(xIdCriador));
-    xJSONObject.RemovePair('idcidadao');
+    xJSONObject.RemovePair('idcriador');
+
     xIdCategoria := StrToInt(xJSONObject.GetValue('idcategoria').Value);
     xJSONObject.AddPair('categoria', Self.ObterCategoria(xIdCategoria));
     xJSONObject.RemovePair('idcategoria');
