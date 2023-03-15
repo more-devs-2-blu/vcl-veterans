@@ -22,10 +22,12 @@ type
       Procedure Registrar;
       Procedure Listar;
       Procedure Excluir;
-      Procedure Alterar(const aColuna, aValor: String);
+      Procedure Alterar;overload;
+      Procedure Alterar(const aColuna, aValor: String);overload;
       //Procedure AlterarPontuacao(aValor: String);
       Procedure ObterRegistro;
       procedure PreencherVoluntarios(const aJsonMelhorias: String);
+      procedure AdicionarInscricao;
 
       constructor Create; overload;
       constructor Create(aVoluntario : TVoluntario);overload;
@@ -38,6 +40,11 @@ implementation
 { TServiceVoluntario }
 uses
   System.JSON, DataSet.Serialize, FireDAC.comp.Client, System.SysUtils, System.IOUtils, UUtils.Constants;
+
+procedure TServiceVoluntario.AdicionarInscricao;
+begin
+
+end;
 
 procedure TServiceVoluntario.Alterar(const aColuna, aValor: String);
 var
@@ -82,6 +89,11 @@ begin
   FRESTRequest.Params.Clear;
 
   FVoluntarios := TObjectList<TVoluntario>.Create;
+end;
+
+procedure TServiceVoluntario.Alterar;
+begin
+ //Não implementado
 end;
 
 constructor TServiceVoluntario.Create(aVoluntario: TVoluntario);
