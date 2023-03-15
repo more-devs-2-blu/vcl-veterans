@@ -44,6 +44,7 @@ type
     lblDescMinhasAcoes: TLabel;
     procedure recCriarAcaoVoluntariaClick(Sender: TObject);
     procedure imgVoltarClick(Sender: TObject);
+    procedure recInscrevaseAcoesClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -56,7 +57,7 @@ var
 implementation
 
 uses
-  UfrmSolicitarAcaoVoluntaria, UfrmHome;
+  UfrmSolicitarAcaoVoluntaria, UfrmHome, UfrmListaAcoesVoluntarias;
 
 {$R *.fmx}
 
@@ -77,6 +78,16 @@ begin
 
   frmSolicitarAcaoVoluntaria.Show;
   Application.MainForm := frmSolicitarAcaoVoluntaria;
+  Self.Close;
+end;
+
+procedure TfrmAcaoVoluntaria.recInscrevaseAcoesClick(Sender: TObject);
+begin
+  if not Assigned(frmListaAcoesVoluntarias) then
+    frmListaAcoesVoluntarias := TfrmListaAcoesVoluntarias.Create(Application);
+
+  frmListaAcoesVoluntarias.Show;
+  Application.MainForm := frmListaAcoesVoluntarias;
   Self.Close;
 end;
 

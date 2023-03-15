@@ -4,7 +4,7 @@ interface
 
 uses REST.Client, REST.Types, Generics.Collections,
   Backend.UEntity.Acao, Backend.UEntity.Cidadao, Backend.UEntity.Categoria,
-  UServiceIntf;
+  UServiceIntf, UUtils.Constants;
 
 type
   TServiceAcao = class(TInterfacedObject, IService)
@@ -47,8 +47,32 @@ begin
 end;
 
 procedure TServiceAcao.AlterarPontuacao(aValor: String);
+var
+  xRequestJSON: TJSONObject;
 begin
-  //não implementado
+  try
+    xRequestJSON := TJSONObject.Create;
+    try
+      FRESTClient.BaseURL := Format(URL_BASE_ACAO + '/%s/%s',[FAcao.Id.ToString, aValor]);
+      FRESTRequest.Method := rmPut;
+      FRESTRequest.Addbody(xRequestJSON);
+
+      FRESTRequest.Execute;
+      case FRESTResponse.StatusCode of
+      API_SUCESSO:
+        Exit;
+      API_NAO_AUTORIZADO:
+        raise Exception.Create('Registro não autorizado.');
+      else
+        raise Exception.Create('Erro não catalogado.');
+      end;
+    except
+      on e: exception do
+        raise Exception.Create(e.Message);
+    end;
+  finally
+    FreeAndNil(xRequestJSON);
+  end;
 end;
 
 constructor TServiceAcao.Create(aAcao : TAcao);

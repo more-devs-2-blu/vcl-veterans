@@ -218,6 +218,7 @@ object frmApoiarMelhorias: TfrmApoiarMelhorias
             Size.Width = 25.000000000000000000
             Size.Height = 25.000000000000000000
             Size.PlatformDefault = False
+            OnClick = imgVoltarClick
           end
         end
         object lytApoirMelhoria: TLayout

@@ -32,6 +32,7 @@ type
     procedure lstMelhoriasItemClickEx(const Sender: TObject; ItemIndex: Integer;
       const LocalClickPos: TPointF; const ItemObject: TListItemDrawable);
     procedure FormCreate(Sender: TObject);
+    procedure imgVoltarClick(Sender: TObject);
   private
     { Private declarations }
     procedure CarregarRegistros;
@@ -52,6 +53,8 @@ uses
   StrUtils, UUtils.Constants;
 
 {$R *.fmx}
+
+uses uFrmMelhoriasUrbanas;
 
 procedure TfrmApoiarMelhorias.AdicionarApoio;
 const
@@ -136,6 +139,16 @@ end;
 procedure TfrmApoiarMelhorias.FormCreate(Sender: TObject);
 begin
   Self.CarregarRegistros;
+end;
+
+procedure TfrmApoiarMelhorias.imgVoltarClick(Sender: TObject);
+begin
+  if not Assigned(frmMelhoriasUrbanas) then
+    frmMelhoriasUrbanas := TfrmMelhoriasUrbanas.Create(Application);
+
+  frmMelhoriasUrbanas.Show;
+  Application.MainForm := frmMelhoriasUrbanas;
+  Self.Close;
 end;
 
 procedure TfrmApoiarMelhorias.PrepararListView(aMelhoria: TMelhoria);

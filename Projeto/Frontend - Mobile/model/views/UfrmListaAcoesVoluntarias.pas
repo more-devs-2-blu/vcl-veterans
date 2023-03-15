@@ -27,12 +27,19 @@ type
     lytMensagemInferior: TLayout;
     lblMensagem: TLabel;
     imgTeste: TImage;
+    imgApoioOn: TImage;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure lstAcoesVoluntariasItemClickEx(const Sender: TObject;
+      ItemIndex: Integer; const LocalClickPos: TPointF;
+      const ItemObject: TListItemDrawable);
+    procedure imgVoltarClick(Sender: TObject);
   private
     { Private declarations }
     procedure CarregarRegistros;
     procedure PrepararListView(aAcao: TAcao);
+    procedure AdicionarApoio;
+    function ObterItemSelecionado: Integer;
   public
     { Public declarations }
   end;
@@ -43,6 +50,8 @@ var
 implementation
 
 {$R *.fmx}
+
+uses UfrmAcaoVoluntaria;
 
 procedure TfrmListaAcoesVoluntarias.Button1Click(Sender: TObject);
 var
@@ -82,6 +91,56 @@ end;
 procedure TfrmListaAcoesVoluntarias.FormCreate(Sender: TObject);
 begin
   Self.CarregarRegistros;
+end;
+
+procedure TfrmListaAcoesVoluntarias.imgVoltarClick(Sender: TObject);
+begin
+  if not Assigned(frmAcaoVoluntaria) then
+    frmAcaoVoluntaria := TfrmAcaoVoluntaria.Create(Application);
+
+  frmAcaoVoluntaria.Show;
+  Application.MainForm := frmAcaoVoluntaria;
+  Self.Close;
+end;
+
+procedure TfrmListaAcoesVoluntarias.lstAcoesVoluntariasItemClickEx(
+  const Sender: TObject; ItemIndex: Integer; const LocalClickPos: TPointF;
+  const ItemObject: TListItemDrawable);
+  const APOIO_RECEBIDO = 1;
+var
+  xItem: TListViewItem;
+begin
+
+  if (not(itemObject = nil)) and (ItemObject.Name = 'imgApoiar') and (ItemObject.TagFloat = 0) then
+    begin
+      AdicionarApoio;
+      xItem  := lstAcoesVoluntarias.Items[lstAcoesVoluntarias.ItemIndex];
+      TListItemImage(xItem.Objects.FindDrawable('imgApoiar')).Bitmap := imgApoioOn.Bitmap;
+      TListItemText(xItem.Objects.FindDrawable('txtApoiadores')).Text :=
+            FloatToStr(StrToFloat(TListItemText(xItem.Objects.FindDrawable('txtApoiadores')).Text) + APOIO_RECEBIDO);
+      ShowMessage('Ação voluntária Apoiada');
+      ItemObject.TagFloat := 1;
+    end;
+end;
+
+procedure TfrmListaAcoesVoluntarias.AdicionarApoio;
+const
+  APOIO_RECEBIDO = '1';
+var
+  xServiceAcao: TServiceAcao;
+begin
+  xServiceAcao := TServiceAcao.Create(
+    TAcao.Create(ObterItemSelecionado));
+
+  xServiceAcao.AlterarPontuacao(APOIO_RECEBIDO);
+end;
+
+function TfrmListaAcoesVoluntarias.ObterItemSelecionado: Integer;
+begin
+  if lstAcoesVoluntarias.ItemIndex <> -1 then
+  begin
+    Result := lstAcoesVoluntarias.Items[lstAcoesVoluntarias.ItemIndex].Tag;
+  end;
 end;
 
 procedure TfrmListaAcoesVoluntarias.PrepararListView(aAcao: TAcao);
