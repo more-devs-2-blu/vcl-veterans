@@ -22,12 +22,15 @@ type
     lblApoiarMelhoria: TLabel;
     lytPrincipal: TLayout;
     lstMelhorias: TListView;
-    Button1: TButton;
-    imgTeste: TImage;
+    imgCatLixo: TImage;
     imgApoiarMelhorias: TImage;
     lytMensagem: TLayout;
     imgApoioOn: TImage;
-    procedure Button1Click(Sender: TObject);
+    imgCatIlumicacao: TImage;
+    imgCatPavimento: TImage;
+    imgCatVegetacao: TImage;
+    imgCatSinalizacao: TImage;
+    imgCatSemImagem: TImage;
     procedure Apoiar(Sender: TObject);
     procedure lstMelhoriasItemClickEx(const Sender: TObject; ItemIndex: Integer;
       const LocalClickPos: TPointF; const ItemObject: TListItemDrawable);
@@ -70,25 +73,6 @@ end;
 procedure TfrmApoiarMelhorias.Apoiar(Sender: TObject);
 begin
   //ShowMessage('Teste');
-end;
-
-procedure TfrmApoiarMelhorias.Button1Click(Sender: TObject);
-var
-  xItem: TListViewItem;
-  I: Integer;
-begin
-  xItem := lstMelhorias.Items.Add;
-
-  TListItemText(xItem.Objects.FindDrawable('txtRanking')).Text := '#1';
-  TListItemImage(xItem.Objects.FindDrawable('imgMelhoria')).Bitmap := imgTeste.Bitmap;
-  TListItemText(xItem.Objects.FindDrawable('txtCategoria')).Text := 'Limpeza';
-  TListItemImage(xItem.Objects.FindDrawable('imgApoiar')).Bitmap := imgApoiarMelhorias.Bitmap;
-  TListItemText(xItem.Objects.FindDrawable('txtEndereco')).Text := 'Rua Dr. Henrique Hacker,500';
-  TListItemText(xItem.Objects.FindDrawable('txtDescricao')).Text := 'Buraco na rua blablabla blablabla blablabla blablabla';
-  TListItemText(xItem.Objects.FindDrawable('txtApoiadores')).Text := '135';
-  TListItemText(xItem.Objects.FindDrawable('txtStatus')).Text := 'Status: Solicitado';
-  TListItemText(xItem.Objects.FindDrawable('txtNome')).Text := 'João Silva';
-  //TListItemGlyphButton(xItem.Objects.FindDrawable('Button')).Click := Self.Apoiar;
 end;
 
 procedure TfrmApoiarMelhorias.lstMelhoriasItemClickEx(const Sender: TObject;
@@ -183,15 +167,15 @@ begin
 
   xCategoria := aCategoria.Nome;
 
- case  TEnumCategorias(AnsiIndexStr(UpperCase(xCategoria),ArrayCategorias)) of
-  ctLixo       : Result := imgApoiarMelhorias;
-  ctIluminacao : Result := imgApoiarMelhorias;
-  ctPavimentos : Result := imgApoiarMelhorias;
-  ctSinalizacao: Result := imgApoiarMelhorias;
-  ctVegetacao  : Result := imgApoiarMelhorias;
-  ctOutros     : Result := imgApoiarMelhorias;
+ case  TEnumCategorias(AnsiIndexStr(lowerCase(xCategoria),ArrayCategorias)) of
+  ctLixo       : Result := imgCatLixo;
+  ctIluminacao : Result := imgCatIlumicacao;
+  ctPavimentos : Result := imgCatPavimento;
+  ctSinalizacao: Result := imgCatSinalizacao;
+  ctVegetacao  : Result := imgCatVegetacao;
+  ctOutros     : Result := imgCatSemImagem;
   else
-   Result := imgApoiarMelhorias
+   Result := imgCatSemImagem
  end;
 end;
 end.

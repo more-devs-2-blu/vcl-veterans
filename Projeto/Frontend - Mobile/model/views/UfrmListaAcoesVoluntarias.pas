@@ -7,7 +7,8 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
   FMX.StdCtrls, FMX.ListView, FMX.Objects, FMX.Layouts,
-  FMX.Controls.Presentation, UServiceAcao, UServiceIntf, Backend.UEntity.Acao;
+  FMX.Controls.Presentation, UServiceAcao, UServiceIntf, Backend.UEntity.Acao,
+  Backend.UEntity.Categoria;
 
 type
   TfrmListaAcoesVoluntarias = class(TForm)
@@ -26,9 +27,8 @@ type
     imgApoiarMelhorias: TImage;
     lytMensagemInferior: TLayout;
     lblMensagem: TLabel;
-    imgTeste: TImage;
+    imgPerfil: TImage;
     imgApoioOn: TImage;
-    procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure lstAcoesVoluntariasItemClickEx(const Sender: TObject;
       ItemIndex: Integer; const LocalClickPos: TPointF;
@@ -51,25 +51,7 @@ implementation
 
 {$R *.fmx}
 
-uses UfrmAcaoVoluntaria;
-
-procedure TfrmListaAcoesVoluntarias.Button1Click(Sender: TObject);
-var
-  xItem: TListViewItem;
-  I: Integer;
-begin
-  xItem := lstAcoesVoluntarias.Items.Add;
-
-  TListItemText(xItem.Objects.FindDrawable('txtRanking')).Text := '#1';
-  TListItemImage(xItem.Objects.FindDrawable('imgMelhoria')).Bitmap := imgExemplo.Bitmap;
-  TListItemText(xItem.Objects.FindDrawable('txtCategoria')).Text := 'Limpeza';
-  TListItemImage(xItem.Objects.FindDrawable('imgApoiar')).Bitmap := imgApoiarMelhorias.Bitmap;
-  TListItemText(xItem.Objects.FindDrawable('txtEndereco')).Text := 'Rua Dr. Henrique Hacker,500';
-  TListItemText(xItem.Objects.FindDrawable('txtDescricao')).Text := 'Buraco na rua blablabla blablabla blablabla blablabla';
-  TListItemText(xItem.Objects.FindDrawable('txtApoiadores')).Text := '135';
-  TListItemText(xItem.Objects.FindDrawable('txtStatus')).Text := 'Status: Concluído';
-  TListItemText(xItem.Objects.FindDrawable('txtNome')).Text := 'João Silva';
-end;
+uses StrUtils, UfrmAcaoVoluntaria, UUtils.Constants;
 
 procedure TfrmListaAcoesVoluntarias.CarregarRegistros;
 var
@@ -151,7 +133,7 @@ begin
   xItem.Tag := aAcao.Id;
 
   TListItemText(xItem.Objects.FindDrawable('txtRanking')).Text := '';
-  TListItemImage(xItem.Objects.FindDrawable('imgMelhoria')).Bitmap := imgTeste.Bitmap;
+  TListItemImage(xItem.Objects.FindDrawable('imgMelhoria')).Bitmap := imgPerfil.Bitmap;
   TListItemText(xItem.Objects.FindDrawable('txtCategoria')).Text := aAcao.Categoria.Nome;
   TListItemImage(xItem.Objects.FindDrawable('imgApoiar')).Bitmap := imgApoiarMelhorias.Bitmap;
   TListItemText(xItem.Objects.FindDrawable('txtEndereco')).Text := aAcao.Endereco;
@@ -160,5 +142,6 @@ begin
   TListItemText(xItem.Objects.FindDrawable('txtStatus')).Text := aAcao.Status;
   TListItemText(xItem.Objects.FindDrawable('txtNome')).Text := aAcao.Criador.Nome;
 end;
+
 
 end.
