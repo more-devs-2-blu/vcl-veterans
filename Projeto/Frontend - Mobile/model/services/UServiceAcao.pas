@@ -198,7 +198,7 @@ begin
   xMemTableCategoria := TFDMemTable.Create(nil);
   try
     try
-      FRESTClient.BaseURL := 'http://localhost:9090/v1/Acao/' + intToStr(aId);
+      FRESTClient.BaseURL := 'http://localhost:9090/v1/acao/' + intToStr(aId);
       FRESTRequest.Method := rmGet;
       FRESTRequest.Execute;
 
@@ -209,7 +209,7 @@ begin
           xJSONFile := FRESTResponse.Content;
           TFile.WriteAllText('file.json', xJSONFile);
 
-          xMemTableCriador.LoadFromJSON(xMemTable.FieldByName('idcriador').AsString);
+          xMemTableCriador.LoadFromJSON(xMemTable.FieldByName('criador').AsString);
           xCriador := TCidadao.Create(xMemTableCriador.FieldByName('nome').AsString);
 
           xMemTableCategoria.LoadFromJSON(xMemTable.FieldByName('categoria').AsString);
@@ -263,10 +263,9 @@ begin
     xJSONFile := FRESTResponse.Content;
     TFile.WriteAllText('file.json', xJSONFile);
 
-
     while not xMemTable.Eof do
     begin
-      xMemTableCidadao.LoadFromJSON(xMemTable.FieldByName('idcriador').AsString);
+      xMemTableCidadao.LoadFromJSON(xMemTable.FieldByName('criador').AsString);
       xCidadao := TCidadao.Create(xMemTableCidadao.FieldByName('nome').AsString);
 
       xMemTableCategoria.LoadFromJSON(xMemTable.FieldByName('categoria').AsString);

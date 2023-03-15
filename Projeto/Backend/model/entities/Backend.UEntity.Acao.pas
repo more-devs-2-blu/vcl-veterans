@@ -196,6 +196,7 @@ begin
   FJSON.AddPair('status',      FStatus);
   FJSON.AddPair('descricao',   FDescricao);
   FJSON.AddPair('endereco',    FEndereco);
+  FJSON.AddPair('reposta',     FResposta);
   FJSON.AddPair('idcriador',     FCriador.Id.ToString);
 
   Result := FJSON;
