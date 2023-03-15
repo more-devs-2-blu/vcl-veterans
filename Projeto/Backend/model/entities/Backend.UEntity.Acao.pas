@@ -43,8 +43,10 @@ type
     public
       constructor Create; overload;
       constructor Create(aId: Integer); overload;
-      constructor Create(const aCategoria: TCategoria; const aApoio: Integer;
-          const aStatus, aDescricao, aEndereco: String; const aCriador: TCidadao); overload;
+      constructor Create(const aCategoria: TCategoria;
+                         const aApoio: Integer;
+                         const aStatus, aDescricao, aEndereco: String;
+                         const aCriador: TCidadao); overload;
       constructor Create(const aId: Integer; const aCategoria: TCategoria; const aApoio: Integer;
           const aStatus, aDescricao, aEndereco: String; const aCriador: TCidadao); overload;
       //Listar Acoes
@@ -190,11 +192,11 @@ function TAcao.GetJSON: TJSONObject;
 begin
 
   FJSON.AddPair('apoio',       FApoio.ToString);
-  FJSON.AddPair('categoria',   FCategoria.id.ToString);
+  FJSON.AddPair('idcategoria',   FCategoria.id.ToString);
   FJSON.AddPair('status',      FStatus);
   FJSON.AddPair('descricao',   FDescricao);
   FJSON.AddPair('endereco',    FEndereco);
-  FJSON.AddPair('criador',     FCriador.Id.ToString);
+  FJSON.AddPair('idcriador',     FCriador.Id.ToString);
 
   Result := FJSON;
 end;

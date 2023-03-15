@@ -180,11 +180,16 @@ begin
 end;
 
 procedure TServiceAcao.Registrar;
+var
+  xJSONFile: String;
 begin
     try
-    FRESTClient.BaseURL := 'http://localhost:9090/v1/melhoria';
+    FRESTClient.BaseURL := 'http://localhost:9090/v1/acao';
     FRESTRequest.Method := rmPost;
     FRESTRequest.Params.AddBody(FAcao.JSON);
+
+    xJSONFile := FAcao.JSON.ToString;
+    TFile.WriteAllText('file.json', xJSONFile);
     FRESTRequest.Execute;
     case FRESTResponse.StatusCode of
       201:
