@@ -30,9 +30,11 @@ type
     imgMaoMarcaDAgua: TImage;
     rectAtualizar: TRectangle;
     Label13: TLabel;
+    procedure FrameResized(Sender: TObject);
     procedure rectAtualizarClick(Sender: TObject);
   private
     { Private declarations }
+    procedure SelecionarRegistro;
     procedure CarregarRegistros;
     procedure PrepararListView(aMelhoria: TMelhoria);
   public
@@ -46,6 +48,8 @@ implementation
 
 {$R *.fmx}
 
+uses
+   UfraGestaoSolicitacao, forms;
 
 procedure TfraSolicitacao.CarregarRegistros;
 var
@@ -64,6 +68,10 @@ begin
 
 end;
 
+procedure TfraSolicitacao.FrameResized(Sender: TObject);
+begin
+  Self.CarregarRegistros;
+end;
 
 procedure TfraSolicitacao.PrepararListView(aMelhoria: TMelhoria);
 var
@@ -78,9 +86,35 @@ begin
   TListItemText(xItem.Objects.FindDrawable('txtStatus')).Text := aMelhoria.Status;
  // TListItemText(xItem.Objects.FindDrawable('txtNome')).Text := aMelhoria.Cidadao.Nome;
 end;
+
 procedure TfraSolicitacao.rectAtualizarClick(Sender: TObject);
 begin
-  Self.CarregarRegistros;
+  self.SelecionarRegistro;
+end;
+
+procedure TfraSolicitacao.SelecionarRegistro;
+var
+  xServiceMelhoria: IService;
+  xMelhoria: TMelhoria;
+  xItem: TListViewItem;
+begin
+  if lstMelhorias.ItemIndex = -1 then
+  exit;
+
+  xItem := lstMelhorias.Items[lstMelhorias.ItemIndex];
+  xMelhoria := TMelhoria.Create(xItem.tag);
+
+  xServiceMelhoria := TServiceMelhoria.Create(xMelhoria);
+
+ { if not Assigned(fraGestaoSolicitacao) then
+    fraGestaoSolicitacao := TfraGestaoSolicitacao.Create
+      (Application);
+
+   fraGestaoSolicitacao.Align := TAlignLayout.Center;
+   Self.Parent.AddObject(fraGestaoSolicitacao);
+
+   FreeAndnil(fraSolicitacao);  }
+
 end;
 
 end.

@@ -31,7 +31,7 @@ type
     Image2: TImage;
     rectAtualizar: TRectangle;
     Label13: TLabel;
-    procedure rectAtualizarClick(Sender: TObject);
+    procedure FrameResized(Sender: TObject);
   private
     { Private declarations }
     procedure CarregarRegistros;
@@ -65,6 +65,10 @@ begin
 
 end;
 
+procedure TfraAcaoVoluntaria.FrameResized(Sender: TObject);
+begin
+  Self.CarregarRegistros;
+end;
 
 procedure TfraAcaoVoluntaria.PrepararListView(aAcao: TAcao);
 var
@@ -78,10 +82,6 @@ begin
   TListItemText(xItem.Objects.FindDrawable('txtCategoria')).Text := aAcao.Categoria.Nome;
   TListItemText(xItem.Objects.FindDrawable('txtStatus')).Text := aAcao.Status;
 
-end;
-procedure TfraAcaoVoluntaria.rectAtualizarClick(Sender: TObject);
-begin
-  Self.CarregarRegistros;
 end;
 
 end.
