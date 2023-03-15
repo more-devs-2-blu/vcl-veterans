@@ -28,7 +28,7 @@ CREATE TABLE Acao
  Apoio INT UNSIGNED,  
  Endereco VARCHAR(255),
  Status VARCHAR(20),
- Criador INT UNSIGNED NOT NULL,
+ idCriador INT UNSIGNED NOT NULL,
  idCategoria INT UNSIGNED NOT NULL);
 
 CREATE TABLE Categoria 
@@ -46,7 +46,7 @@ CREATE TABLE Voluntario
 
 ALTER TABLE Melhoria ADD FOREIGN KEY(idCidadao) REFERENCES Cidadao (id);
 ALTER TABLE Melhoria ADD FOREIGN KEY(idCategoria) REFERENCES Categoria (id);
-ALTER TABLE Acao ADD FOREIGN KEY(Criador) REFERENCES Cidadao (id);
+ALTER TABLE Acao ADD FOREIGN KEY(idCriador) REFERENCES Cidadao (id);
 ALTER TABLE Acao ADD FOREIGN KEY(idCategoria) REFERENCES Categoria (id);
 ALTER TABLE Voluntario ADD FOREIGN KEY(idCidadao) REFERENCES Cidadao (id);
 ALTER TABLE Voluntario ADD FOREIGN KEY(idAcao) REFERENCES Acao (id);
