@@ -79,6 +79,7 @@ function TCidadao.GetNome: string;
 begin
   Result := FNome;
 end;
+
 function TCidadao.GetPontos: Integer;
 begin
   Result := FPontos;

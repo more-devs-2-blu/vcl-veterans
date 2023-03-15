@@ -16,25 +16,20 @@ type
     lytPrincipal: TLayout;
     lytBotoes: TLayout;
     Label1: TLabel;
-    cmbOrdenar: TComboBox;
     lytMelhorias: TLayout;
     Label3: TLabel;
     Label5: TLabel;
     Label7: TLabel;
     Label8: TLabel;
     lstAcoes: TListView;
-    rectVoltar: TRectangle;
-    Label2: TLabel;
     rectFundo: TRectangle;
-    Label4: TLabel;
     imgMaoMarcaDAgua: TImage;
     Image2: TImage;
-    rectAtualizar: TRectangle;
-    Label13: TLabel;
-    Button1: TButton;
+    recVisualizar: TRectangle;
+    Label6: TLabel;
     procedure FrameResized(Sender: TObject);
     procedure rectAtualizarClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure Rectangle2Click(Sender: TObject);
   private
     { Private declarations }
     procedure CarregarRegistros;
@@ -52,11 +47,6 @@ implementation
 {$R *.fmx}
 uses
     UfrnHome, UfraGestaoVoluntaria;
-
-procedure TfraAcaoVoluntaria.Button1Click(Sender: TObject);
-begin
-  SelecionarRegistro;
-end;
 
 procedure TfraAcaoVoluntaria.CarregarRegistros;
 var
@@ -94,9 +84,14 @@ begin
 
 end;
 
-procedure TfraAcaoVoluntaria.rectAtualizarClick(Sender: TObject);
+procedure TfraAcaoVoluntaria.Rectangle2Click(Sender: TObject);
 begin
   SelecionarRegistro;
+end;
+
+procedure TfraAcaoVoluntaria.rectAtualizarClick(Sender: TObject);
+begin
+  SELF.SelecionarRegistro;
 end;
 
 procedure TfraAcaoVoluntaria.SelecionarRegistro;
@@ -107,28 +102,19 @@ begin
   if lstAcoes.ItemIndex = -1 then
   exit;
 
-  try
     xItem := lstAcoes.Items[lstAcoes.ItemIndex];
-
     xServiceAcao := TServiceAcao.Create;
-    frmHome.Acao := xServiceAcao.ObterRegistro1(lstAcoes.Items[lstAcoes.ItemIndex].Tag);
-    if not Assigned(fraGestaoVoluntaria) then
-      fraGestaoVoluntaria := TfraGestaoSolidaria.Create(application);
     try
+      frmHome.Acao := xServiceAcao.ObterRegistro1(lstAcoes.Items[lstAcoes.ItemIndex].Tag);
+      if not Assigned(fraGestaoVoluntaria) then
+        fraGestaoVoluntaria := TfraGestaoSolidaria.Create(application);
+
       fraGestaoVoluntaria.Align := TAlignLayout.Center;
       Self.Parent.AddObject(fraGestaoVoluntaria);
 
-      FreeAndNil(xServiceAcao);
     finally
-
+    FreeAndNil(xServiceAcao);
     end;
-  finally
-
-end;
-
- {   }
-
-
 
 end;
 

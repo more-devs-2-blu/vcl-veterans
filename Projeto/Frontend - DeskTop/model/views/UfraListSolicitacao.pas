@@ -22,16 +22,13 @@ type
     Label8: TLabel;
     lstMelhorias: TListView;
     Label1: TLabel;
-    rectVoltar: TRectangle;
-    Label2: TLabel;
-    cmbOrdenar: TComboBox;
-    Label4: TLabel;
     Image1: TImage;
     imgMaoMarcaDAgua: TImage;
-    rectAtualizar: TRectangle;
-    Label13: TLabel;
+    Rectangle1: TRectangle;
+    Label6: TLabel;
     procedure FrameResized(Sender: TObject);
     procedure rectAtualizarClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     procedure SelecionarRegistro;
@@ -49,7 +46,12 @@ implementation
 {$R *.fmx}
 
 uses
-   UfraGestaoSolicitacao, forms;
+   UfraGestaoSolicitacao, forms, UfrnHome;
+
+procedure TfraSolicitacao.Button1Click(Sender: TObject);
+begin
+  Self.SelecionarRegistro;
+end;
 
 procedure TfraSolicitacao.CarregarRegistros;
 var
@@ -94,26 +96,26 @@ end;
 
 procedure TfraSolicitacao.SelecionarRegistro;
 var
-  xServiceMelhoria: IService;
-  xMelhoria: TMelhoria;
+  xServiceMelhoria: TServiceMelhoria;
   xItem: TListViewItem;
 begin
   if lstMelhorias.ItemIndex = -1 then
   exit;
 
-  xItem := lstMelhorias.Items[lstMelhorias.ItemIndex];
-  xMelhoria := TMelhoria.Create(xItem.tag);
+    xItem := lstMelhorias.Items[lstMelhorias.ItemIndex];
+    xServiceMelhoria := TServiceMelhoria.Create;
 
-  xServiceMelhoria := TServiceMelhoria.Create(xMelhoria);
+    try
+    frmHome.Melhoria := xServiceMelhoria.ObterRegistro1(lstMelhorias.Items[lstMelhorias.ItemIndex].Tag);
+    if not Assigned(fraGestaoSolicitacao) then
+      fraGestaoSolicitacao := TfraGestaoSolicitacao.Create(application);
 
-  if not Assigned(fraGestaoSolicitacao) then
-    fraGestaoSolicitacao := TfraGestaoSolicitacao.Create
-      (Application);
+      fraGestaoSolicitacao.Align := TAlignLayout.Center;
+      Self.Parent.AddObject(fraGestaoSolicitacao);
 
-   fraGestaoSolicitacao.Align := TAlignLayout.Center;
-   Self.Parent.AddObject(fraGestaoSolicitacao);
-
-   FreeAndnil(fraSolicitacao);
+  finally
+     FreeAndNil(xServiceMelhoria);
+  end;
 
 end;
 
