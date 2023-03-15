@@ -63,15 +63,15 @@ INSERT INTO CATEGORIA (nome) VALUES ('Pavimentos');
 INSERT INTO CATEGORIA (nome) VALUES ('Sinalização');
 INSERT INTO CATEGORIA (nome) VALUES ('Vegetação');
 
-INSERT INTO ACAO (descricao, apoio, endereco, status, criador, idcategoria) 
+INSERT INTO ACAO (descricao, apoio, endereco, status, idcriador, idcategoria) 
 	VALUES ('Carpir meu quintal', 0, 'Rua do Bode, 43', 'Aberto', 2, 1);
-INSERT INTO ACAO (descricao, apoio, endereco, status, criador, idcategoria) 
+INSERT INTO ACAO (descricao, apoio, endereco, status, idcriador, idcategoria) 
 	VALUES ('Plantar flores na pracinha', 19, 'Rua da Vaca, 11', 'Autorizado', 5, 3);  
-INSERT INTO ACAO (descricao, apoio, endereco, status, criador, idcategoria) 
+INSERT INTO ACAO (descricao, apoio, endereco, status, idcriador, idcategoria) 
 	VALUES ('Roubar a geladeira do vizinho', 0, 'Rua do Sapo, 8', 'Negado', 3, 5);  
-INSERT INTO ACAO (descricao, apoio, endereco, status, criador, idcategoria) 
+INSERT INTO ACAO (descricao, apoio, endereco, status, idcriador, idcategoria) 
 	VALUES ('Organizar festa de aniversário da rua', 22, 'Rua do Elefante, 11', 'Autorizado', 1, 3);
-INSERT INTO ACAO (descricao, apoio, endereco, status, criador, idcategoria) 
+INSERT INTO ACAO (descricao, apoio, endereco, status, idcriador, idcategoria) 
 	VALUES ('Pintar o poste de roxo', 3, 'Rua da Pitanguinha, 83', 'Negado', 4, 1);    
 
 INSERT INTO MELHORIA (descricao, status, apoio, endereco, resposta, idCidadao, idcategoria) 
