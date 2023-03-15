@@ -14,9 +14,10 @@ type
       FRESTRequest: TRESTRequest;
       FRESTResponse: TRESTResponse;
 
-      function GetCidadao: TObjectList<TCidadao>;
+      function GetCidadao: TCidadao;
       function GetCidadaos: TObjectList<TCidadao>;
       procedure SetCidadaos(const Value: TObjectList<TCidadao>);
+    procedure SetCidadao(const Value: TCidadao);
 
     public
       procedure Alterar;
@@ -30,6 +31,7 @@ type
       destructor  Destroy; override;
 
       property Cidadaos: TObjectList<TCidadao> read GetCidadaos write SetCidadaos;
+      property Cidadao: TCidadao read getCidadao write SetCidadao;
   end;
 implementation
 uses
@@ -65,9 +67,9 @@ begin
   inherited;
 end;
 
-function TServiceCidadao.GetCidadao: TObjectList<TCidadao>;
+function TServiceCidadao.GetCidadao: TCidadao;
 begin
-
+  Result := FCidadao;
 end;
 
 function TServiceCidadao.GetCidadaos: TObjectList<TCidadao>;
@@ -147,6 +149,11 @@ begin
     on e: exception do
       raise Exception.Create(e.Message);
   end;
+end;
+
+procedure TServiceCidadao.SetCidadao(const Value: TCidadao);
+begin
+  FCidadao := Value;
 end;
 
 procedure TServiceCidadao.SetCidadaos(const Value: TObjectList<TCidadao>);

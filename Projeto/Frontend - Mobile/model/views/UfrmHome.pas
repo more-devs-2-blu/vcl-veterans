@@ -4,7 +4,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Objects, FMX.Layouts, FMX.Effects,
-  backend.UEntity.Cidadao, FMX.Ani, UUtils.AnimacaoClick;
+  backend.UEntity.Cidadao, FMX.Ani, UUtils.AnimacaoClick, UServiceUsuario;
 type
   TfrmHome = class(TForm)
     recFundo: TRectangle;
@@ -73,6 +73,7 @@ end;
 procedure TfrmHome.FormCreate(Sender: TObject);
 begin
   Self.CarregarRanking;
+  lblNome.Text := dm.xUsuarioLogado.Nome;
   FEventoBotao := TEventoBotao.Create;
 end;
 
