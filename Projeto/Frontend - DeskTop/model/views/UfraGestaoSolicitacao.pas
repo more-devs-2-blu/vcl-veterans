@@ -129,7 +129,6 @@ procedure TfraGestaoSolicitacao.FrameResized(Sender: TObject);
 begin
   lblApoiadores.Text := frmHome.Melhoria.Apoio.ToString;
   lblDescricao.Text  := frmHome.Melhoria.descricao;
-  lblDescricao.Text  := frmHome.Melhoria.descricao;
   lblCategoria.Text  := frmHome.Melhoria.Categoria.Nome;
   lblStatus.Text     := frmHome.Melhoria.Status;
 end;
