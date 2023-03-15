@@ -24,9 +24,10 @@ type
       Procedure Excluir;
       Procedure Alterar;
       Procedure AlterarPontuacao(aValor: String);
+      procedure Alterar1(const aColuna, aValor: String);
       Procedure ObterRegistro;
       procedure PreencherAcao(const aJsonAcoes: String);
-
+      Function ObterRegistro1(aId:Integer):TAcao;
       constructor Create; overload;
       constructor Create(aAcao : TAcao);overload;
       destructor  Destroy; override;
@@ -44,6 +45,35 @@ uses
 procedure TServiceAcao.Alterar;
 begin
 
+end;
+
+procedure TServiceAcao.Alterar1(const aColuna, aValor: String);
+var
+  xRequestJSON: TJSONObject;
+begin
+  try
+    xRequestJSON := TJSONObject.Create;
+    try
+      FRESTClient.BaseURL := Format(URL_BASE_ACAO + '/%s/%s/%s',[FAcao.Id.ToString, aColuna, aValor]);
+      FRESTRequest.Method := rmPatch;
+      FRESTRequest.Addbody(xRequestJSON);
+
+      FRESTRequest.Execute;
+      case FRESTResponse.StatusCode of
+      API_SUCESSO:
+        Exit;
+      API_NAO_AUTORIZADO:
+        raise Exception.Create('Registro não autorizado.');
+      else
+        raise Exception.Create('Erro não catalogado.');
+      end;
+    except
+      on e: exception do
+        raise Exception.Create(e.Message);
+    end;
+  finally
+    FreeAndNil(xRequestJSON);
+  end;
 end;
 
 procedure TServiceAcao.AlterarPontuacao(aValor: String);
@@ -153,6 +183,65 @@ begin
 
 end;
 
+function TServiceAcao.ObterRegistro1(aId: Integer): TAcao;
+var
+  xMemTable: TFDMemTable;
+  xMemTableCriador: TFDMemTable;
+  xMemTableCategoria: TFDMemTable;
+  xCriador: TCidadao;
+  xCategoria: TCategoria;
+  xJSONFile: String;
+  xAcao: TAcao;
+begin
+  xMemTable := TFDMemTable.Create(nil);
+  xMemTableCriador := TFDMemTable.Create(nil);
+  xMemTableCategoria := TFDMemTable.Create(nil);
+  try
+    try
+      FRESTClient.BaseURL := 'http://localhost:9090/v1/Acao/' + intToStr(aId);
+      FRESTRequest.Method := rmGet;
+      FRESTRequest.Execute;
+
+      case FRESTResponse.StatusCode of
+        200:
+        begin
+          xMemTable.LoadFromJSON(FRESTResponse.Content);
+          xJSONFile := FRESTResponse.Content;
+          TFile.WriteAllText('file.json', xJSONFile);
+
+          xMemTableCriador.LoadFromJSON(xMemTable.FieldByName('idcriador').AsString);
+          xCriador := TCidadao.Create(xMemTableCriador.FieldByName('nome').AsString);
+
+          xMemTableCategoria.LoadFromJSON(xMemTable.FieldByName('categoria').AsString);
+          xCategoria := TCategoria.Create(xMemTableCategoria.FieldByName('nome').AsString);
+
+          xAcao := TAcao.Create(xMemTable.FieldByName('id').asInteger,
+                                      xMemTable.FieldByName('apoio').asInteger,
+                                      xMemTable.FieldByName('status').AsString,
+                                      xMemTable.FieldByName('descricao').AsString,
+                                      xMemTable.FieldByName('endereco').AsString,
+                                      xCategoria,
+                                      xCriador
+                                      );
+          Result := xAcao;
+        end;
+        401:
+          raise Exception.Create('Usuário não autorizado.');
+        else
+          raise Exception.Create('Erro ao carregar a lista de Times. Código do Erro: ' + FRESTResponse.StatusCode.ToString);
+      end;
+    except on E: Exception do
+      raise Exception.Create('Error Message');
+    end;
+    finally
+    FreeAndNil(xMemTable);
+    FreeAndNil(xMemTableCriador);
+    FreeAndNil(xMemTableCategoria);
+  end;
+
+
+end;
+
 procedure TServiceAcao.PreencherAcao(const aJsonAcoes: String);
 var
   xMemTable: TFDMemTable;
@@ -177,7 +266,7 @@ begin
 
     while not xMemTable.Eof do
     begin
-      xMemTableCidadao.LoadFromJSON(xMemTable.FieldByName('criador').AsString);
+      xMemTableCidadao.LoadFromJSON(xMemTable.FieldByName('idcriador').AsString);
       xCidadao := TCidadao.Create(xMemTableCidadao.FieldByName('nome').AsString);
 
       xMemTableCategoria.LoadFromJSON(xMemTable.FieldByName('categoria').AsString);

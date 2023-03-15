@@ -62,6 +62,7 @@ INSERT INTO CATEGORIA (nome) VALUES ('Iluminação');
 INSERT INTO CATEGORIA (nome) VALUES ('Pavimentos');
 INSERT INTO CATEGORIA (nome) VALUES ('Sinalização');
 INSERT INTO CATEGORIA (nome) VALUES ('Vegetação');
+INSERT INTO CATEGORIA (nome) VALUES ('Outros');
 
 INSERT INTO ACAO (descricao, apoio, endereco, status, idcriador, idcategoria) 
 	VALUES ('Carpir meu quintal', 0, 'Rua do Bode, 43', 'Aberto', 2, 1);
