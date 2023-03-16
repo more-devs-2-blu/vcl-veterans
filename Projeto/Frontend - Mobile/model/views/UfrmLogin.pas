@@ -25,12 +25,12 @@ type
     lytLogin: TLayout;
     lblTituloLogin: TLabel;
     CheckBox1: TCheckBox;
-    lblMostrarSenha: TLabel;
     lytLogo: TLayout;
     lytImage: TLayout;
     imgLogo: TImage;
     Layout1: TLayout;
     lblEuAjudo: TLabel;
+    lblMostrarSenha: TLabel;
     procedure CheckBox1Change(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure recBotaoClick(Sender: TObject);

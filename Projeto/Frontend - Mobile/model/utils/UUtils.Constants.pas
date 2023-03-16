@@ -13,8 +13,8 @@ Const
   ArrayCategorias : array[0..5] of String = ('lixo', 'iluminação','pavimentos',
   'sinalização','vegetação', 'outros');
 
-  //URL_BASE            = 'http://localhost:9090';
-  URL_BASE            = 'http://187.85.120.34:9090';
+  URL_BASE            = 'http://localhost:9090';
+
   URL_BASE_CIDADAO    = URL_BASE + '/v1/cidadao';
   URL_BASE_MELHORIA   = URL_BASE + '/v1/melhoria';
   URL_BASE_ACAO       = URL_BASE + '/v1/acao';
