@@ -76,7 +76,7 @@ begin
 
   xServiceMelhoria := TServiceMelhoria.Create(TMelhoria.Create(frmHome.Melhoria.Id));
   try
-    xServiceMelhoria.Alterar1(COLUNA, xStatus);
+    xServiceMelhoria.AlterarPorId(COLUNA, xStatus);
     lblStatus.Text := xStatus;
     showMessage('Status Alterado com Sucesso.');
   finally
@@ -105,7 +105,7 @@ begin
 
   xServiceMelhoria := TServiceMelhoria.Create(TMelhoria.Create(frmHome.Melhoria.Id));
   try
-    xServiceMelhoria.Alterar1(COLUNA, xResposta);
+    xServiceMelhoria.AlterarPorId(COLUNA, xResposta);
     showMessage('FeedBack Enviado.');
   finally
     FreeAndNil(xServiceMelhoria);
@@ -120,7 +120,6 @@ begin
   lblCategoria.Text  := frmHome.Melhoria.Categoria.Nome;
   lblStatus.Text     := frmHome.Melhoria.Status;
 end;
-
 
 procedure TfraGestaoSolicitacao.rectAtualizarClick(Sender: TObject);
 begin
