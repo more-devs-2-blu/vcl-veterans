@@ -125,17 +125,22 @@ A aplicação Eu Ajudo possui diversas ações que devem ser executadas pelos ci
 <img src="https://user-images.githubusercontent.com/114958388/225526910-fc25de65-6c05-43b8-88b9-935dec4d7f0e.png" width="200px"/>
 
 
-- Menu de Ações Voluntárias.
-<img src="https://user-images.githubusercontent.com/114958388/225527772-f2ae8434-cb09-4eb3-bc8a-058542e25c32.png" width="200px"/>
+#### Software Mobile - Gestor 
 
-- Criar Ação Voluntária.
-<img src="https://user-images.githubusercontent.com/114958388/225527480-8c5862d7-7893-4732-820c-8b7d291ec107.png" width="200px"/>
+- Home.
+<img src="https://i.imgur.com/Vp86JXE.png" width="600px"/>
 
-- Inscrever-se em outras Ações Voluntárias.
-<img src="https://user-images.githubusercontent.com/114958388/225528044-62cebe75-500a-49c7-af7c-eca41683c4b4.png" width="200px"/>
+- Menu.
+<img src="https://i.imgur.com/ZGYYCgG.png" width="600px"/>
 
-- Visualizar minhas Ações Voluntárias.
-<img src="https://user-images.githubusercontent.com/114958388/225528257-15c4f95a-ae8b-4d62-ba07-1ddaf10f2f0d.png" width="200px"/>
+- Lista de Melhorias.
+<img src="https://i.imgur.com/2YriQk5.png" width="600px"/>
 
-- Ranking: Top apoiadores da Cidade.
-<img src="https://user-images.githubusercontent.com/114958388/225528728-79f9be63-8620-4ef4-aba0-ab91f3fbdfa6.png" width="200px"/>
+- Gestão de Melhoria.
+<img src="https://i.imgur.com/HCOuHBf.png" width="600px"/>
+
+- Lista de Ações Voluntárias.
+<img src="https://i.imgur.com/Z8Hmuw8.png" width="600px"/>
+
+- Gestão de Ações Voluntárias.
+<img src="https://i.imgur.com/vpUDjyz.png" width="600px"/>
