@@ -1,4 +1,4 @@
-program Project1;
+program EuAjudo_Gestor_Desktop;
 
 uses
   System.StartUpCopy,
