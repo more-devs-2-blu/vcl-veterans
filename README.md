@@ -33,6 +33,31 @@ Enquando que o gestor pode gerenciar essas sugestões e ações voluntárias.
 - Ranking de cidadãos mais ativos no sistema;
 - Notícias das ultimas realizações públicas.
 
+### Diagrama Caso de Uso 
+<img src="https://user-images.githubusercontent.com/114958388/225534704-14069802-2ed5-4b1a-9107-9142f1300f80.png" width="500px"/>
+
+### Papéis 
+A aplicação Eu Ajudo conta com dois papéis principais: Cidadão e Gestor. 
+
+**Cidadão**: Papel responsável por informar ao sistema melhorias que esperam algum tipo de resposta do ente público, assim como organizar e participar de ações voluntárias.
+
+**Gestor**: Papel responsável por avaliar as melhorias, verificar o seu andamento e conduzir a resposta ao cidadão que enviou as solicitações. É responsável também por gerenciar ações voluntárias feitas por cidadãos, permitindo, apoiando ou vetando sua realização.
+
+### Ações
+A aplicação Eu Ajudo possui diversas ações que devem ser executadas pelos cidadãos ou Gestores. Abaixo seguem as ações separadas por cada papel responsável. 
+
+#### Ações do Gestor
+- Avaliar melhorias: Ação responsável por executar uma triagem entre as solicitações enviadas pelo cidadão. 
+- Elaborar resposta às melhorias: Ação responsável por analisar a contribuição e designar o parecer ao cidadão que a enviou.
+- Modificar status das melhorias: Ação responsável por efetuar o andamento da melhoria e modificar seu status.
+- Gerenciar as ações voluntárias : Ação responsável por definir ou não seu comparecimento no local de uma ação voluntária e, caso julgue necessário, sua participação ou intervenção.
+
+#### Ações do Cidadão
+- Criar Melhoria: Ação responsável pela criação de uma nova melhoria.
+- Apoiar Melhoria: Ação responsável por quantificar a importância de uma melhoria específica. Quanto mais avaliações uma melhoria tiver, mais relevância e visibilidade ela terá para o Gestor e também para outros cidadãos.
+- Acompanhar a Melhoria: Ação responsável pela averiguação do andamento de melhorias tanto por ele criadas quanto de outros cidadãos .
+- Criar a Ação Voluntária: Ação responsável pela criação de uma ação voluntária. 
+- Inscrever-se em Ação Voluntária: Ação responsável pela inscrição em uma ação voluntária. Ao se inscrever, o cidadão firma compromisso com outros inscritos para ajudar.
 
 ## 🛠️ Ferramentas Utilizadas 🛠️
 
