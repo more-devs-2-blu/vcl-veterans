@@ -44,6 +44,8 @@ Enquando que o gestor pode gerenciar essas sugestões e ações voluntárias.
 
 * [FireMonkey](https://www.embarcadero.com/br/free-tools/firemonkey-stencils) - O FireMonkey (FMX) Stencils estão disponíveis para designers que trabalham com desenvolvedores que utilizam RAD Studio, Delphi ou C++Builder para desenvolver aplicativos para vários dispositivos.
 
+* [MySQL](https://www.mysql.com/) - Sistema de gerenciamento de banco de dados, que utiliza a linguagem SQL como interface.
+
 * [Figma](https://www.figma.com/) - Ferramenta de design de interface gráfica utilizada para criar protótipos e designs da aplicação.
 
 * [Draw.io](https://app.diagrams.net/) - Software de desenho gráfico multiplataform.
