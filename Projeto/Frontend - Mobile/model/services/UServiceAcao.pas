@@ -24,10 +24,10 @@ type
       Procedure Excluir;
       Procedure Alterar;
       Procedure AlterarPontuacao(aValor: String);
-      procedure Alterar1(const aColuna, aValor: String);
+      procedure AlterarPorId(const aColuna, aValor: String);
       Procedure ObterRegistro;
       procedure PreencherAcao(const aJsonAcoes: String);
-      Function ObterRegistro1(aId:Integer):TAcao;
+      Function ObterRegistroPorId(aId:Integer):TAcao;
       constructor Create; overload;
       constructor Create(aAcao : TAcao);overload;
       destructor  Destroy; override;
@@ -47,7 +47,7 @@ begin
 
 end;
 
-procedure TServiceAcao.Alterar1(const aColuna, aValor: String);
+procedure TServiceAcao.AlterarPorId(const aColuna, aValor: String);
 var
   xRequestJSON: TJSONObject;
 begin
@@ -140,12 +140,12 @@ end;
 
 procedure TServiceAcao.Excluir;
 begin
-
+  //Não implementado nessa versão.
 end;
 
 function TServiceAcao.GetAcao: TObjectList<TAcao>;
 begin
-
+  //Não implementado nessa versão.
 end;
 
 function TServiceAcao.GetAcoes: TObjectList<TAcao>;
@@ -156,16 +156,16 @@ end;
 procedure TServiceAcao.Listar;
 begin
     try
-      FRESTClient.BaseURL := 'http://localhost:9090/v1/acao/apoio/desc';
+      FRESTClient.BaseURL := URL_BASE_ACAO + '/apoio/desc';
       FRESTRequest.Method := rmGet;
       FRESTRequest.Execute;
 
       case FRESTResponse.StatusCode of
-        200:
+        API_SUCESSO:
         begin
           Self.PreencherAcao(FRESTResponse.Content)
         end;
-        401:
+        API_NAO_AUTORIZADO :
           raise Exception.Create('Usuário não autorizado.');
         else
           raise Exception.Create('Erro ao carregar a lista de Times. Código do Erro: ' + FRESTResponse.StatusCode.ToString);
@@ -180,10 +180,10 @@ end;
 
 procedure TServiceAcao.ObterRegistro;
 begin
-
+  //Não implementado nessa versão.
 end;
 
-function TServiceAcao.ObterRegistro1(aId: Integer): TAcao;
+function TServiceAcao.ObterRegistroPorId(aId: Integer): TAcao;
 var
   xMemTable: TFDMemTable;
   xMemTableCriador: TFDMemTable;
@@ -198,12 +198,12 @@ begin
   xMemTableCategoria := TFDMemTable.Create(nil);
   try
     try
-      FRESTClient.BaseURL := 'http://localhost:9090/v1/acao/' + intToStr(aId);
+      FRESTClient.BaseURL := URL_BASE_ACAO + intToStr(aId);
       FRESTRequest.Method := rmGet;
       FRESTRequest.Execute;
 
       case FRESTResponse.StatusCode of
-        200:
+        API_SUCESSO:
         begin
           xMemTable.LoadFromJSON(FRESTResponse.Content);
           xJSONFile := FRESTResponse.Content;
@@ -225,7 +225,7 @@ begin
                                       );
           Result := xAcao;
         end;
-        401:
+        API_NAO_AUTORIZADO :
           raise Exception.Create('Usuário não autorizado.');
         else
           raise Exception.Create('Erro ao carregar a lista de Times. Código do Erro: ' + FRESTResponse.StatusCode.ToString);
@@ -296,7 +296,7 @@ var
   xJSONFile: String;
 begin
     try
-    FRESTClient.BaseURL := 'http://localhost:9090/v1/acao';
+    FRESTClient.BaseURL := URL_BASE_ACAO ;
     FRESTRequest.Method := rmPost;
     FRESTRequest.Params.AddBody(FAcao.JSON);
 
@@ -304,9 +304,9 @@ begin
     TFile.WriteAllText('file.json', xJSONFile);
     FRESTRequest.Execute;
     case FRESTResponse.StatusCode of
-      201:
+      API_CRIADO:
         Exit;
-      401:
+      API_NAO_AUTORIZADO :
         raise Exception.Create('Usuário não autorizado.');
       else
         raise Exception.Create('Erro não catalogado.');

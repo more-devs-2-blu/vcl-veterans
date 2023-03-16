@@ -80,15 +80,15 @@ end;
 procedure TServiceCidadao.Listar;
 begin
     try
-      FRESTClient.BaseURL := 'http://localhost:9090/v1/cidadao/pontos/desc';
+      FRESTClient.BaseURL := URL_BASE_CIDADAO + '/pontos/desc';
       FRESTRequest.Method := rmGet;
       FRESTRequest.Execute;
       case FRESTResponse.StatusCode of
-        200:
+        API_SUCESSO:
         begin
           Self.PreencherCidadaos(FRESTResponse.Content)
         end;
-        401:
+        API_NAO_AUTORIZADO :
           raise Exception.Create('Usuário não autorizado.');
         else
           raise Exception.Create('Erro ao carregar a lista de Times. Código do Erro: ' + FRESTResponse.StatusCode.ToString);
@@ -133,14 +133,14 @@ end;
 procedure TServiceCidadao.Registrar;
 begin
   try
-    FRESTClient.BaseURL := 'http://localhost:9090/v1/cidadao';
+    FRESTClient.BaseURL := URL_BASE_CIDADAO;
     FRESTRequest.Method := rmPost;
     FRESTRequest.Params.AddBody(FCidadao.JSON);
     FRESTRequest.Execute;
     case FRESTResponse.StatusCode of
-      201:
+      API_CRIADO:
         Exit;
-      401:
+      API_NAO_AUTORIZADO :
         raise Exception.Create('Usuário não autorizado.');
       else
         raise Exception.Create('Erro não catalogado.');
@@ -161,16 +161,14 @@ begin
   FCidadaos := Value;
 end;
 
-
-{Metodos Vazios}
 procedure TServiceCidadao.Excluir;
 begin
-
+  //Não implementado nessa versão.
 end;
 
 procedure TServiceCidadao.Alterar;
 begin
-
+  //Não implementado nessa versão.
 end;
 
 end.

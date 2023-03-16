@@ -98,7 +98,6 @@ begin
   finally
     FreeAndNil(xServiceCidadao);
   end;
-  showMessage(dm.xUsuarioLogado.Nome);
 end;
 
 procedure TfrmLogin.CheckBox1Change(Sender: TObject);

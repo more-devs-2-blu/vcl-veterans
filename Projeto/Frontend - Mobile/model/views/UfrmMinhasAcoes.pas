@@ -7,7 +7,8 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
   FMX.StdCtrls, FMX.ListView, FMX.Layouts, FMX.Controls.Presentation,
-  FMX.Objects, Backend.UEntity.Acao, UServiceIntf, Backend.UEntity.Categoria;
+  FMX.Objects, Backend.UEntity.Acao, UServiceIntf, Backend.UEntity.Categoria,
+  UServiceUsuario;
 
 type
   TfrmMinhaAcoes = class(TForm)
@@ -22,10 +23,8 @@ type
     lblMinhasAcoes: TLabel;
     lytPrincipal: TLayout;
     lstAcoesVoluntarias: TListView;
-    Button1: TButton;
     lytMensagem: TLayout;
     imgPerfil: TImage;
-    procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure imgVoltarClick(Sender: TObject);
   private
@@ -44,24 +43,6 @@ implementation
 {$R *.fmx}
 
 uses StrUtils, UServiceAcao, UfrmAcaoVoluntaria, UUtils.Constants;
-
-procedure TfrmMinhaAcoes.Button1Click(Sender: TObject);
-var
-  xItem: TListViewItem;
-  I: Integer;
-begin
-  xItem := lstAcoesVoluntarias.Items.Add;
-
-  TListItemText(xItem.Objects.FindDrawable('txtRanking')).Text := '#1';
-  TListItemImage(xItem.Objects.FindDrawable('imgMelhoria')).Bitmap := imgExemplo.Bitmap;
-  TListItemText(xItem.Objects.FindDrawable('txtCategoria')).Text := 'Limpeza';
-  TListItemImage(xItem.Objects.FindDrawable('imgApoiar')).Bitmap := imgApoiarMelhorias.Bitmap;
-  TListItemText(xItem.Objects.FindDrawable('txtEndereco')).Text := 'Rua Dr. Henrique Hacker,500';
-  TListItemText(xItem.Objects.FindDrawable('txtDescricao')).Text := 'Buraco na rua blablabla blablabla blablabla blablabla';
-  TListItemText(xItem.Objects.FindDrawable('txtApoiadores')).Text := '135';
-  TListItemText(xItem.Objects.FindDrawable('txtStatus')).Text := 'Status: Concluído';
-  TListItemText(xItem.Objects.FindDrawable('txtNome')).Text := 'João Silva';
-end;
 
 procedure TfrmMinhaAcoes.FormCreate(Sender: TObject);
 begin
@@ -99,7 +80,7 @@ procedure TfrmMinhaAcoes.PrepararListView(aAcao: TAcao);
 var
   xItem: TListViewItem;
 begin
-  if aAcao.Criador.Nome = 'Carlos Felipe' then
+  if aAcao.Criador.Nome = dm.xUsuarioLogado.Nome then
   begin
     xItem := lstAcoesVoluntarias.Items.Add;
     xItem.Tag := aAcao.Id;

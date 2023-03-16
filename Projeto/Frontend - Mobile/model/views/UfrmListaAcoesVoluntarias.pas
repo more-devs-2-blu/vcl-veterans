@@ -9,7 +9,7 @@ uses
   FMX.StdCtrls, FMX.ListView, FMX.Objects, FMX.Layouts,
   FMX.Controls.Presentation, UServiceAcao, UServiceIntf, Backend.UEntity.Acao,
   Backend.UEntity.Categoria, Backend.UEntity.Voluntario, UServiceVoluntario,
-  Backend.UEntity.Cidadao;
+  Backend.UEntity.Cidadao, UServiceUsuario;
 
 type
   TfrmListaAcoesVoluntarias = class(TForm)
@@ -142,7 +142,7 @@ var
   xServiceVoluntario: TServiceVoluntario;
 begin
   xServiceVoluntario := TServiceVoluntario.Create(
-    TVoluntario.Create(TCidadao.Create(1), TAcao.Create(ObterItemSelecionado)));
+    TVoluntario.Create(dm.xUsuarioLogado, TAcao.Create(ObterItemSelecionado)));
 
   xServiceVoluntario.Registrar;
   ShowMessage('Volutario cadastrado com sucesso');
