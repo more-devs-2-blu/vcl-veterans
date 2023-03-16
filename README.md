@@ -14,7 +14,7 @@
 <img src="https://user-images.githubusercontent.com/114958388/225516237-81705f77-8044-47f4-bde1-35f8bb320c15.png" width="200px"/>
 </div>
 
-O sistema Eu Ajudo surge para aprimorar a zeladoria pública de uma cidade. Para isso foi desenvolvido um software mobile para ser utilizado pelo cidadão, e um software Desktop para o gestor e servidores públicos. 
+O sistema Eu Ajudo surge para aprimorar a zeladoria pública de uma cidade. Para isso foi desenvolvido um software mobile para ser utilizado pelo cidadão, e um software Desktop para os gestores e servidores públicos. 
 O cidadão pode sugerir e apoiar melhorias e criar e se inscrever em ações voluntárias. 
 Enquando que o gestor pode gerenciar essas sugestões e ações voluntárias. 
 
