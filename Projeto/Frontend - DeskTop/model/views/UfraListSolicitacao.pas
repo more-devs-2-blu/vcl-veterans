@@ -46,7 +46,7 @@ implementation
 {$R *.fmx}
 
 uses
-   UfraGestaoSolicitacao, forms, UfrnHome;
+   UfraGestaoSolicitacao, UfrnHome;
 
 procedure TfraSolicitacao.Button1Click(Sender: TObject);
 begin
@@ -106,7 +106,7 @@ begin
     xServiceMelhoria := TServiceMelhoria.Create;
 
     try
-    frmHome.Melhoria := xServiceMelhoria.ObterRegistro1(lstMelhorias.Items[lstMelhorias.ItemIndex].Tag);
+    frmHome.Melhoria := xServiceMelhoria.ObterRegistroPorId(lstMelhorias.Items[lstMelhorias.ItemIndex].Tag);
     if not Assigned(fraGestaoSolicitacao) then
       fraGestaoSolicitacao := TfraGestaoSolicitacao.Create(application);
 

@@ -68,7 +68,7 @@ begin
 
   xServiceAcao := TServiceAcao.Create(TAcao.Create(frmHome.Melhoria.Id));
   try
-    xServiceAcao.Alterar1(COLUNA, xStatus);
+    xServiceAcao.AlterarPorId(COLUNA, xStatus);
     lblStatus.Text := xStatus;
     showMessage('Status Alterado com Sucesso.');
   finally
@@ -91,7 +91,7 @@ begin
 
   xServiceAcao := TServiceAcao.Create(TAcao.Create(frmHome.Acao.Id));
   try
-    xServiceAcao.Alterar1(COLUNA, xResposta);
+    xServiceAcao.AlterarPorId(COLUNA, xResposta);
     showMessage('FeedBack Enviado..');
   finally
     FreeAndNil(xServiceAcao);

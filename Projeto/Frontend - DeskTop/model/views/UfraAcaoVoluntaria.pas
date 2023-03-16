@@ -105,7 +105,7 @@ begin
     xItem := lstAcoes.Items[lstAcoes.ItemIndex];
     xServiceAcao := TServiceAcao.Create;
     try
-      frmHome.Acao := xServiceAcao.ObterRegistro1(lstAcoes.Items[lstAcoes.ItemIndex].Tag);
+      frmHome.Acao := xServiceAcao.ObterRegistroPorId(lstAcoes.Items[lstAcoes.ItemIndex].Tag);
       if not Assigned(fraGestaoVoluntaria) then
         fraGestaoVoluntaria := TfraGestaoSolidaria.Create(application);
 
