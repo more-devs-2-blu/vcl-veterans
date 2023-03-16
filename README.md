@@ -112,5 +112,5 @@ Enquando que o gestor pode gerenciar essas sugestões e ações voluntárias.
 - Visualizar minhas Ações Voluntárias.
 <img src="https://user-images.githubusercontent.com/114958388/225528257-15c4f95a-ae8b-4d62-ba07-1ddaf10f2f0d.png" width="200px"/>
 
-- Ranking do Top Cidadãos.
+- Ranking: Top apoiadores da Cidade.
 <img src="https://user-images.githubusercontent.com/114958388/225528728-79f9be63-8620-4ef4-aba0-ab91f3fbdfa6.png" width="200px"/>
