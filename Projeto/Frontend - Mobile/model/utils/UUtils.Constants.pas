@@ -13,16 +13,18 @@ Const
   ArrayCategorias : array[0..5] of String = ('lixo', 'iluminação','pavimentos',
   'sinalização','vegetação', 'outros');
 
-  URL_BASE_CIDADAO    = 'http://localhost:9090/v1/cidadao';
-  URL_BASE_MELHORIA   = 'http://localhost:9090/v1/melhoria';
-  URL_BASE_ACAO       = 'http://localhost:9090/v1/acao';
-  URL_BASE_VOLUNTARIO = 'http://localhost:9090/v1/voluntario';
+  //URL_BASE            = 'http://localhost:9090';
+  URL_BASE            = 'http://187.85.120.34:9090';
+  URL_BASE_CIDADAO    = URL_BASE + '/v1/cidadao';
+  URL_BASE_MELHORIA   = URL_BASE + '/v1/melhoria';
+  URL_BASE_ACAO       = URL_BASE + '/v1/acao';
+  URL_BASE_VOLUNTARIO = URL_BASE + '/v1/voluntario';
 
 
   API_SUCESSO             = 200;
   API_CRIADO              = 201;
   API_SUCESSO_SEM_RETORNO = 204;
-  API_NAO_AUTORIZADO      = 401;
+  API_NAO_AUTORIZADO      = 401 ;
 
 
 

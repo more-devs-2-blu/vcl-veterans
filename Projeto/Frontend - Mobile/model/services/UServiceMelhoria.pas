@@ -15,7 +15,7 @@ type
       FRESTClient: TRESTClient;
       FRESTRequest: TRESTRequest;
       FRESTResponse: TRESTResponse;
-      function GetMelhoria: TObjectList<TMelhoria>;
+      function GetMelhoria: TMelhoria;
       procedure SetMelhorias(const Value: TObjectList<TMelhoria>);
       function GetMelhorias: TObjectList<TMelhoria>;
     public
@@ -24,9 +24,9 @@ type
       Procedure Excluir;
       Procedure Alterar;overload;
       Procedure Alterar(const aColuna, aValor: String);overload;
-      Procedure Alterar1(const aColuna, aValor: String);
+      Procedure AlterarPorId(const aColuna, aValor: String);
       Procedure AlterarPontuacao(aValor: String);
-      Function ObterRegistro1(aId:Integer):TMelhoria;
+      Function ObterRegistroPorId(aId:Integer):TMelhoria;
       Procedure ObterRegistro;
       procedure OrdenarPor(aColuna,aOrdem: String);
       procedure PreencherMelhorias(const aJsonMelhorias: String);
@@ -74,7 +74,7 @@ begin
   end;
 end;
 
-procedure TServiceMelhoria.Alterar1(const aColuna, aValor: String);
+procedure TServiceMelhoria.AlterarPorId(const aColuna, aValor: String);
 var
   xRequestJSON: TJSONObject;
 begin
@@ -106,7 +106,7 @@ end;
 
 procedure TServiceMelhoria.Alterar;
 begin
-
+  //Não implementado nessa versão.
 end;
 
 procedure TServiceMelhoria.AlterarPontuacao(aValor: String);
@@ -173,12 +173,12 @@ end;
 
 procedure TServiceMelhoria.Excluir;
 begin
-
+  //Não implementado nessa versão.
 end;
 
-function TServiceMelhoria.GetMelhoria: TObjectList<TMelhoria>;
+function TServiceMelhoria.GetMelhoria: TMelhoria;
 begin
-
+  Result := FMelhoria;
 end;
 
 function TServiceMelhoria.GetMelhorias: TObjectList<TMelhoria>;
@@ -189,16 +189,16 @@ end;
 procedure TServiceMelhoria.Listar;
 begin
     try
-      FRESTClient.BaseURL := 'http://localhost:9090/v1/melhoria/apoio/desc';
+      FRESTClient.BaseURL := URL_BASE_MELHORIA + '/apoio/desc';
       FRESTRequest.Method := rmGet;
       FRESTRequest.Execute;
 
       case FRESTResponse.StatusCode of
-        200:
+        API_SUCESSO:
         begin
           Self.PreencherMelhorias(FRESTResponse.Content)
         end;
-        401:
+        API_NAO_AUTORIZADO :
           raise Exception.Create('Usuário não autorizado.');
         else
           raise Exception.Create('Erro ao carregar a lista de Times. Código do Erro: ' + FRESTResponse.StatusCode.ToString);
@@ -213,10 +213,10 @@ end;
 
 procedure TServiceMelhoria.ObterRegistro;
 begin
-
+  //Não implementado nessa versão.
 end;
 
-function TServiceMelhoria.ObterRegistro1(aId: Integer): TMelhoria;
+function TServiceMelhoria.ObterRegistroPorId(aId: Integer): TMelhoria;
 var
   xMemTable: TFDMemTable;
   xMemTableCidadao: TFDMemTable;
@@ -231,12 +231,12 @@ begin
   xMemTableCategoria := TFDMemTable.Create(nil);
   try
     try
-      FRESTClient.BaseURL := 'http://localhost:9090/v1/melhoria/' + intToStr(aId);
+      FRESTClient.BaseURL := URL_BASE_MELHORIA + intToStr(aId);
       FRESTRequest.Method := rmGet;
       FRESTRequest.Execute;
 
       case FRESTResponse.StatusCode of
-        200:
+        API_SUCESSO:
         begin
           xMemTable.LoadFromJSON(FRESTResponse.Content);
           xJSONFile := FRESTResponse.Content;
@@ -258,7 +258,7 @@ begin
                                       );
           Result := xMelhoria;
         end;
-        401:
+        API_NAO_AUTORIZADO :
           raise Exception.Create('Usuário não autorizado.');
         else
           raise Exception.Create('Erro ao carregar a lista de Times. Código do Erro: ' + FRESTResponse.StatusCode.ToString);
@@ -281,11 +281,11 @@ begin
       FRESTRequest.Execute;
 
       case FRESTResponse.StatusCode of
-        200:
+        API_SUCESSO:
         begin
           Self.PreencherMelhorias(FRESTResponse.Content)
         end;
-        401:
+        API_NAO_AUTORIZADO :
           raise Exception.Create('Usuário não autorizado.');
         else
           raise Exception.Create('Erro ao carregar a lista de Times. Código do Erro: ' + FRESTResponse.StatusCode.ToString);
@@ -350,15 +350,15 @@ procedure TServiceMelhoria.Registrar;
 
 begin
     try
-    FRESTClient.BaseURL := 'http://localhost:9090/v1/melhoria';
+    FRESTClient.BaseURL := URL_BASE_MELHORIA;
     FRESTRequest.Method := rmPost;
     FRESTRequest.Params.AddBody(FMelhoria.JSON);
 
     FRESTRequest.Execute;
     case FRESTResponse.StatusCode of
-      201:
+      API_CRIADO:
         Exit;
-      401:
+      API_NAO_AUTORIZADO :
         raise Exception.Create('Usuário não autorizado.');
       else
         raise Exception.Create('Erro não catalogado.');

@@ -1,9 +1,9 @@
 object frmLogin: TfrmLogin
   Left = 0
   Top = 0
-  Caption = 'Form1'
-  ClientHeight = 550
-  ClientWidth = 383
+  Caption = 'frmLogin'
+  ClientHeight = 600
+  ClientWidth = 360
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -11,8 +11,8 @@ object frmLogin: TfrmLogin
   object recFundo: TRectangle
     Align = Client
     Fill.Color = claWhite
-    Size.Width = 383.000000000000000000
-    Size.Height = 550.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 600.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
     object lytNome: TLayout
@@ -22,7 +22,7 @@ object frmLogin: TfrmLogin
       Margins.Right = 15.000000000000000000
       Position.X = 15.000000000000000000
       Position.Y = 238.000000000000000000
-      Size.Width = 353.000000000000000000
+      Size.Width = 330.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 3
@@ -32,7 +32,7 @@ object frmLogin: TfrmLogin
         StyleLookup = 'transparentedit'
         TabOrder = 0
         TextSettings.Font.Size = 14.000000000000000000
-        Size.Width = 353.000000000000000000
+        Size.Width = 330.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         TextPrompt = 'Nome'
@@ -46,7 +46,7 @@ object frmLogin: TfrmLogin
       Margins.Right = 15.000000000000000000
       Position.X = 15.000000000000000000
       Position.Y = 323.000000000000000000
-      Size.Width = 353.000000000000000000
+      Size.Width = 330.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 2
@@ -57,7 +57,7 @@ object frmLogin: TfrmLogin
         TabOrder = 0
         Password = True
         TextSettings.Font.Size = 14.000000000000000000
-        Size.Width = 353.000000000000000000
+        Size.Width = 330.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         TextPrompt = 'Senha'
@@ -71,14 +71,14 @@ object frmLogin: TfrmLogin
       Margins.Right = 15.000000000000000000
       Position.X = 15.000000000000000000
       Position.Y = 423.000000000000000000
-      Size.Width = 353.000000000000000000
+      Size.Width = 330.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
       object recBotao: TRectangle
         Align = Client
         Fill.Color = xFF27AE60
-        Size.Width = 353.000000000000000000
+        Size.Width = 330.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None
@@ -88,7 +88,7 @@ object frmLogin: TfrmLogin
         object lblBotao: TLabel
           Align = Client
           StyledSettings = [Family]
-          Size.Width = 353.000000000000000000
+          Size.Width = 330.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Size = 16.000000000000000000
@@ -103,14 +103,14 @@ object frmLogin: TfrmLogin
     object ToolBar1: TToolBar
       Margins.Top = 15.000000000000000000
       Position.Y = 155.000000000000000000
-      Size.Width = 383.000000000000000000
+      Size.Width = 360.000000000000000000
       Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 5
       object RectLogin: TRectangle
         Align = Client
         Fill.Color = claWhite
-        Size.Width = 383.000000000000000000
+        Size.Width = 360.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
         Stroke.Color = claWhite
@@ -140,7 +140,7 @@ object frmLogin: TfrmLogin
       Margins.Top = 30.000000000000000000
       Margins.Bottom = 10.000000000000000000
       Position.Y = 30.000000000000000000
-      Size.Width = 383.000000000000000000
+      Size.Width = 360.000000000000000000
       Size.Height = 100.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0

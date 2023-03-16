@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Edit, FMX.ListBox, FMX.StdCtrls, FMX.Layouts, FMX.Controls.Presentation,
   UServiceIntf, UServiceAcao, Backend.UEntity.Acao, Backend.UEntity.Categoria,
-  Backend.UEntity.Cidadao, UUtils.AnimacaoClick;
+  Backend.UEntity.Cidadao, UUtils.AnimacaoClick, UServiceUsuario;
 
 type
   TfrmSolicitarAcaoVoluntaria = class(TForm)
@@ -81,7 +81,7 @@ begin
   xServiceAcao := TServiceAcao.Create(
     TAcao.Create(TCategoria.Create(cmbCategoria.ItemIndex+1),0,
                  'Em aguardo',edtDescricao.Text,edtEndereco.Text,
-                  TCidadao.Create(1)));
+                  dm.xUsuarioLogado));
 
   try
     xServiceAcao.Registrar;

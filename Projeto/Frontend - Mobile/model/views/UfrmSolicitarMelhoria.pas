@@ -7,7 +7,8 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Objects, FMX.Layouts, FMX.Controls.Presentation, FMX.Edit, FMX.ListBox,
   UServiceIntf, UServiceMelhoria, Backend.UEntity.Cidadao,
-  Backend.UEntity.Melhoria, Backend.UEntity.Categoria, UUtils.AnimacaoClick;
+  Backend.UEntity.Melhoria, Backend.UEntity.Categoria, UUtils.AnimacaoClick,
+  UServiceUsuario;
 
 type
   TfrmSolicitarMelhoria = class(TForm)
@@ -81,7 +82,7 @@ begin
 
   xServiceMelhoria := TServiceMelhoria.Create(
     TMelhoria.Create('Em aguardo',edtDescricao.Text,edtEndereco.Text,
-       TCidadao.Create(1),
+       dm.xUsuarioLogado,
        TCategoria.Create(cmbCategoria.ItemIndex+1)));
 
   try

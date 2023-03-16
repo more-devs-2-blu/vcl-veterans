@@ -15,7 +15,7 @@ type
       FRESTClient: TRESTClient;
       FRESTRequest: TRESTRequest;
       FRESTResponse: TRESTResponse;
-      function GetVoluntario: TObjectList<TVoluntario>;
+      function GetVoluntario: TVoluntario;
       procedure SetVoluntarios(const Value: TObjectList<TVoluntario>);
       function GetVoluntarios: TObjectList<TVoluntario>;
     public
@@ -24,7 +24,6 @@ type
       Procedure Excluir;
       Procedure Alterar;overload;
       Procedure Alterar(const aColuna, aValor: String);overload;
-      //Procedure AlterarPontuacao(aValor: String);
       Procedure ObterRegistro;
       procedure PreencherVoluntarios(const aJsonMelhorias: String);
       procedure AdicionarInscricao;
@@ -43,7 +42,7 @@ uses
 
 procedure TServiceVoluntario.AdicionarInscricao;
 begin
-
+  //Não implementado nessa versão.
 end;
 
 procedure TServiceVoluntario.Alterar(const aColuna, aValor: String);
@@ -117,12 +116,12 @@ end;
 
 procedure TServiceVoluntario.Excluir;
 begin
-
+  //Não implementado nessa versão.
 end;
 
-function TServiceVoluntario.GetVoluntario: TObjectList<TVoluntario>;
+function TServiceVoluntario.GetVoluntario: TVoluntario;
 begin
-
+  Result := FVoluntario;
 end;
 
 function TServiceVoluntario.GetVoluntarios: TObjectList<TVoluntario>;
@@ -133,16 +132,16 @@ end;
 procedure TServiceVoluntario.Listar;
 begin
     try
-      FRESTClient.BaseURL := 'http://localhost:9090/v1/melhoria/apoio/desc';
+      FRESTClient.BaseURL := URL_BASE_VOLUNTARIO + '/apoio/desc';
       FRESTRequest.Method := rmGet;
       FRESTRequest.Execute;
 
       case FRESTResponse.StatusCode of
-        200:
+        API_SUCESSO:
         begin
           Self.PreencherVoluntarios(FRESTResponse.Content)
         end;
-        401:
+        API_NAO_AUTORIZADO :
           raise Exception.Create('Usuário não autorizado.');
         else
           raise Exception.Create('Erro ao carregar a lista de Times. Código do Erro: ' + FRESTResponse.StatusCode.ToString);
@@ -154,7 +153,7 @@ end;
 
 procedure TServiceVoluntario.ObterRegistro;
 begin
-
+  //Não implementado nessa versão.
 end;
 
 procedure TServiceVoluntario.PreencherVoluntarios(const aJsonMelhorias: String);
@@ -210,9 +209,9 @@ try
     FRESTRequest.Params.AddBody(FVoluntario.JSON);
     FRESTRequest.Execute;
     case FRESTResponse.StatusCode of
-      201:
+      API_CRIADO:
         Exit;
-      401:
+      API_NAO_AUTORIZADO :
         raise Exception.Create('Usuário não autorizado.');
       else
         raise Exception.Create('Erro não catalogado.');

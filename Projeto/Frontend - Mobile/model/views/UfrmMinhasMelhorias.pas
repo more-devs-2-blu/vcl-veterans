@@ -7,7 +7,8 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
   FMX.StdCtrls, FMX.ListView, FMX.Objects, FMX.Layouts,
-  FMX.Controls.Presentation, Backend.UEntity.Melhoria, Backend.UEntity.Categoria;
+  FMX.Controls.Presentation, Backend.UEntity.Melhoria, Backend.UEntity.Categoria,
+  UServiceUsuario;
 
 type
   TfrmMinhasMelhorias = class(TForm)
@@ -19,7 +20,6 @@ type
     lytApoirMelhoria: TLayout;
     lblMinhasMelhorias: TLabel;
     lytPrincipal: TLayout;
-    Button1: TButton;
     imgApoiarMelhorias: TImage;
     imgTeste: TImage;
     lstMinhasMelhorias: TListView;
@@ -29,7 +29,6 @@ type
     imgCatSemImagem: TImage;
     imgCatSinalizacao: TImage;
     imgCatVegetacao: TImage;
-    procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure imgVoltarClick(Sender: TObject);
   private
@@ -50,25 +49,6 @@ implementation
 
 uses StrUtils,UServiceIntf, UServiceMelhoria, UUtils.Constants,
   uFrmMelhoriasUrbanas;
-
-procedure TfrmMinhasMelhorias.Button1Click(Sender: TObject);
-var
-  xItem: TListViewItem;
-  I: Integer;
-begin
-  xItem := lstMinhasMelhorias.Items.Add;
-
-  TListItemText(xItem.Objects.FindDrawable('txtRanking')).Text := '#1';
-  TListItemImage(xItem.Objects.FindDrawable('imgMelhoria')).Bitmap := imgTeste.Bitmap;
-  TListItemText(xItem.Objects.FindDrawable('txtCategoria')).Text := 'Limpeza';
-  TListItemImage(xItem.Objects.FindDrawable('imgApoiar')).Bitmap := imgApoiarMelhorias.Bitmap;
-  TListItemText(xItem.Objects.FindDrawable('txtEndereco')).Text := 'Rua Dr. Henrique Hacker,500';
-  TListItemText(xItem.Objects.FindDrawable('txtDescricao')).Text := 'Buraco na rua blablabla blablabla blablabla blablabla';
-  TListItemText(xItem.Objects.FindDrawable('txtApoiadores')).Text := '135';
-  TListItemText(xItem.Objects.FindDrawable('txtStatus')).Text := 'Status: Concluído';
-  TListItemText(xItem.Objects.FindDrawable('txtNome')).Text := 'João Silva';
-
-end;
 
 procedure TfrmMinhasMelhorias.CarregarRegistros;
 var
@@ -106,7 +86,7 @@ var
   xItem: TListViewItem;
   xImagemCategoria : TImage;
 begin
-  if aMelhoria.Cidadao.Nome = 'Carlos Felipe' then
+  if aMelhoria.Cidadao.Nome = dm.xUsuarioLogado.Nome then
   begin
     xItem := lstMinhasMelhorias.Items.Add;
     xItem.Tag := aMelhoria.Id;
