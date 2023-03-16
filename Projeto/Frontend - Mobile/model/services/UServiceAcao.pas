@@ -198,7 +198,7 @@ begin
   xMemTableCategoria := TFDMemTable.Create(nil);
   try
     try
-      FRESTClient.BaseURL := URL_BASE_ACAO + intToStr(aId);
+      FRESTClient.BaseURL := URL_BASE_ACAO + '/'+ intToStr(aId);
       FRESTRequest.Method := rmGet;
       FRESTRequest.Execute;
 
