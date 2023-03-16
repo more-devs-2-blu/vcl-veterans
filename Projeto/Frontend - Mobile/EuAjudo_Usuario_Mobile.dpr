@@ -1,4 +1,4 @@
-program SinergiaCidada;
+program EuAjudo_Usuario_Mobile;
 
 uses
   System.StartUpCopy,

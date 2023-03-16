@@ -8,7 +8,7 @@
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>32787</TargetedPlatforms>
         <AppType>Application</AppType>
-        <MainSource>SinergiaCidada.dpr</MainSource>
+        <MainSource>EuAjudo_Usuario_Mobile.dpr</MainSource>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -92,7 +92,7 @@
         <AUP_READ_PHONE_STATE>true</AUP_READ_PHONE_STATE>
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
-        <SanitizedProjectName>SinergiaCidada</SanitizedProjectName>
+        <SanitizedProjectName>EuAjudo_Usuario_Mobile</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;IndyIPCommon;RESTComponents;bindcompdbx;DBXInterBaseDriver;IndyIPServer;IndySystem;tethering;fmxFireDAC;FireDAC;bindcompfmx;FireDACSqliteDriver;ibmonitor;soaprtl;DbxCommonDriver;ibxpress;fmx;FireDACIBDriver;xmlrtl;soapmidas;ibxbindings;rtl;DbxClientDriver;CustomIPTransport;dbexpress;IndyCore;bindcomp;dsnap;FireDACCommon;IndyIPClient;RESTBackendComponents;soapserver;dbxcds;bindengine;CloudService;dsnapxml;dbrtl;IndyProtocols;FireDACCommonDriver;inet;$(DCC_UsePackage)</DCC_UsePackage>
@@ -289,7 +289,7 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">SinergiaCidada.dpr</Source>
+                    <Source Name="MainSource">EuAjudo_Usuario_Mobile.dpr</Source>
                 </Source>
                 <Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\bcboffice2k270.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
@@ -445,9 +445,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Android64\Debug\libSinergiaCidada.so" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Android64\Debug\libEuAjudo_Usuario_Mobile.so" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Android64">
-                        <RemoteName>libSinergiaCidada.so</RemoteName>
+                        <RemoteName>libEuAjudo_Usuario_Mobile.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -516,9 +516,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Android\Debug\libSinergiaCidada.so" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Android\Debug\libEuAjudo_Usuario_Mobile.so" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Android">
-                        <RemoteName>libSinergiaCidada.so</RemoteName>
+                        <RemoteName>libEuAjudo_Usuario_Mobile.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -528,9 +528,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win64\Debug\SinergiaCidada.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win64\Debug\EuAjudo_Usuario_Mobile.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
-                        <RemoteName>SinergiaCidada.exe</RemoteName>
+                        <RemoteName>EuAjudo_Usuario_Mobile.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -595,9 +595,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\SinergiaCidada.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\EuAjudo_Usuario_Mobile.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>SinergiaCidada.exe</RemoteName>
+                        <RemoteName>EuAjudo_Usuario_Mobile.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
