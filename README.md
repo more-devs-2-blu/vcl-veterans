@@ -125,7 +125,7 @@ A aplicação Eu Ajudo possui diversas ações que devem ser executadas pelos ci
 <img src="https://user-images.githubusercontent.com/114958388/225526910-fc25de65-6c05-43b8-88b9-935dec4d7f0e.png" width="200px"/>
 
 
-#### Software Mobile - Gestor :desktop_computer:	
+#### Software Desktop - Gestor :desktop_computer:	
 
 - Home.
 <img src="https://i.imgur.com/Vp86JXE.png" width="600px"/>
